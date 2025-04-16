@@ -1,0 +1,11 @@
+title: Your Name
+description: Personal Website
+theme: minima
+baseurl: "" # Leave this empty for user.github.io sites
+url: "https://yourusername.github.io" # Replace with your actual URL
+
+# Navigation links
+header_pages:
+  - research.md
+  - teaching.md
+  - resume.md
