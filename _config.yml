@@ -1,11 +1,27 @@
 title: Jonas El Gammal
 description: My Personal Webpage
-theme: jekyll-theme-cayman
 baseurl: "" # Leave this empty for user.github.io sites
-url: "https://yourusername.github.io" # Replace with your actual URL
+
+url: "https://jonaselgammal.github.io"
+
+# Comment this out since you're using a local copy of the theme
+# theme: minima
+sass:
+  style: compressed
+
+# Optional: Remove this unless you’re using a special layout that includes `page.css`
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      css: "assets/css/style.css"
+
+plugins:
+  - jekyll-feed
 
 # Navigation links
 header_pages:
   - research.md
-  - teaching.md
+  - resources.md
   - resume.md

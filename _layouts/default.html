@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include header.html -%}
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        {{ content }}
+      </div>
+    </main>
+    
+    <script>
+      const toggle = document.getElementById("theme-toggle");
+    
+      // Create the emoji icon
+      const icon = document.createElement("span");
+      icon.id = "theme-icon";
+      icon.style.marginRight = "8px";
+      icon.style.fontSize = "1.3rem";
+      icon.style.transition = "color 0.3s ease";
+    
+      // Insert the icon just before the toggle
+      const toggleWrapper = document.querySelector(".theme-toggle-wrapper");
+      if (toggleWrapper && toggle) {
+        toggleWrapper.insertBefore(icon, toggleWrapper.firstChild);
+      }
+    
+      function applyTheme(theme) {
+        const isDark = theme === "dark";
+        document.body.classList.toggle("dark-mode", isDark);
+        toggle.checked = isDark;
+    
+        icon.textContent = isDark ? "🌙" : "☀️";
+        icon.style.color = isDark ? "#ffffff" : "#000000"; // white or black
+      }
+    
+      const savedTheme = localStorage.getItem("theme") || "light";
+      applyTheme(savedTheme);
+    
+      toggle.addEventListener("change", () => {
+        const newTheme = toggle.checked ? "dark" : "light";
+        localStorage.setItem("theme", newTheme);
+        applyTheme(newTheme);
+      });
+    </script>
+
+    {%- include footer.html -%}
+
+  </body>
+
+</html>
