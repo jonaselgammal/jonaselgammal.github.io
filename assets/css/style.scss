@@ -80,6 +80,7 @@ body {
   
     .site-header {
       background: #222;
+      color: #aaa;
     }
   
     .site-footer {
@@ -87,5 +88,20 @@ body {
       color: #aaa;
     }
   }
+
+  header,
+  header a,
+  .site-title,
+  .site-nav,
+  .site-nav a {
+    color: var(--fg) !important;
+  }
   
+  .site-nav a:hover {
+    color: var(--link) !important;
+  }
+  
+  .site-title {
+    font-weight: bold;
+  }
   
