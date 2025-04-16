@@ -1,6 +1,6 @@
-title: Your Name
-description: Personal Website
-theme: minima
+title: Jonas El Gammal
+description: My Personal Webpage
+theme: jekyll-theme-cayman
 baseurl: "" # Leave this empty for user.github.io sites
 url: "https://yourusername.github.io" # Replace with your actual URL
 
