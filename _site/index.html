@@ -3,9 +3,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Hi, I’m Jonas El Gammal | Jonas El Gammal</title>
+<title>Hi, I’m Jonas! | Jonas El Gammal</title>
 <meta name="generator" content="Jekyll v3.10.0" />
-<meta property="og:title" content="Hi, I’m Jonas El Gammal" />
+<meta property="og:title" content="Hi, I’m Jonas!" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="My Personal Webpage" />
 <meta property="og:description" content="My Personal Webpage" />
@@ -14,9 +14,9 @@
 <meta property="og:site_name" content="Jonas El Gammal" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Hi, I’m Jonas El Gammal" />
+<meta property="twitter:title" content="Hi, I’m Jonas!" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"My Personal Webpage","headline":"Hi, I’m Jonas El Gammal","name":"Jonas El Gammal","url":"http://localhost:4000/"}</script>
+{"@context":"https://schema.org","@type":"WebSite","description":"My Personal Webpage","headline":"Hi, I’m Jonas!","name":"Jonas El Gammal","url":"http://localhost:4000/"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css">
   <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Jonas El Gammal" /></head>
@@ -33,37 +33,60 @@
         </label>
 
         <div class="trigger"><a class="page-link" href="/research/">Research</a><a class="page-link" href="/resources/">Resources</a><a class="page-link" href="/resume/">Resume</a></div>
-      </nav><!-- Light and dark mode toggle -->
-    <div class="theme-toggle-wrapper">
-      <label class="theme-switch">
-        <input type="checkbox" id="theme-toggle">
-        <span class="slider"></span>
-      </label>
-    </div>
-  </div>
+      </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home"><h1 class="page-heading">Hi, I'm Jonas El Gammal</h1><p>Welcome to my personal webpage.</p>
+        <div class="home"><h1 class="page-heading">Hi, I'm Jonas!</h1><div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; margin-bottom: 20px;">
 
-<p>I’m a cosmologist/astrophysicist, currently as a postdoc at the University of Insubria in Como. My work can broadly be summarized as follows: I take slow-to-compute problems and make them fast.</p>
+  <a href="mailto:jonas.el.gammal@rwth-aachen.de">
+    <img src="/assets/icons/email.png" alt="Email" style="width: 40px; height: 40px;" />
+  </a>
 
-<p>Currently, I am working on three main topics::</p>
+  <a href="https://www.linkedin.com/in/jelgammal/" target="_blank">
+    <img src="/assets/icons/linkedin.png" alt="LinkedIn" style="width: 40px; height: 40px;" />
+  </a>
+
+  <a href="https://github.com/jonaselgammal" target="_blank">
+    <img src="/assets/icons/github.png" alt="GitHub" style="width: 40px; height: 40px;" />
+  </a>
+
+  <a href="https://inspirehep.net/authors/2902073" target="_blank">
+    <img src="/assets/icons/inspire_BW.png" alt="InspireHEP" style="width: 194px; height: 40px;" />
+  </a>
+
+  <a href="https://orcid.org/0009-0005-4833-4266" target="_blank">
+    <img src="/assets/icons/orcid.svg" alt="OrcidID" style="width: 40px; height: 40px;" />
+  </a>
+
+</div>
+
+<p>Welcome to my personal webpage.</p>
+
+<p>I’m a cosmologist/astrophysicist, currently as a postdoc at the University of Insubria in Como, Italy. Before that I was a PhD student at the University of Stavanger in Norway (supervised by <a href="https://www.uis.no/en/profile/germano-nardini">Germano Nardini</a>) and before that I studied at RWTH Aachen University in Germany.</p>
+
+<p>Most of the time I’m a pretty chill dude and I enjoy all kinds of outdoor and extreme sports, such as hiking, climbing, skiing, surfing, skydiving, you name it. I also love to travel and explore new places, especially in the mountains.</p>
+
+<hr />
+
+<p>Work-wise, what I’m doing can broadly be summarised as: I take slow-to-compute problems and make them fast. For this, I’m using machine learning and differentiable programming to speed up Bayesian inference for cosmology and gravitational wave detection. I also work on cosmological simulations and data analysis for Pulsar Timing Arrays (PTAs). I’m a member of the <a href="https://www.lisamission.org">LISA Consortium</a>, where I develop a simulation code to model the gravitational wave background from enhanced curvature perturbations arising during inflation and tools for accelerated Bayesian inference of astrophysical sources. I’m also part of a member of <a href="https://eas.unige.ch">EAS</a> and <a href="https://www.dpg-physik.de">DPG</a>.</p>
+
+<p>Currently, I am working on three main topics:</p>
 
 <ol>
-  <li><strong><a href="/research/#machine-learning-for-bayesian-inference">Machine learning for Bayesian Inference</a></strong>: I am developing a new method to perform Bayesian inference using Gaussian Process Regression and active sampling to create a surrogate model of the posterior function. This method is particularly useful for slow likelihoods, such as those arising in cosmology and astrophysics.</li>
-  <li><strong><a href="/research/#cosmological-simulations">Cosmological simulations</a></strong>: As part of the LISA Cosmology Working Group, I am developing a new simulation code to model the gravitational wave background from enhanced curvature perturbations arising during inflation.</li>
-  <li><strong><a href="/research/#fast-pta-inference">Fast PTA inference</a></strong>: I recently started working on Pulsar Timing Array (PTA) data analysis as part of EPTA, where I am trying to speed up Bayesian inference for PTAs using the jax-enabled PTA likelihood from Discovery.</li>
+  <li><strong><a href="/research/#machine-learning-for-bayesian-inference">Machine learning for Bayesian Inference</a></strong>: I am developing <a href="https://github.com/jonaselgammal/GPry"><strong>GPry</strong></a>, a new method to perform Bayesian inference using Gaussian Process Regression and active sampling to create a surrogate model of the posterior function. This method is particularly useful for slow likelihoods, such as those arising in cosmology and astrophysics.</li>
+  <li><strong><a href="/research/#reconstructing-curvature-perturbations-via-sigws">Reconstructing Curvature Perturbations via SIGWs</a></strong>: As part of the LISA Cosmology Working Group, I am developing <a href="https://github.com/jonaselgammal/SIGWAY"><strong>SIGWAY</strong></a>, a simulation code to model the gravitational wave background from enhanced curvature perturbations arising during inflation.</li>
+  <li><strong><a href="/research/#fast-pta-inference">Fast PTA inference</a></strong>: I recently started working on Pulsar Timing Array (PTA) data analysis as part of EPTA, where I am trying to speed up Bayesian inference for PTAs using the jax-enabled PTA likelihood from <a href="https://github.com/nanograv/discovery"><strong>Discovery</strong></a>.</li>
 </ol>
+
+<hr />
 
 <p>Explore:</p>
 <ul>
-  <li><a href="/research/">Research Portfolio</a></li>
-  <li><a href="teaching.md">Teaching Materials</a></li>
-  <li><a href="/resume/">Resume</a></li>
+  <li><a href="/research/">research portfolio</a></li>
+  <li><a href="/teaching/">some useful resources</a></li>
+  <li><a href="/resume/">my resume</a></li>
 </ul>
-
-<p>Feel free to connect with me via <a href="https://www.linkedin.com/in/jelgammal/">LinkedIn</a> or email me at jonas.e.elgammal@uis.no.</p>
 </div>
 
       </div>

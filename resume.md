@@ -6,76 +6,83 @@ permalink: /resume/
 
 # Resume
 
-You can [download my resume (PDF)](files/Your_Resume.pdf).
+**You can [download my resume (PDF)](/assets/files/CV_jonas_el_gammal.pdf)** ...
 
-Or view a brief overview below:
-
-# Jonas Elias El Gammal
-
-**Address**: Madlalia 3, 4044 Stavanger, Norway  
-**Email**: [jonas.el.gammal@rwth-aachen.de](mailto:jonas.el.gammal@rwth-aachen.de)  
-**Phone**: [+47 929 76 884](tel:+4792976884)  
-**LinkedIn**: [linkedin.com/in/jelgammal](https://www.linkedin.com/in/jelgammal/)  
-**GitHub**: [github.com/jonaselgammal](https://github.com/jonaselgammal)
+... or view a brief overview below:
 
 ---
 
-## 👤 Personal Details
+## Jonas Elias El Gammal
+Born 04 May 1997 in Bochum, Germany
 
-- **Born**: 04.05.1997 in Bochum, Germany  
-- **Nationality**: German and British  
-- **Marital Status**: Unmarried
+<div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; margin-bottom: 20px;">
+
+  <a href="mailto:jonas.el.gammal@rwth-aachen.de">
+    <img src="/assets/icons/email.png" alt="Email" style="width: 40px; height: 40px;">
+  </a>
+
+  <a href="https://www.linkedin.com/in/jelgammal/" target="_blank">
+    <img src="/assets/icons/linkedin.png" alt="LinkedIn" style="width: 40px; height: 40px;">
+  </a>
+
+  <a href="https://github.com/jonaselgammal" target="_blank">
+    <img src="/assets/icons/github.png" alt="GitHub" style="width: 40px; height: 40px;">
+  </a>
+
+  <a href="https://inspirehep.net/authors/2902073" target="_blank">
+    <img src="/assets/icons/inspire_BW.png" alt="InspireHEP" style="width: 194px; height: 40px;">
+  </a>
+
+  <a href="https://orcid.org/0009-0005-4833-4266" target="_blank">
+    <img src="/assets/icons/orcid.svg" alt="OrcidID" style="width: 40px; height: 40px;">
+  </a>
+
+</div>
 
 ---
 
 ## 🎓 Education
 
-### University of Insubria — *Postdoctoral Researcher*  
+#### [![University of Insubria Logo](/assets/icons/insubria.png){: style="height: 1em; vertical-align: middle;"}](https://www.uninsubria.eu) University of Insubria — *Postdoctoral Researcher*  
 **2024–Present**  
 - Accelerating Pulsar Timing Array inference using GPUs and differentiable programming with JAX (EPTA collaboration).
 
-### CERN — *Visiting Scientist*  
+#### [![CERN Logo](/assets/icons/cern.png){: style="height: 1em; vertical-align: middle;"}](https://theory.cern/) CERN — *Visiting Scientist*  
 **2024**  
 - Three-month visit to the theory department.  
 - Developing data analysis pipeline for second-order scalar-induced gravitational waves from inflation (LISA), in collaboration with M. Pieroni and G. Franciolini.
 
-### University of Stavanger — *PhD Fellow in Physics*  
+#### [![UiS Logo](/assets/icons/uis.png){: style="height: 1em; vertical-align: middle;"}](https://www.uis.no/en) University of Stavanger — *PhD Fellow in Physics*  
 **2021–2025**  
-- Thesis: *Cutting edge data analysis for gravitational wave detection with LISA*  
+- **Thesis:** *Cutting edge data analysis for gravitational wave detection with LISA*  
 - Topics include:
-  - Scalar-induced gravitational waves from ultra-slow roll inflation.
+  - Constraining scalar-induced gravitational waves with LISA.
   - LISA & Planck inference accelerated with machine learning.
 
-### Grenoble INP, PHELMA — *ERASMUS Exchange*  
+#### [![Grenoble INP Logo](/assets/icons/phelma.png){: style="height: 1em; vertical-align: middle;"}](https://phelma.grenoble-inp.fr/en) Grenoble INP, PHELMA — *ERASMUS Exchange*  
 **2019–2020**  
 - Nuclear engineering specialization.
 
-### RWTH Aachen University — *M.Sc. in Physics*  
-**2018–2020**  
-- Grade: 1.3  
-- Focus: Astroparticle physics and cosmology  
-- Thesis: *Accelerating Bayesian Inference of expensive Likelihoods with Gaussian Processes*  
-  - Supervisors: Prof. J. Lesgourgues, Jesús Torrado
-
-### RWTH Aachen University — *B.Sc. in Physics*  
-**2015–2018**  
-- Grade: 1.7  
-- Thesis: *Propagation Distances of Extragalactic Nuclei with CRPropa3 Simulations*  
-  - Supervisor: Prof. M. Erdmann
+#### [![RWTH Logo](/assets/icons/rwth_small.png){: style="height: 1em; vertical-align: middle;"}](https://www.rwth-aachen.de) RWTH Aachen University — *B.Sc.+M.Sc. in Physics*  
+**2015–2020**  
+- **B.Sc. Grade:** 1.7, **M.Sc. Grade:** 1.3
+- **Focus:** Astroparticle physics and cosmology  
+- **Master Thesis:** *Accelerating Bayesian Inference of expensive Likelihoods with Gaussian Processes*  
+  Supervisors: Prof. J. Lesgourgues, Jesús Torrado
 
 ---
 
 ## 👨‍🏫 Teaching Experience
 
-### University of Stavanger
+#### [![UiS Logo](/assets/icons/uis.png){: style="height: 1em; vertical-align: middle;"}](https://www.uis.no/en) University of Stavanger
 
-- **Numerical Methods** (2023, 2024)  
+- **Numerical Methods** - _Full course_ (2023, 2024)  
   - Bachelor-level course including Python programming and numerical algorithms (ODEs, PDEs).
 
-- **Electromagnetism & Special Relativity** (2023)  
+- **Electromagnetism & Special Relativity** - _Full course_ (2023)  
   - Based on Purcell & Morin’s textbook.
 
-### RWTH Aachen University
+#### [![RWTH Logo](/assets/icons/rwth_small.png){: style="height: 1em; vertical-align: middle;"}](https://www.rwth-aachen.de) RWTH Aachen University
 
 - **Tutor** (2017–2019)  
   - Courses on optics, quantum physics, nuclear physics, data processing & statistics.  
@@ -86,37 +93,39 @@ Or view a brief overview below:
 ## 📝 Publications
 
 - **Apr 2025** — *Accelerating LISA inference with Gaussian processes*  
-  _Jonas El Gammal et al._ — [ArXiv:2503.21871](https://arxiv.org/abs/2503.21871)
+  _Jonas El Gammal et al._ — [**ArXiv:2503.21871**](https://arxiv.org/abs/2503.21871)
 
 - **Jan 2025** — *Reconstructing Primordial Curvature Perturbations via Scalar-Induced GWs*  
-  _LISA Cosmology Working Group_ — [ArXiv:2501.11320](https://arxiv.org/abs/2501.11320)
+  _LISA Cosmology Working Group_ — [**ArXiv:2501.11320**](https://arxiv.org/abs/2501.11320)
 
 - **May 2023** — *Parallelized Acquisition for Active Learning using Monte Carlo*  
-  _Jesús Torrado, Nils Schöneberg, Jonas El Gammal_ — [ArXiv:2305.19267](https://arxiv.org/abs/2305.19267)
+  _Jesús Torrado, Nils Schöneberg, Jonas El Gammal_ — [**ArXiv:2305.19267**](https://arxiv.org/abs/2305.19267)
 
 - **Nov 2022** — *Fast and Robust Bayesian Inference using Gaussian Processes with GPry*  
-  _Jonas El Gammal et al._ — [ArXiv:2211.02045](https://arxiv.org/abs/2211.02045)
+  _Jonas El Gammal et al._ — [**ArXiv:2211.02045**](https://arxiv.org/abs/2211.02045)
 
 ---
 
-## 🧰 Packages
+## 🧰 Python packages
 
-### [GPry](https://github.com/jonaselgammal/GPry)
+#### [![GitHub logo](/assets/icons/github.png){: style="height: 1em; vertical-align: middle;"}](https://github.com/jonaselgammal/GPry) GPry
 
-- Speeds up inference on expensive likelihoods via Gaussian Processes.
-- Uses nested sampling with active acquisition.
+- Speeds up inference with expensive likelihoods via a Gaussian Processes surrogate model and active learning.
+- Implements efficient batch acquisition strategies with nested sampling for improved scalability.
 
-### [SIGWAY](https://github.com/jonaselgammal/SIGWAY)
+#### [![GitHub logo](/assets/icons/github.png){: style="height: 1em; vertical-align: middle;"}](https://github.com/jonaselgammal/SIGWAY) SIGWAY
 
-- Computes second-order scalar-induced gravitational waves.
-- Solves the Mukhanov–Sasaki equation and interfaces with the LISA likelihood.
+- Computes second-order scalar-induced gravitational waves using
+  - A model-independent binned power spectrum of curvature perturbations.
+  - A template-based approach using common inflationary models.
+  - A first-principles approach solving the background and perturbation EOM for single-field inflation.
 
 ---
 
 ## 💻 Technologies
 
-- **Programming**: Python (with JAX), basic C++ and R  
-- **Tools**: Git, ReadTheDocs, etc.
+- **Programming**: Python, jax, Machine learning algorithms and packages such as TensorFlow, PyTorch, scikit-learn, etc.
+- **Tools**: Git, ReadTheDocs, LaTeX, etc.
 
 ---
 
@@ -132,5 +141,5 @@ Or view a brief overview below:
 
 - Hiking, Climbing, Surfing, Skydiving, Skiing, Mountaineering  
 - Guitar and Piano  
-- Occasional academic fun — see [ArXiv:2403.20219](https://arxiv.org/abs/2403.20219)
+- Occasional academic fun — see [**ArXiv:2403.20219**](https://arxiv.org/abs/2403.20219)
 
