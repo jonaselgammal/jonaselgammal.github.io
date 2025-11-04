@@ -66,4 +66,9 @@ We are currently working on extending the analysis to include **non-standard the
 
 ### Fast PTA inference
 
-I recently started working on PTA data analysis as part of EPTA, where I am trying to speed up Bayesian inference for PTAs using the jax-enabled PTA likelihood from Discovery.
+I recently started working on PTA data analysis as part of EPTA, where I am trying to speed up Bayesian inference for PTAs using the jax-enabled PTA likelihood from [**discovery**](https://github.com/nanograv/discovery). As part of this, I have written a number of interfaces to samplers that I am collecting [**here**](https://github.com/jonaselgammal/discoverysamplers). Currently supported samplers are:
+- [nessai](https://nessai.readthedocs.io/en/latest/): Nested sampling with normalizing flows
+- [eryn](https://github.com/mikekatz04/Eryn): RJMCMC sampler with parallel tempering
+- [GPry](https://gpry.readthedocs.io/en/latest/): See above for details
+
+In addition, I am working on interfacing with [blackjax](https://blackjax-devs.github.io/blackjax/) to enable end-to-end jax-based PTA inference.
