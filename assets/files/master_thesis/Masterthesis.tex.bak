@@ -1,0 +1,1849 @@
+\documentclass[ a4paper,	%a4 Format, wird übers geometry package definiert
+		11pt,		%Schriftgröße 13pt
+		twoside,
+ 		BCOR=15mm,
+ 		DIV=12,
+  		openright,
+  		headings=big,
+  		english,
+  		%bibliography=totoc
+		%bibtotoc,	%Literaturverzeichnis mit ins Inhaltsverzeichnis für KOMA Klassen
+		%liststotoc	%Abbildungs- und Tabellenverzeichnis mit ins Inhaltsverzeichnis für KOMA Klassen
+		]
+		{scrartcl}	%Klasse für Artikel, bzw scrartcl für KOMA Artikel, book/scrbook ... 
+		
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{mathpazo}
+\usepackage{subcaption}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots} % Für Plots in Tikz
+\usepackage{pdfpages}
+\usepackage{float}
+%\usepackage[font=normal]{caption}
+\usepackage{geometry}		%Seitenränder
+\usepackage{graphicx}		%Bilder einbinden
+%\usepackage{floatflt}		%Textfluss bei Bildern
+%\usepackage{multicol}		%mehrspaltiger Text
+%\usepackage[monochrome]{color}		%farbiger Text
+\usepackage{amsmath}		%Mathematik Umgebung 
+\usepackage{amssymb}		% und
+\usepackage{cancel}		% mathematische Symbole
+\usepackage{fancyhdr}		%Kopf und Fußzeilen
+%\usepackage{blindtext}		%erstelle Blindtext zum Lückenfüllen in Vorlagen
+%\usepackage{capt-of}		%Ccaption von Bildern und Tabellen
+\usepackage{setspace}		%Umebungen zum anderen Setzen des Zeilenabstands
+%\usepackage{tabularx}		%für feste Tabellenspaltenbreiten
+%\usepackage{textcomp}
+%\usepackage[square,sort&compress,numbers]{natbib}
+%\usepackage{comment}
+%\usepackage{ucs} %Unicode
+\usepackage{verbatim}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{subfloat}
+%\usepackage{epstopdf}
+\usepackage{pdfpages} 
+\usepackage{siunitx}
+\usepackage[titletoc]{appendix}
+%\usepackage{helvet} ARIAL PACKAGE
+%\renewcommand{\familydefault}{\sfdefault}
+\usepackage{hyperref}\hypersetup{} %pdfborder = {0 0 0}	für keine bunten Ränder	%Setzt die Überschriften auch als Lesezeichen im PDF
+\usepackage{amsthm} %Theorems and stuff....
+\usepackage{mathtools} %rcases
+
+\usepackage[boxed, linesnumbered]{algorithm2e} % For algorithms
+\SetKwComment{comment}{}{}
+\SetCommentSty{text}
+\SetNlSty{texttt}{[}{]}	
+%\SetNlSkip{3em}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+% bibliography
+\usepackage[citestyle=numeric,
+			backend=biber,
+			mincitenames=1,
+			maxbibnames=3,
+			maxcitenames=2,
+			sorting=none]{biblatex}
+\addbibresource{bibliography.bib}
+
+%set path for graphics
+\graphicspath{{./figures/}}
+
+%some more shit
+\usepackage{lmodern}
+%\usepackage[autostyle=true]{csquotes}
+
+
+% declare units
+\DeclareSIUnit\parsec{pc}
+\DeclareSIUnit\yr{yr}
+
+\newcommand{\var}{\mathrm{var}}
+\newcommand{\GP}{\mathcal{GP}}
+\newcommand{\nbl}{\vec{\nabla}}
+\newcommand{\dift}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\difp}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+\newcommand{\sumi}[1]{\sum\limits_{i=1}^#1}
+\newcommand{\poisson}[1]{\{#1\}}
+\newcommand{\mw}[1]{\langle #1 \rangle}
+\newcommand{\bx}{\boldsymbol{x}}
+\newcommand{\bX}{\boldsymbol{X}}
+\newcommand{\by}{\boldsymbol{y}}
+\newcommand{\bY}{\boldsymbol{Y}}
+\newcommand{\bsf}{\boldsymbol{F}}
+\newcommand{\bF}{\boldsymbol{F}}
+\newcommand{\bq}{\boldsymbol{q}}
+\newcommand{\bQ}{\boldsymbol{Q}}
+\newcommand{\bp}{\boldsymbol{p}}
+\newcommand{\bP}{\boldsymbol{P}}
+\newcommand{\bM}{\boldsymbol{M}}
+\newcommand{\bL}{\boldsymbol{L}}
+\newcommand{\be}{\boldsymbol{e}}
+\newcommand{\bE}{\boldsymbol{E}}
+\newcommand{\bG}{\boldsymbol{G}}
+\newcommand{\bB}{\boldsymbol{B}}
+\newcommand{\bH}{\boldsymbol{H}}
+\newcommand{\bk}{\boldsymbol{k}}
+\newcommand{\br}{\boldsymbol{r}}
+\newcommand{\bJ}{\boldsymbol{J}}
+\newcommand{\bra}[1]{\left< #1\right|}
+\newcommand{\ket}[1]{\left| #1\right>}
+\newcommand{\bracket}[2]{\left< #1\left| #2\right>\right.}
+\newcommand{\nor}[1]{\left|\left| #1\right|\right|}
+\newcommand{\D}{\mathrm{d}}
+\renewcommand{\d}{\,\mathrm{d}}
+\newcommand{\dx}{\ \text{d}}
+\renewcommand{\det}{{\mathrm{det}}}
+\newcommand{\inj}{{\mathrm{inj}}}
+\renewcommand{\max}{{\mathrm{max}}}
+\newcommand{\cov}{\mathrm{cov}}
+\renewcommand{\L}{\mathcal{L}}
+
+\newcommand{\tvec}[3]{\begin{pmatrix}
+#1 \\ #2 \\ #3
+\end{pmatrix}}
+\newcommand{\fvec}[4]{\begin{pmatrix}
+#1 \\ #2 \\ #3 \\ #4
+\end{pmatrix}}
+\newcommand{\twovec}[2]{\begin{pmatrix}
+#1 \\ #2 
+\end{pmatrix}}
+
+
+%Tabellenspalten neu definieren
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}} 	%linksbündig mit Breitenangabe
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}} 	%zentriert mit Breitenangabe
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}} 	%rechtsbündig mit Breitenangabe
+
+%Seitenränder
+\geometry{a4paper, top=30mm, bottom=40mm}
+\captionsetup{font=small}
+
+%Deckblatt
+\newcommand{\titel}{Accelerating Bayesian Inference of\\ expensive Likelihoods with\\ Gaussian Processes}
+\title{\titel}
+\newcommand{\autor}{Jonas Elias El Gammal}
+\author{\autor}
+
+%Kopf- und Fußzeilen
+\pagestyle{fancy}
+\fancyhf{}				%Kopf und Fußzeilen zurücksetzen
+\fancyhead[LO,RE]{}				%Kopf links
+\fancyhead[RO,LE]{\leftmark}			%Kopf rechts
+\fancyfoot[RO,LE]{\thepage}			%Fuß rechts
+% \fancyfoot[L]{\autor}			%Fuß links
+\renewcommand{\footrulewidth}{0.4pt}	%Dicke der Linie über Fußzeile
+\renewcommand{\headrulewidth}{0.4pt}	%Dicke der Linie unter Kopfzeile
+
+%Absatzabstände
+\parindent 0em		%keine Einrückung
+\parskip 5pt 		%Absatzabstand
+
+%Nummerierungen der Bilder und Tabellen absatzweise
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\numberwithin{equation}{section}
+
+\hyphenation{data-base}
+\hyphenation{under-stood}
+\hyphenation{ac-cel-er-a-tion}
+\hyphenation{max-i-mum}
+\hyphenation{di-men-sion-al}
+\hyphenation{com-pre-hen-si-bil-i-ty}
+\hyphenation{cor-re-spond-ing}
+\hyphenation{Con-sid-er-ing}
+\hyphenation{Ob-ser-va-to-ry}
+\hyphenation{ex-po-nen-tial}
+\hyphenation{cor-re-sponds}
+\hyphenation{one-di-men-sion-al}
+
+\DeclareUnicodeCharacter{2212}{-}
+
+\begin{document}
+%----------------------------------------------------------------------------------------------------------------------------------------
+% EeV durch EV ersetzen bei Rigidität in figtext, Plots als pdf Abkürzungen checken
+%----------------------------------------------------------------------------------------------------------------------------------------
+
+%Titelseite
+\begin{titlepage}
+\begin{center}
+\ \\[0.5cm]
+% Upper part of the page
+%\begin{figure}[ht]
+%	\center
+%\includegraphics[width=0.6\textwidth]{rwth_institute_logo.png}\\[0.2cm]
+%\end{figure}
+%\textsc{\Large}\\[0.11cm]
+% Title
+\ \hrule \ \\[0.5cm]
+{ \huge \bfseries
+\begin{onehalfspace} %Zeilenabstand hier auf 1.5, 2 geht auch
+Accelerating Bayesian Inference of\\ expensive Likelihoods with\\ Gaussian Processes \\[0.36cm]
+\end{onehalfspace}}
+
+		\ \hrule \ \\[0.5cm]
+		
+		\large{
+			von 
+			\ \\[0.3cm]
+			\textbf{\autor} 
+			\ \\[0.99cm]
+			\textbf{Masterarbeit in Physik}
+			\ \\[0.99cm]
+			vorgelegt der
+			\ \\[0.3cm]
+			\textbf{Fakultät für Mathematik, Informatik und Naturwissenschaften}
+			\ \\[0.3cm]
+			der 
+			\ \\[0.3cm]
+			\textbf{RWTH Aachen}
+			\ \\[0.99cm]
+			im Dezember 2020
+			\ \\[0.99cm]
+			angefertigt im
+			\ \\[0.3cm]
+			\textbf{Institut für Theoretische Teilchenphysik und Kosmologie (TTK)}
+			\ \\[0.99cm]
+			bei
+			\ \\[0.3cm]
+			\textbf{Prof. Dr. Julien Lesgourgues}
+		}
+		
+		\vfill
+		% Bottom of the page
+		%{vorgelegt im \textbf{Dezember 2020}}
+		
+	\end{center}
+	
+\end{titlepage}
+
+
+\thispagestyle{empty}
+
+\cleardoublepage
+% Abstract
+\ \\[2.5cm]
+\begin{abstract}
+\begin{center}
+\huge\textbf{Abstract}
+\end{center}\small
+\ \\
+\noindent Numerically approximating multidimensional posterior distributions can be very expensive when evaluating the likelihood function involves expensive numerical computation. At the same time many likelihoods in physics show a "speed hierarchy" between the different dimensions of the parameter space which means that recomputing the likelihood function is much more expensive when changing some parameters than others. This naturally arises when some of these parameters come from theoretical models while others are associated to the data. Recently some attempts have been made at fast Bayesian inference using Bayesian quadrature \cite{ALoMEuBQ, paper_1, Henning_inference} to reduce the number of samples required for mapping the posterior distributions drastically. While this approach works well in low dimensions it becomes prohibitively expensive if the number of dimensions exceeds $d\gtrsim 10$. Additionally these approaches cannot take advantage of the aforementioned speed hierarchy in the likelihood. In this thesis we develop an algorithm which mitigates these problems and improves on the current state of the art by (i) introducing a novel acquisition function which is well suited to performing Bayesian quadrature of log-probability distributions (ii) accelerating the Kriging believer \cite{parallel_kriging_believer_1} batch acquisition algorithm with blockwise matrix inversion \cite{update_equation} and (iii) Proposing an algorithm which can take advantages of speed hierarchies by marginalizing nuisance parameters with the \texttt{PolyChord} nested sampling algorithm \cite{skilling_nested_sampling, polychord_1}. We test these algorithms on gaussian toy likelihoods and real cosmological likelihoods and report a decrease in wall clock time of up to several orders of magnitude for mapping the posterior space.\normalsize
+\end{abstract}
+%Gutachter
+\vspace*{\fill}
+\begin{center}
+\begin{minipage}{0.49\textwidth}
+\textbf{Erstgutachter und Betreuer}\\
+
+Prof. Dr. Julien Lesgourgues\\
+Institut für Theoretische Teilchenphysik \\
+und Kosmologie (TTK)\\
+RWTH Aachen University
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\textbf{Zweitgutachter}\\
+
+Prof. Dr. Felix Kahlhoefer\\
+Institut für Theoretische Teilchenphysik \\
+und Kosmologie (TTK)\\
+RWTH Aachen University
+\end{minipage}
+\end{center}
+\thispagestyle{empty}
+\cleardoublepage
+
+%Inhaltsverzeichnis ohne Fußzeile und mit einfachen Zeilenabstand erstellen
+\pdfbookmark[1]{Table of contents}{toc}	% Inhaltsverzeichnis als PDF Lesezeichen
+\begingroup
+  \parskip=0pt
+  \addtocontents{toc}{\protect\thispagestyle{empty}}
+  \tableofcontents
+\endgroup
+\thispagestyle{empty}
+\newpage~\thispagestyle{empty}\newpage
+
+\setcounter{page}{1} 
+\raggedbottom
+
+\section{Introduction}
+Bayesian inference is one of the main tools which is used in science for comparing theories to data and for quantitatively analysing the parameters which govern these theories. Doing these analyses does however involve integrating the posterior distribution along one or multiple axes which usually has to be done numerically.
+
+In the last decades the Metropolis Hastings MCMC algorithm has become one of the main methods for performing these numerical integrations as it is easy to implement, robust and scales well with the number of dimensions. It does however need a large number of posterior evaluations $\gtrsim 10^3$ to correctly recover the shape of the posterior. At the same time calculating likelihood and posterior distributions for comparing theoretical models to data can be computationally very expensive as it often involves heavy numerical calculations such as integrals, differential equations or simulations. This coupled with the high number of evaluations needed for MCMC poses a challenge to scientists to the point where it makes some analyses outright impossible due to the computational overhead involved.
+
+This problem has recently gained a lot of attention by the machine learning community where numerous proposals for more efficient algorithms have been made. One of these algorithms which is particularly promising is Bayesian quadrature (BQ) which relies on Gaussian Process (GP) regression which is a Bayesian approach to non-parametric interpolation that has been applied to numerous machine learning problems in the past. This powerful approach needs less samples from the posterior to converge to the correct distribution but this unfortunately comes at the expense of added computational overhead and bad scaling with the number of dimensions. Furthermore these algorithms cannot exploit speed hierarchies (i.e. the difference in computation times when changing different parameters) that are inherent to many likelihoods in physics and that arise when an expensive to compute theoretical model is compared to data. These practical disadvantages have so far limited BQ to a small number of select problems and MCMC is still considered the gold standard in Bayesian inference.
+
+The goal of this thesis is to develop a robust framework for BQ which extends the useful range of this approach to moderately high dimensions while limiting the computational overhead. Furthermore we will try to take advantage of the aforementioned speed hierarchies to increase performance further.
+
+Chapter \ref{an_introduction_to_bayesian_inference} will be a brief review of Bayesian inference where most of the relevant terminology and notation is introduced along with a brief discussion of the numerical considerations that have to be made when performing Bayesian inference. This is followed by the introduction of two of the most commonly used, state of the art algorithms for Bayesian inference, Metropolis Hastings MCMC and nested sampling. We discuss the numerical implications of these algorithms as well as the number of posterior evaluations required for convergence.
+
+In chapter \ref{gaussian_processes_chap} we explain the concept of GPs with a focus on providing intuitive explanations in addition to establishing the relevant notation. This is followed by a detailed discussion of the role of the kernel function and the description of the GP regression algorithm. Next the idea of BQ is introduced together with active sampling.
+
+Since our goal in this thesis is to perform BQ on probability distributions, chapter \ref{bq_for_prob_dist} will focus on discussing the considerations that have to be made for efficiently sampling this class of functions. First we motivate the use of BQ for probability distributions and highlight the specific advantages that this algorithm has compared to MCMC. Afterwards we introduce a power reduction operation followed by the derivation of a novel acquisition function which is appropriate for the efficient characterization of log-probability distributions. Next we discuss the preprocessing of the data followed by a proposal for an efficient implementation of the Kriging believer algorithm which allows for batch acquisition and hence for parallel evaluation of the posterior. Lastly the algorithm is completed by introducing a convergence criterion. This is followed by a discussion of two of the main problems that this algorithms brings with it. We then perform some experiments on artificial as well as real likelihoods and evaluate the performance against MCMC.
+
+In chapter \ref{hybrid_gp_sampling_chapter} we present a novel algorithm that takes advantage of the speed hierarchies that are present in many likelihoods by using both nested sampling and BQ in the Bayesian inference procedure. This is first motivated, then the idea of the algorithm is presented in detail followed by some considerations regarding the projected speed-up compared to MCMC. After this we test this algorithm on artificial likelihoods and report its performance. 
+\cleardoublepage
+
+\section{An introduction to Bayesian inference}\label{an_introduction_to_bayesian_inference}
+In this chapter we will give a brief introduction into the field of Bayesian inference. Although most of the relevant properties and mathematical definitions will be provided we will assume that the reader is familiar with the basic concepts of statistics and probability theory on the level of an introductory lecture. As Bayesian inference relies heavily on numerical methods this chapter will also provide some insight into the most commonly used numerical algorithms. 
+
+Section \ref{bayesian_inference_section} provides a brief overview of the origin of Bayesian inference in probability theory and establishes the terminology used throughout this thesis. This is followed by a discussion of the role of priors and we will touch on some of the numerical difficulties that appear when performing Bayesian inference. T
+
+he Markov Chain Monte Carlo algorithm, a widely used and generally considered as state of the art algorithm is introduced in section \ref{mcmc_section}. Nested sampling, which is another state of the art algorithm which takes a different approach at numerical Bayesian inference is introduces in section \ref{nested_sampling_section}. 
+
+Although this can hardly be considered a complete review we will try to address the specific advantages and shortcomings of these two different approaches as they will play an important role later in this thesis.
+
+\subsection{Bayesian inference}\label{bayesian_inference_section}
+\subsubsection{Bayes theorem}
+At the foundation of Bayesian inference lies Bayes theorem which states that for two events $A$ and $B$ with probabilities $P(A)$ and $P(B)$ the \textit{conditional} probability of $A$ given $B$ is given by \cite{Cowan1998}
+\begin{align}\label{bayes_theorem}
+P(A|B) = \frac{P(B|A) P(A)}{P(B)} \ .
+\end{align}
+The conditional probability $P(A|B)$ describes the probability of event $A$ happening given that event $B$ has happened. Bayes' theorem is one of the foundations of statistics and can very simply be derived from the definition of conditional probability \cite{Murphy2012}.\\	
+The goal in Bayesian inference is to use this theorem to to update the probability of some \textit{hypothesis} given some \textit{data}. In this context Bayes' theorem states that
+\begin{align}\label{bayes_theorem_inference}
+P(\mathrm{hypothesis}|\mathrm{data})=\frac{P(\mathrm{data}|\mathrm{hypothesis})P(\mathrm{hypothesis})}{P(\mathrm{data})}
+\end{align}
+In Bayesian inference these quantities have special names \cite{Cowan1998}:
+\begin{itemize}
+\item $P(\mathrm{hypothesis})$ is called the \textit{prior} since it encodes the prior belief about the likelihood of the hypothesis
+\item $P(\mathrm{hypothesis}|\mathrm{data})$ is called the \textit{posterior}.
+\item $P(\mathrm{data}|\mathrm{hypothesis})$ is called the \textit{likelihood}.
+\item $P(\mathrm{data})$ is called \textit{marginal likelihood} or \textit{model evidence}. This quantity usually does not need to be computed as it is the same for all hypotheses.\\
+Furthermore probability theory demands that for an exhaustive set of $n$ hypotheses $h_n$ and some data $d$ 
+\begin{align}
+\sum_{i=1}^n P(h_n|d) \equiv 1 \ .
+\end{align}
+This means that the value of the evidence is fixed by the other quantities appearing in Bayes' theorem and that it can be computed by evaluating
+\begin{align}\label{marginal_normalization}
+P(d) = \sum_{i=1}^n P(\mathrm{data}|\mathrm{hypothesis})P(\mathrm{hypothesis}) \ .
+\end{align}
+\end{itemize}
+
+\subsubsection{Bayes theorem for probability distributions}\label{bayes_theorem_for_pdfs}
+In most cases Bayesian inference is not used for discrete probabilities but for continuous probability distributions. In this case one is usually interested in inferring some underlying parameters $\theta$ where $x\sim p(x|\theta)$ given some data $\bs{X}=\{x_1,\dots,x_n\}$. The parameters $\theta$ themselves again have some underlying distribution $\theta\sim p(\theta|\alpha)$ with some \textit{hyperparameters} $\alpha$.\\
+In this case $p(\theta|\alpha)$ takes the role of the prior, and $p(\bs{X}|\theta)$ that of the likelihood. These take the form of continuous probability distributions\footnote{While the prior needs to be a true (normalized) probability distribution the likelihood does not necessarily need to meet this criterion. In fact since the likelihood is a probability defined on the data space it is almost never normalized in the parameter space.} which means that Bayes' theorem is modified accordingly:
+The posterior distribution is
+\begin{align*}
+p(\theta|\bs{X},\alpha) = \frac{p(\bs{X}|\theta,\alpha)p(\theta|\alpha)}{p(\bs{X}|\alpha)} = \frac{p(\bs{X}|\theta,\alpha)p(\theta|\alpha)}{\int p(\bs{X}|\theta, \alpha) p(\theta|\alpha)\d\theta} \propto p(\bs{X}|\theta,\alpha)p(\theta|\alpha) \ .
+\end{align*}
+As the prior does not depend on the data $\bs{X}$ the focus when performing Bayesian inference is usually placed on computing the correct Likelihood which is often written as $L_{\bs{X}}(\theta,\alpha) = L(\bs{X}|\theta,\alpha) = p(\bs{X}|\theta,\alpha)$. This emphasizes that the free parameters of the likelihood are $\theta$ and $\alpha$.\\ 
+
+Furthermore it is popular to take the logarithm of the Likelihood function which gives rise to the \textit{log-likelihood}:
+\begin{align}\label{log_likelihood_def}
+\L = \log(L)
+\end{align}
+The main motivation for this redefinition is the fact that the logarithm is a monotonic function which implies that any maximum of the Likelihood function is also a maximum of the log-Likelihood function. This is useful since we are usually interested in maximizing the posterior distribution which is a function of the likelihood. The reason that the log-Likelihood function is used instead is that it is often easier to compute than the Likelihood. For instance for i.i.d. data with common density the log-Likelihood can be written as a sum
+\begin{align*}
+\L_{\bs{X}}(\theta) = \sum_{x\in\bs{X}}\L_x(\theta)
+\end{align*}
+which is generally easier to process than the product appearing in the full likelihood. This can be especially beneficial in cases where derivatives of the Likelihood are required.\\
+An additional advantage of using the log-likelihood function is the fact that the likelihood function can only take positive values which are often either very small or very large while the log-likelihood function maps to $\mathbb{R}$ which is numerically beneficial for computation.
+
+Similarly the marginal distribution can be calculated by taking the continuity limit of the sum in eq.\,\ref{marginal_normalization} which gives rise to the integral:
+\begin{align}\label{marginal_prob_dist}
+p(\bs{X}|\alpha) = \int p(\bs{X}|\theta, \alpha) p(\theta|\alpha)\d\theta
+\end{align}
+Of course $\theta$ does not necessarily have to be a single parameter but can also be a set of $n$ parameters $\theta=\{\theta_1,\dots,\theta_n\}$. In this case the integral over one or multiple of those parameters is usually still called the marginal distribution:
+\begin{align}\label{partial_marginal_dist}
+p(\bs{X}|\tilde{\theta},\alpha) = \int p(\bs{X}|\theta, \alpha) p(\theta|\alpha)\d\overline{\theta}
+\end{align}
+where $\tilde{\theta}\subset\theta$ and $\overline{\theta}=\theta\backslash\tilde{\theta}$. $\overline{\theta}$ are then also referred to as \textit{nuisance parameters}. Since ambiguity in the terminology can sometimes be confusing one usually speaks of "marginalizing over $\overline{\theta}$".\\
+
+An important example of a likelihood is that of $n$ i.i.d. random variables $\bs{X}=(X_1,\dots,X_n)$ with some unknown mean $\mu\in\mathbb{R}$ and variance $\sigma^2\in\mathbb{R}^+$:
+\begin{align}\label{likelihood_iid_gaussian}
+L_{\bs{X}}(\mu,\sigma^2) = \prod_{i=1}^n\frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(X-\mu)^2}{2\sigma^2}\right)\ .
+\end{align}
+This is a prime example of the practical advantages of taking the log-Likelihood since this is much easier to compute:
+\begin{align}
+\L_{\bs{X}}(\mu,\sigma^2) = \sum_{i=1}^n -\log(2\pi\sigma^2) - \frac{(X-\mu)^2}{2\sigma^2}
+\end{align}
+
+\subsubsection{Priors}
+Since the prior distribution assigns a probability to a hypothesis before looking at any data it should reflect the knowledge about the problem at hand (or the lack thereof) that can be drawn from initial considerations. As such a prior can e.g. restrict the possible domain of the parameters $\theta$ or encode some belief about the nature of the distribution.
+
+Furthermore the posterior distribution of one combination of hypothesis and data can often be the prior for a different one. This is often the case if several experiments give rise to likelihoods for the same set of parameters.
+
+In many cases we do not have very accurate information about the nature of the distribution on which we want to perform Bayesian inference in which case it is often advisable to construct a prior distribution which translates the information provided by the
+likelihood into the posterior while adding minimal bias. Many attempts at this have been made and this is still an area of active research. A full review of this would be beyond the scope of this thesis however it is worth mentioning that the most commonly used priors in practice are the flat or uniform prior and the gaussian prior. These take the shape of a uniform distribution and a gaussian distribution respectively. For additional information on this this topic please refer to \cite{Cowan1998, Gelman2013}.
+
+\subsubsection{Numerical considerations}
+
+In Bayesian inference the main focus usually lies on computing the posterior distribution for a given theory and marginalizing over different combinations of its parameters $\theta$, usually for visualization of the distribution and for the inference of marginalized quantities such as confidence intervals.
+
+While computing the marginal distribution can be performed analytically for a select group of simple posterior distributions, this integral has to be calculated numerically for most applications in physics as the Likelihood function either has an analytically intractable integral or is not given as an analytic function in the first place but has to be calculated numerically.
+
+This coupled with the fact that $\theta$ is often high dimensional (e.g. the Planck 2018 Likelihood has 27 free parameters \cite{planck_2018_results}) requires careful consideration of the integration method used. In particular this calls for an efficient algorithm which allows a robust characterization of the full parameter space $\theta$ while also enabling easy marginalization over any set of dimensions of this space.
+
+Some of these algorithms will be presented in the following.
+
+\subsection{Markov Chain Monte Carlo}\label{mcmc_section}
+\subsubsection{Markov Chains}
+To understand the concept of Markov Chain Monte Carlo (MCMC) we first have to establish the definition of a Markov Chain \cite{Gelman2013}
+\begin{definition}\label{def_markov_chain}
+A Markov Chain (MC) is a discrete stochastic process in which every next step in the process depends only on the current step. This property is also called \textit{Markov property}. Formally it can be defined as a sequence of random variables $X_1, X_2,\dots, X_n$ such that 
+\begin{align}
+p(X_{n+1}|X_1=x_1,X_2=x_2,\dots,X_n=x_n) = p(X_{n+1}|X_n=x_n) \ .
+\end{align}
+\end{definition}
+This means that at any point the chain only depends on the location of the previous sample which has the computational advantage that only two locations $X_n, X_{n-1}$ need to be kept in the main memory at any time while the rest of the chain can be saved to the hard drive. In addition this property also implies that any sub-chain of an MC containing $X_j, X_{j+1}, \dots X_{k}$ where $1<j<k<n$ is again an MC. 
+\subsubsection{Markov Chain Monte Carlo}
+Markov Chain Monte Carlo is the most commonly used and most thoroughly studied algorithm which fulfills the requirements for an efficient integration algorithm which were established earlier. The idea of this algorithm is to construct a process which approaches the sampled probability density as its stationary distribution. In other words the goal is to construct a chain which follows a path in the parameter space such that the normalized histogram of values approaches the probability density function (PDF) \cite{Murphy2012}.
+
+This is done by constructing a Markov Chain which is defined as a sequence of possible events where the probability of each event only depends on the state attained in the last step. This requires some rule which describes the probability to jump from one value in the likelihood to the next. One of the simplest and most widely used algorithms for this is the Metropolis-Hastings algorithm.
+
+For a probability distribution $p(x)$ that we want to map, this algorithms works by introducing an acceptance rate $\alpha$ which gives the probability that the chain will jump to a drawn value. This acceptance rate is calculated by sampling a point from some arbitrary probability density $g(x'|x_t)$ that suggests a candidate point $x'$ based on the the previous candidate sample $x_{t}$. A common choice for $g$ is a Gaussian distribution which is centered on $x_{t}$.
+
+Having drawn $x'$ from $g(x',x_t)$ the \textit{acceptance ratio} $\alpha$ is calculated\footnote{It is important to note that we are in fact not mapping $p(x)$ itself but a target distribution $f(x)$ which is proportional to $p(x)$. This rarely matters in practical applications though since we can easily normalize the histogram.}:
+\begin{align}\label{metropolis_hastings_acceptance_rate}
+\alpha = \frac{p(x')}{p(x_t)}
+\end{align}
+This acceptance ratio is compared to a uniformly drawn number $u\in [0,1]$:
+\begin{itemize}
+\item If $\alpha\geq u$ the candidate is accepted and $x_{t+1}=x'$.
+\item If $\alpha < u$ the candidate is rejected and $x_{t+1}=x_t$
+\end{itemize}
+This way the chain always jumps towards higher values of $p$ while the probability for jumping to points which have a value which is lower than the current one is smaller than $1$. Furthermore it is noteworthy that $g$ can only depend on the current value of the chain $x_t$ to conserve the Markov property (see Def.\,\ref{def_markov_chain}).
+
+The integration of the Monte Carlo approximation of the PDF can be done by summing the histogram of samples along one or multiple axes. It is one of the strengths of MCMC that this summation is computationally very cheap and that this histogram is a natural by-product of the Markov Chain. Furthermore the computational overhead of this method is independent of the number of samples in the chain and only consists of the computation of the proposal distribution, the evaluation of the likelihood and posterior function and the acceptance rate of the Metropolis Hastings proposal. 
+
+Disadvantages to this method are that a lot of information about the posterior distribution is simply ignored. As such the chain is oblivious to rejected samples and the values of the posterior at the sampling locations. In addition it is somewhat difficult to calculate the total evidence since the values of the likelihood are discarded during sampling. Another issue is that MCMC requires a lot of fine tuning to correctly map multimodal distributions. An illustration of Metropolis-Hastings-MCMC of a one-dimensional distribution is shown in Fig.\,\ref{metropolis_hasting_example}.
+
+\begin{figure}
+\begin{center}
+\def\svgwidth{0.65\textwidth}
+\input{../figures/metropolis_hasting_2_test.pdf_tex}
+\end{center}
+\caption{Example of the Metropolis Hastings MCMC algorithm on a mixture of two gaussian distributions with a uniform prior in $[-100, 100]$. The chain consists of 1000 steps with a gaussian proposal distribution $\mathcal{N}(X_n, 8)$ that is centered on $X_n$ and has a standard deviation of $8$. One can see how the normalized histogram of samples converges towards the real posterior distribution in the back. The image has been taken from \cite{Murphy2012}.}\label{metropolis_hasting_example}
+\end{figure}
+
+As mentioned above the Metropolis-Hastings algorithm is one of the most commonly used acceptance rules for MCMC. However there are other methods, most notably Hamilton Monte Carlo\footnote{In the literature this is also commonly referred to as Hybrid Monte Carlo} (HMC) \cite{neal_2011} and a adjusted version of the Metropolis-Hastings algorithm called Gibbs sampling for multidimensional distributions where instead of sampling from the joint distribution and integrating over it, one sequentially samples from the conditional distribution in each dimension \cite{Gelman2013}.
+
+\subsection{Nested Sampling}\label{nested_sampling_section}
+An alternative approach to MCMC which has become increasingly popular recently due to its robustness against multimodality and the fact that it can calculate the total evidence is the nested sampling algorithm which has been pioneered by John Skilling \cite{skilling_nested_sampling} and this section closely follows this paper. This algorithm uses a principle which is similar to that of Lebesgue integration to find an estimate for the evidence
+\begin{align}\label{evidence_int_nested_sampling}
+Z = \int L(\theta) \pi(\theta)\d \theta
+\end{align}
+where $L(\theta)$ is the likelihood function and $\pi(\theta)$ the prior. While this integral is straightforward to compute numerically (e.g. by using the trapezoidal rule) if $\theta$ is low-dimensional and $L(\theta)\pi(\theta)$ is cheap to evaluate, one needs a more efficient algorithm if these two conditions are not met.\\
+The nested sampling algorithm is such an algorithm which is obtained by observing that we can rewrite Eq.\,\ref{evidence_int_nested_sampling} by substituting
+\begin{align}
+X(\lambda) = \int_{L(\theta)>\lambda}\pi(\theta)\d X \ .
+\end{align}
+For increasing $\lambda$ the enclosed mass $X$ hence decreases from $1$ to $0$ (due to the fact that $\pi(\theta)$ is a probability distribution). By renaming $L(X)$ to the inverse function i.e. $L(X(\lambda))\equiv\lambda$ the evidence reduces to a one dimensional integral
+\begin{align}
+Z = \int_0^1 L(X)\d X \ .
+\end{align}
+This transformation is advantageous since now the integrand $L(X)$ is positive and decreasing.\\
+While this integral may look very easy at first the problem which remains is that inverting $L$ is not trivial and usually cannot be done analytically. Intuitively this would be done by dividing the $\theta$-space into a fine grid, evaluating the likelihood for each of these bins and sorting them by value
+\begin{align*}
+0 < X_m < \dots < X_2 < X_1 < 1
+\end{align*}
+where we assume that we have divided the space into $m$ parts. The weighted sum
+\begin{align}\label{weighted_sum_nested_sampling}
+\sum_{i=1}^m w_i L_i \to Z
+\end{align}
+then converges to the value of the integral where $w_i=\Delta X$ is the distance between $X_i$ and $X_{i+1}$. This corresponds to approximating the integral by summing up the histogram of the inverted likelihood. As such it is an approximate form of Lebesgue integration. An illustration of this approach is shown in Fig.\,\ref{nested_sampling_1}.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{nested_sampling_1.pdf}
+\end{center}
+\caption{Illustration of the nested sampling approach. Each iso-likelihood contour $L_i$ (left) in the parameter space corresponds to a value $X_i$ (right) in the inverted likelihood space. The evidence can be computed by numerically approximating $Z = \int_0^1 L(X)\d X$ with the weighted sum in Eq.\,\eqref{weighted_sum_nested_sampling}. Image taken from \cite{skilling_nested_sampling}.}\label{nested_sampling_1}
+\end{figure}
+
+In practice one wants the sampling to be linear in $\log(X)$ instead of $X$ because in most real world cases the bulk of the posterior mass only occupies a small fraction $e^{-H}$ of the prior volume where
+\begin{align}
+H = \int\log(\D P/\D X)\d P
+\end{align}
+which is achieved by introducing a variable $t$ such that
+\begin{align}
+X_1 = t_1, \ X_2=t_1 t_2, \dots , X_i = t_1 t_2 \dots t_i, \dots X_m = t_1 t_2 \dots t_m
+\end{align}
+where each $t_i$ is a value between $0$ and $1$. We can express this explicitly by writing
+\begin{align}
+\sum_{i=1}^m w_i(\bs{t}) L_i \to Z(\bs{t}) \ .
+\end{align} 
+What remains is to set precise values for $\bs{t}$ and while this is difficult to set exactly it can be done statistically. The reason for this is that for any point $X_i$ which is randomly drawn from the prior with the constraint that $X_i<X_{i-1}$ with $X_0=1$, we know that $X_i = t_i X_{i-1}$ where $t_i$ is drawn from the uniform distribution covering $[0,1)$. Since the constraint $X_i<X_{i-1}$ is equivalent to $L_i > L_{i-1}$ with $L_0=0$ we can use this to sample directly from the likelihood instead of having to invert it.\\
+
+The idea of nested sampling is then to draw a convenient number $N$ of points from the prior and at each iteration select the worst point (the one with the lowest $L$ and highest $Z$) as the $i$'th point. The recurrence for $X$ is then given by
+\begin{align}
+X_0 = 0, X_i = t_i X_{i-1}
+\end{align}
+and since $t_i$ is the largest of $N$ numbers drawn from \texttt{uniform}$[0,1)$ the probability for obtaining a value $t_i$ is given by
+\begin{align*}
+p(t_i) \sim N t_i^{N-1}
+\end{align*}
+If we treat this like a distribution in $\log(t)$ we can easily calculate the expectation value and variance analytically which yields
+\begin{align}\label{nested_sampling_expectation_eq}
+\mathbb{E}(\log(t)) = -1/N\qquad \mathrm{var}(\log(t)) = \frac{1}{N^2} \ .
+\end{align}
+The expectation value can then be used as an approximation for $t_i$. The point which has been previously selected is then deleted and replaced by another point which is drawn from the prior with the constraint that $L>L_i$. Finding an independent point that follows the prior distribution and fulfils $L>L_i$ can be a bit tricky if the bulk of the posterior volume is contained in a small region of the prior. 
+
+We can make our lives easier though by not sampling directly from the prior but rather evolving one of our $N$ points which by definition have higher likelihood values than $L_i$ with some algorithm which makes the new sample approximately independent from $L_i$, for example a sufficiently decorrelated MCMC chain. This procedure is done iteratively until the required precision is reached.
+
+Conveniently this algorithm also allows us to estimate the uncertainty of $Z$. Since the values for $\bs{t}$ in the weighted sum $\sum_i L_i w_i(\bs{t})$ are set statistically instead of actually inserting the correct value for $\bs{t}$ this induces an uncertainty in the estimate of $Z$. Luckily we can estimate the uncertainty in $\bs{t}$ by observing that the distribution for $t_i$ gives rise to a "sequence probability"
+\begin{align}\label{nested_sampling_sequence_prob}
+\mathrm{Pr}(\bs{t})\d\bs{t} = \prod_i N t_i^{N-1}
+\end{align}
+which in turn induces a probability for the estimate of $Z$:
+\begin{align}\label{prob_Z_est}
+\mathrm{Pr}(Z) = \int \delta\left(Z - \sum_{i-1}^m L_i w_i(\bs{t})\right) \mathrm{Pr}(\bs{t})\d\bs{t}
+\end{align}
+The moments of this distribution can then be determined by any integration algorithm that is convenient. In practice MCMC is commonly used for this. In addition the integration is often done in log space as it is numerically more convenient and usually the the evidence itself is also calculated in log space.\\
+Pseudocode of the full algorithm is shown in algorithm \ref{nested_sampling_algorithm}.
+
+\IncMargin{1em}
+\begin{algorithm}[H]\label{nested_sampling_algorithm}
+ \DontPrintSemicolon
+ \KwIn{$N$ initial points $\theta = \{\theta_1,\dots,\theta_N\}$ from prior}
+ $Z:=0$\;
+ $X_0:=1$\;
+  \For{$i=1,2,\dots,j$}{
+	$L_i = \min(L(\theta))$\;
+	$X_i:=\exp(-i/N)$ (crude) or sample $X_i$ to get uncertainty\comment*[r]{eq.\,(\ref{nested_sampling_expectation_eq},\ref{nested_sampling_sequence_prob})}
+	$w_i:=X_{i-1}-X_i$ (simple) or $(X_{i-1}-X_{i+1})/2$ (trapezoidal)\;
+	$Z = Z + L_i w_i$\;
+	replace $L_i$ with point drawn from $\pi(\theta)$ with $L(\theta)>L_i$\;
+ }
+ $Z=Z + \frac{1}{N} L(\theta_1+\dots+L(\theta_N))X_j$\;
+ \KwRet{$Z$}
+ \caption{Pseudocode of the nested sampling algorithm. The last step (line 10) takes advantage of the points left after $j$ steps. If the algorithm has converged this should only add a small correction and could very well be omitted. The pseudocode is taken from \cite{skilling_nested_sampling}.}
+\end{algorithm}
+
+\subsection{Typical computational complexity}
+\begin{figure}
+\begin{center}
+\def\svgwidth{0.75\textwidth}
+\input{../figures/nested_sampling_scaling_test.pdf_tex}
+\end{center}
+\caption{Number of evaluations needed to achieve convergence on a unimodal gaussian likelihood with nested sampling. The two programs, \texttt{PolyChord} \cite{polychord_1, polychord_2} and \texttt{MultiNest} \cite{multinest_1, multinest_2, multinest_3} are different implementations of the basic nested sampling algorithm. One can see the exponential scaling of \texttt{MultiNest} emerging in high dimensions while \texttt{PolyChord} scales polynomially which comes from the differences in the ways both algorithms select their samples. The image has been taken from \cite{polychord_1}.}\label{nested_sampling_scaling}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+%\resizebox{0.75\textwidth}{!}{
+\input{../figures/n_evals_mcmc.pgf}
+\end{center}
+\caption{Number of evaluations to achieve convergence on a unimodal gaussian likelihood with MCMC. The algorithm used is a modified version of the Metropolis Hastings algorithm that is described in \cite{mcmc_sampler_1, mcmc_sampler_2}. 50 (10 in 16 dimensions) random, mildly correlated gaussian distributions were drawn and sampled using adaptive covariance matrix learning. The empirical mean and standard deviation for the number of evaluations per chain are shown for one and four chains. Furthermore the theoretical scaling which is $\propto D^{1.7}$ is shown. The number of chains corresponds to the number of parallel processes which can be run.}\label{mcmc_scaling}
+\end{figure}
+
+The speed of convergence for both MCMC and nested sampling algorithms depends on a number of factors. These are the desired accuracy of the sampling (usually estimated by a convergence criterion), the number of modes of the posterior distribution (where a large number of modes typically means slower convergence) as well as the shape of the posterior distribution. For instance "banana"-shaped posterior distributions are challenging for these algorithms and thus need a higher number of evaluations. 
+
+Another important factor is the dimensionality of the posterior distribution. Algorithms typically either scale exponentially with the number of dimensions or polynomially with  $N_L \propto \mathrm{const}\cdot D^\rho$. This scaling for two different nested sampling algorithms and simple, unimodal gaussian distributions is shown in Fig.\,\ref{nested_sampling_scaling}. Similar data for an MCMC algorithm which is described in \cite{mcmc_sampler_1, mcmc_sampler_2} is shown in Fig.\,\ref{mcmc_scaling}. Again random unimodal gaussians were used as posterior distributions. One can see that the number of evaluations for both algorithms is comparable.
+
+The number of samples shown here can be seen as a lower bound on the number of samples which need to be evaluated to achieve convergence since unimodal gaussian distributions are especially simple to sample.
+
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Gaussian Processes}\label{gaussian_processes_chap}
+This chapter gives an overview on Gaussian Processes (GPs), as these will be used later to present an alternative approach to using MCMC or nested sampling methods to construct a model of the posterior.
+
+First, the concept of GPs and their mathematical foundations are introduced in section \ref{gp_concept_chapter} followed by an intuitive description of the practical considerations that need to be taken into account when using GPs. The kernel function is discussed in detail in section \ref{kernels_chapter}, followed by examples of the most commonly used kernel functions. 
+
+Next, GP regression is introduced in section \ref{gp_regression_section}. This part of the chapter closely follows chapter 1 and 2 of \cite{GPML} and can be viewed as a brief introduction to the main concepts of GP regression. 
+
+Section \ref{bayesian_quadrature_section} introduces Bayesian quadrature together with a review of Bayesian optimization and active sampling in \ref{active_sampling_subsection}. As these topics are still areas of ongoing investigation we will try to give an overview of the current state of research.
+\subsection{Concept}\label{gp_concept_chapter}
+While GPs are mathematically simple and well defined, getting an intuitive understanding of how they work requires us to introduce the concept of a stochastic process. Omitting the mathematical details it can be thought of as a function
+\begin{align*}
+\{Y(t): t\in T\}
+\end{align*}
+where $Y$ is a random variable drawn from some probability measure $P$. $T$ is often referred to as \textit{index set}. Important examples of stochastic processes apart from GPs are Markov- and Wiener processes \cite{Lamperti2012}. \\
+Armed with this idea of stochastic processes we can formally define GPs:
+\begin{definition}
+A Gaussian Process is a collection of random variables, any finite number of which have a joint Gaussian distribution. \cite{GPML}
+\end{definition}
+This means, that a GP is a stochastic process defined on any set $T=\{t_1,...,t_n\}$ where the $n$ values $\{y_1,...,y_n\}$ are drawn from a joint Gaussian distribution 
+\begin{align}\label{multiv_gauss_def}
+\mathcal{N}(t|\bs{\mu},\Sigma) = \frac{1}{ \sqrt{(2\pi)^n \det(\Sigma)} } \exp \left(-\frac{1}{2}(\bs{t}-{\bs{\mu}})^{\top}{\Sigma}^{-1}(\bs{t}-{\bs{\mu}}) \right)
+\end{align}
+with
+\begin{align*}
+\bs{\mu} = \tvec{\mu_1}{\vdots}{\mu_n}, \ \Sigma=\tvec{\Sigma_{11} & \dots & \Sigma_{1n}}{\vdots & \ddots & \vdots}{\Sigma_{n1} & \dots & \Sigma_{nn}}\ .
+\end{align*}
+$\bs{\mu}$ is called the mean vector (of length $n$) and $\Sigma$ the covariance matrix (of size $n\times n$). While in principle any set $T$ is allowed for a valid GP,\footnote{In fact any multivariate Gaussian distribution between variables in the same space is a GP.} in practice only the case where $T$ is continuously defined on $\mathbb{R}$ is of particular interest\footnote{Actually the case where $X\subset\mathbb{R}^D$ is even more interesting for our purposes. How the formalism can be extended to this case is described in section \ref{higher_dim_section}}. In the following the index set of the continuous GP will be denoted as $X$.
+
+Nevertheless it is useful to look at the finite integer set $\{1,...,n\}$ in order to gain an intuitive understanding of how a GP defined on a continuous domain works.Fig.\,\ref{intuitive_1} shows how such a discrete GP looks like for $n=5$ and $n=30$. One observes that the GP is fully described if for every two points $t,t'\in T$ there exist (i) two mean values $\mu, \mu'$ and (ii) a covariance matrix $\Sigma$. These can be expressed as two functions (here in the continuous case with the index set $X$):
+
+(i) the mean function $m(x)$ and (ii) the covariance function (often called \textit{kernel}) $k(x,x')$ with $x,x'\in X$. As such a continuous GP is a distribution over functions $f(x)$ which can be expressed as
+\begin{align}\label{dist_over_func}
+f(x)\sim \GP(m(x), k(x,x'))
+\end{align}
+where
+\begin{align}\label{mean_and_variance_prior}
+m(x) &= \mathbb{E}[f(x)]\\
+k(x,x') &= \mathbb{E}[(f(x)-m(x))(f(x')-m(x'))] \ .
+\end{align}
+Note however that the definition of a stochastic process automatically implies a consistency requirement (also called Kolmogrov's extension theorem \cite{Stoch_diff_eq}) which demands that any GP that specifies $(y_1,\dots, y_n)\sim\mathcal{N}(x|\bs{\mu},\Sigma)$ on any set $X$ must equally specify $(y'_1,\dots, y'_n)\sim\mathcal{N}(x'|\bs{\mu}',\Sigma')$ for any subset $X'\subset X$ by taking the relevant parts of $\bs{\mu}$ and $\Sigma$. In other words this means, that for $X=\mathbb{R}$ one does not need to know the (infinite-dimensional) full distribution between all indices to make predictions about a finite subset of indices.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.45\textwidth]{gp_intuition_1.pdf}
+\includegraphics[width=0.45\textwidth]{gp_intuition_2.pdf}
+\end{center}
+\caption{Left: Samples drawn from a multivariate gaussian distribution with $m(t)=0$ and $k(t,t')=\exp\left(-\frac{(t-t')^2}{200}\right)$. The samples are indexed by the set $\{1,2,3,4,5\}$.  Right: Samples drawn from the same multivariate gaussian distribution defined on the index set $\{t\in\mathbb{N}, 1\leq t\leq 30\}$. Intuitively one can see how a the samples describe smooth functions. For the continuous index set $X$, $m(x)$ and $k(x,x')$ can be chosen as smooth functions $\mathbb{R}\to\mathbb{R}$ which makes the transition from the discrete index set $T$ to the continuous index set $X$ obvious.}\label{intuitive_1}
+\end{figure}
+
+\subsubsection{Conditioning}
+In practice one does not only want to draw values from the prior distribution but wants to incorporate knowledge about a set of training points $\{(x_i,y_i=f_i)|i=1,\dots,n\}$. In the GP framework the joint distribution of these training points $\bs{f}$ and an arbitrary set of test points $\bs{f}_*(\bs{x}_*)$ is
+\begin{align}\label{joint_distribution}
+\begin{bmatrix}
+\bs{f} \\ \bs{f}_*
+\end{bmatrix}\sim \mathcal{N}\left(\begin{bmatrix}
+\bs{m}(\bs{x}) \\ \bs{m}(\bs{x}_*)
+\end{bmatrix}, \begin{bmatrix}
+K(\bs{x},\bs{x}) & K(\bs{x},\bs{x}_*) \\ 
+K(\bs{x}_*,\bs{x}) & K(\bs{x}_*,\bs{x}_*)
+\end{bmatrix}\right)
+\end{align}
+such that if there are $u$ training and $v$ test points $\bs{m}(\bs{x})$ is the vector of length $u$ with $\bs{m}(\bs{x})_i=m(x_i)$ and $K(\bs{x},\bs{x})_{ij}=k(x_i, x_j)$ with dimension $u\times u$. Similarly $K(\bs{x}_*,\bs{x})$ has dimension $v\times u$ and $K(\bs{x}_*,\bs{x}_*)$ dimension $v\times v$. The matrix
+\begin{align}\label{gram_matrix_def}
+K(\bs{x},\bs{x}')_{ij} = k(x_i,x'_j)
+\end{align}
+for any kernel $k$ is called the \textit{Gram matrix} between $\bs{x}$ and $\bs{x}'$. \\
+As the training points are known observations, it is necessary to \textit{condition} the joint probability on the observed values\footnote{This is equivalent to taking the set of the (infinitely) many possible functions $f(x)$ and rejecting all functions which do not pass through the points $\{x_i,y_i|i=1,\dots,n\}$}. Fortunately conditioning for multivariate Gaussians is very simple:
+\begin{align}\label{conditional}
+\bs{f}_*|\bs{x}_*,\bs{x},\bs{f}\sim \mathrm{N}(\overline{\bs{f}}_*,\Sigma_{\bs{f}_*})
+\end{align}
+with
+\begin{align}\label{mean_and_cov}
+\overline{\bs{f}}_* &= \bs{m}(\bs{x}_*) + K(\bs{x}_*, \bs{x})K(\bs{x},\bs{x})^{-1}(\bs{f}-\bs{m}(\bs{x})) \\
+\cov(\bs{f}_*)=\Sigma_{\bs{f}_*} &= K(\bs{x}_*,\bs{x}_*) - K(\bs{x}_*,\bs{x})K(\bs{x},\bs{x})^{-1}K(\bs{x},\bs{x}_*)
+\end{align}
+This conditioned GP is then called the \textit{posterior GP}.
+
+One thing to note about these equations is, that even for a zero-mean prior function $m(x)=0\ \forall x$ it is possible to obtain a non-zero posterior mean value for the conditioned distribution. This is motivates the choice $m(x)=0$ as mean function which reduces the problem of constructing a GP solely to the choice of an appropriate kernel function (see section \ref{kernels_chapter} for more details). Unless mentioned otherwise all further calculations in this thesis will assume a zero mean function.
+
+A graphical example of how this conditioning works can be seen in Fig.\,\ref{gp_condition_fig} where on the left are sample functions drawn from a prior GP with $m(x)=0$ and $k(x,x')=\exp\left(-\frac{(x-x')^2}{2}\right)$ and on the right sample functions from a GP that is conditioned on a set of training points (observations). The value of their prior and posterior mean functions as well as their standard deviations are also shown. The standard deviations are the square-root of the diagonal entries of the covariance matrix:
+\begin{align}\label{sigma_gp}
+\sigma(x_i) = \sqrt{\Sigma_{f(x_i), ii}}
+\end{align}
+
+\paragraph{Predictions with noisy observations}\ \\
+In practice the training data often has some associated statistical noise $y=f(x)+\varepsilon$. Where $\varepsilon$ has an associated variance $\sigma_n^2$ which in most cases can be assumed to be i.i.d. gaussian. It is very simple to include this into the GP framework by simply adding this noise term to the kernel function:
+\begin{align}\label{noise_kernel_formula}
+\tilde{k}(x,x') = k(x, x') + \sigma_n^2\delta_{x,x'}
+\end{align}
+where $\delta_{x,x'}$ is the Kronecker delta. This also changes the equations for conditioned GPs as now the common distribution between $\bs{y}$ and $\bs{f}_*$ is given by
+\begin{align}\label{joint_distribution_noise}
+\begin{bmatrix}
+\bs{y} \\ \bs{f}_*
+\end{bmatrix}\sim \mathcal{N}\left(\begin{bmatrix}
+\bs{m}(\bs{x}) \\ \bs{m}(\bs{x}_*)
+\end{bmatrix}, \begin{bmatrix}
+K(\bs{x},\bs{x})+\sigma_n^2 I & K(\bs{x},\bs{x}_*) \\ 
+K(\bs{x}_*,\bs{x}) & K(\bs{x}_*,\bs{x}_*)
+\end{bmatrix}\right) \ .
+\end{align}
+This means that the conditional distribution changes to
+\begin{align}\label{conditional_noise}
+\bs{f}_*|\bs{x}_*,\bs{x},\bs{y}\sim \mathrm{N}(\overline{\bs{f}}_*,\Sigma_{\bs{f}_*})
+\end{align}
+with
+\begin{align}\label{conditional_noise_full}
+\overline{\bs{f}}_* &= \bs{m}(\bs{x}_*) + K(\bs{x}_*, \bs{x})[K(\bs{x},\bs{x})+\sigma_n^2I]^{-1}(\bs{y}-\bs{m}(\bs{x})) \\
+\cov(\bs{f}_*)=\Sigma_{\bs{f}_*} &= K(\bs{x}_*,\bs{x}_*) - K(\bs{x}_*,\bs{x})[K(\bs{x},\bs{x})+\sigma_n^2I]^{-1}K(\bs{x},\bs{x}_*) \ .
+\end{align}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.45\textwidth]{gp_prior_samples.pdf}
+\includegraphics[width=0.45\textwidth]{gp_posterior_samples.pdf}
+\end{center}
+\caption{Left: Sample functions drawn from a GP with $\mu(x)=0$ and $k(x,x')=\exp\left(-\frac{(x-x')^2}{2}\right)$ (dashed lines) as well as the value of the prior mean function and the standard deviation $\sqrt{k(x,x)}$ (solid black line and grey band). Note how in principle any function $f(x)$ is allowed but the probability that any function is drawn is dictated by the mean function and kernel. Right: Sample functions drawn from the same GP after conditioning (dashed lines) on five observations (black crosses). Again mean function and standard deviation are shown, this time for the posterior GP. Note how even with a zero prior mean function $m(x)=0$ one obtains a non-zero posterior mean. Furthermore after conditioning, only those functions which pass through the training points are allowed.}\label{gp_condition_fig}
+\end{figure}
+
+\subsection{The kernel function}\label{kernels_chapter}
+As discussed in the last section, with the mean function usually assumed to be zero, the GP is fully characterized by its kernel or covariance function. This raises the need to closely examine the properties of a kernel function and inspect which kernels are suitable to accurately predict a functional dependence from measurements.
+
+As kernel functions cannot be any arbitrary function, we have to first establish the requirements which have to be fulfilled by a kernel to be valid. As the kernel is a function of two (potentially vector-like) variables $k(x,x')$, that describes the covariance between two points, it trivially needs to fulfil three conditions:
+\begin{enumerate}
+\item The kernel needs to map $k:\mathbb{R}^D\times\mathbb{R}^D\to\mathbb{R}$
+\item It needs to be symmetric: $k(x,x')=k(x',x)$
+\item The covariance matrix obtained from the kernel needs to be positive definite: $\bs{z}^T K(\bs{x},\bs{x}') \bs{z} \geq 0$ for all $z\in\mathbb{R}^D\textbackslash 0$ and with $K(\bs{x},\bs{x}')_{ij} = k(\bs{x}_i,\bs{x}_j')$ being the Gram matrix of $\bs{x}$ and $\bs{x}'$. This condition is fulfilled if and only if $k(x,x')\geq 0$ for all $x,x'\in X$ \cite{Cressie2015}.
+\end{enumerate}
+Apart from these mathematical requirements a kernel function should also represent all knowledge that is available on the underlying functional dependence of the training set.
+
+A kernel function can encode information such as differentiability, periodicity and variability in the data. As GPs are non-parametric models unfortunately it is quite hard to infer a suitable kernel function from prior knowledge (unlike for parametric models where the functional dependence is chosen beforehand). This makes the choice of kernels for specific problems complicated.
+
+Nevertheless some general statements can be made about some kernels and how their characteristics translate to the GP. The most important ones are listed below:
+
+\begin{enumerate}
+\item The first important characteristic is \textit{stationarity}. This simply means, that a kernel function is invariant to translations, i.e.
+\begin{align*}
+k(x+z, x'+z) = k(x, x)\quad\forall\ z \ .
+\end{align*}
+Any stationary kernel can hence be rewritten as a function of the distance $d=|x-x'|$
+The stationarity of a kernel will directly translate to a GP. In most cases stationarity is desirable.
+\item The second important characteristic of kernels is \textit{differentiability}. Again this translates directly to the GP. If a kernel function is $n$ times differentiable so is the resulting GP.
+\item Lastly a kernel can be periodic, which is defined as
+\begin{align*}
+k(x, x') = k(x, x'+n\cdot z),\quad n\in\mathbb{Z} \ .
+\end{align*}
+Again periodicity of the kernel also imposes periodicity on the GP.
+\end{enumerate}
+
+In the following the most commonly used kernel functions are presented. This list is by no means complete. In principle there are infinitely many viable kernel functions.
+
+\paragraph{The Constant kernel}\ \\
+This kernel is perhaps the easiest kernel imaginable as it is just defined as
+\begin{align}\label{constant_kernel_definition}
+k(x,x')=C,\qquad C\in\mathbb{R}^+
+\end{align}
+While this kernel is mathematically very easy, in practice it is rarely useful on its own because it results in an infinite correlation length if $C\neq 0$. This means that all points have the same value. 
+
+Usually the constant kernel is only used as a building block for more complex composite kernels (see section \ref{composite_kernels_chap}). An example of a GP with a constant kernel before and after conditioning is shown in Fig.\,\ref{constant_kernel}.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{constant_kernel_prior.pdf}
+\includegraphics[width=0.45\textwidth]{constant_kernel_post.pdf}
+\end{center}
+\caption{Left: Sample functions drawn from a GP with a constant kernel ($C=1$) (dashed lines) as well as the value of the prior mean function and the standard deviation (solid black line and grey band). Right: Same GP after conditioning on five observations (black crosses). The standard deviation for the posterior GP is not visible.}\label{constant_kernel}
+\end{figure}
+
+\paragraph{The White (noise) kernel}\ \\
+The white kernel is almost as simple as the constant kernel. It imposes a variance on points but no correlation between them:
+\begin{align}\label{white_kernel_definition}
+k(x, x') = \sigma_n^2 \delta_{x,x'}
+\end{align}
+where $\delta_{x,x'}$ is the Kronecker delta, which is one if $x=x'$ and zero otherwise. As this kernel does not establish any relation between any pair of $x$-values, a GP with only a white kernel is equivalent to a random noise generator. Mathematically speaking this is due to the fact that the Gram matrix of $k(x,x')$ only has non-zero values on its diagonal and thus all covariances between points vanish. 
+
+Again this kernel is almost exclusively used to build composite kernels. In fact including i.i.d.\ statistical noise into a GP is equivalent to adding a white kernel to an existing kernel as shown in Eq.\,\ref{noise_kernel_formula}. Fig.\,\ref{white_kernel} shows an example of a GP with a white kernel before and after conditioning on five points. In this example $\sigma_n^2$ is chosen to be one so that the GP corresponds to white noise with a standard deviation of one.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{white_kernel_prior.pdf}
+\includegraphics[width=0.45\textwidth]{white_kernel_post.pdf}
+\end{center}
+\caption{Left: Sample functions drawn from a GP with a white kernel ($\sigma_n^2=1$) as well as the value of the prior mean function and the standard deviation (solid black line and grey band). Right: Same GP after conditioning on five observations (black crosses). This GP corresponds to white noise with a standard deviation of $\sigma_n=1$}\label{white_kernel}
+\end{figure}
+
+\paragraph{The RBF kernel} \ \\
+Perhaps most commonly used kernel function is the \textit{Radial Basis Bunction} (RBF) kernel\footnote{In the literature this kernel has many different names among which are \textit{Squared Exponential} kernel and \textit{Gaussian} kernel. Throughout this thesis we will stick to RBF kernel though.}. This kernel is usually defined as
+\begin{align}\label{rbf_kernel_definition}
+k(d)=\exp\left(-\frac{d^2}{2\cdot l^2}\right),\quad l\in\mathbb{R}\ .
+\end{align}
+It is infinitely many times differentiable and stationary. A drawback of this kernel is that is produces very "smooth" GPs which in case of real world data rarely reflects the truth. Therefore it has been argued by many authors that the RBF kernel should not be used in applications where real world data is involved \cite{GPML}.\\ 
+Fig.\,\ref{rbf_kernel} shows a GP with an RBF kernel with $l=1$. Note how the sample functions drawn from the GP are very smooth. 
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{rbf_kernel_prior.pdf}
+\includegraphics[width=0.45\textwidth]{rbf_kernel_post.pdf}
+\end{center}
+\caption{Left: Sample functions drawn from a GP with an RBF kernel ($l=1$) as well as the value of the prior mean function and the standard deviation (solid black line and grey band). Right: Same GP after conditioning on five observations (black crosses).}\label{rbf_kernel}
+\end{figure}
+
+\paragraph{The Mat\'{e}rn kernel}
+The Mat\'{e}rn kernel can be seen as a generalization of the RBF kernel with the introduction of an additional parameter $\nu$ which controls the differentiability. Like the RBF kernel, it is stationary. It is defined as \cite{Murphy2012}
+\begin{align}\label{matern_kernel_definition}
+k_\nu(d) = \frac{2^{1-\nu}}{\Gamma(\nu)}\Bigg(\frac{\sqrt{2\nu}d}{l}\Bigg)^\nu\cdot K_\nu\Bigg(\frac{\sqrt{2\nu}d}{l}\Bigg),\qquad l\in\mathbb{R}^+\ .
+\end{align}
+where $\Gamma$ is the gamma function and $K_\nu$ the modified Bessel function of the second kind
+A value of $\nu=n+\frac{1}{2}$ means that the kernel is $n$ times differentiable. For $n=0$ it is simply given as
+\begin{align*}
+k_{1/2}(d)=\exp\left(-\frac{d}{l}\right)
+\end{align*}
+and is often referred to as Ornstein-Uhlenbeck kernel, as when it is used to define a GP it describes the (one-dimensional) velocity of a particle undergoing brownian motion \cite{Murphy2012}.
+Furthermore for $\nu\to\infty$ the Mat\'{e}rn kernel approaches the RBF kernel. Fig.\,\ref{matern_kernel} shows a GP with a Mat\'{e}rn kernel with $\nu=\frac{3}{2}, l=1$. The sample functions drawn from the GP are therefore once differentiable which is clearly visible when compared to samples drawn from the RBF kernel.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{matern_kernel_prior.pdf}
+\includegraphics[width=0.45\textwidth]{matern_kernel_post.pdf}
+\end{center}
+\caption{Left: Sample functions drawn from a GP with a Mat\'{e}rn kernel ($\nu=\frac{3}{2}, l=1$) as well as the value of the prior mean function and the standard deviation (solid black line and grey band). Right: Same GP after conditioning on five observations (black crosses). Note how the sample functions drawn from the GP are much less smooth than those drawn from the GP with RBF kernel.}\label{matern_kernel}
+\end{figure}
+
+\paragraph{The exponential-sine squared kernel}
+The exponential sine squared (ESS) kernel is a prime example of a periodic kernel.\footnote{In the literature, this kernel function is often simply referred to as periodic kernel \cite{Duvenaud2014, GPML, wilson2013gaussian}. Since this is somewhat misleading, as this is just one example of possible periodic kernels we will stick to "ESS kernel".} It is stationary and defined as \cite{Duvenaud2014}
+\begin{align}\label{periodic_kernel_definition}
+k(d) = \exp\left(\frac{2\sin^2\left(\frac{\pi d}{p}\right)}{l^2}\right)
+\end{align}
+where $p$ controls the distance between different periods of the function and $l$ plays the same role as in the RBF kernel. Fig\,\ref{expsine_kernel} shows an example of a GP with ESS kernel. The periodicity is clearly visible.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{expsine_kernel_prior.pdf}
+\includegraphics[width=0.45\textwidth]{expsine_kernel_post.pdf}
+\end{center}
+\caption{Left: Sample functions drawn from a GP with a ESS kernel ($l=10^{-5}, p=1$) as well as the value of the prior mean function and the standard deviation (solid black line and grey band). Right: Same GP after conditioning on five observations (black crosses). The interpretation of the data differs a lot from the one by the RBF and Mat\'{e}rn kernels due to the imposed periodicity.}\label{expsine_kernel}
+\end{figure}
+
+\subsubsection{Composite kernels}\label{composite_kernels_chap}
+From the three conditions for kernel functions specified in section \ref{kernels_chapter} one can combine known kernel functions into new ones through simple operations. Most importantly two operations always conserve these conditions and can hence be used to construct composite kernels:
+\begin{enumerate}
+\item The sum of two or more kernels is a valid kernel.
+\item The product of two or more kernels is also a valid kernel.
+\end{enumerate}
+In practice these rules can be used to construct composite kernels to better incorporate prior knowledge about the functional dependence of the data one tries to represent. Furthermore it is possible to assign different covariance functions to different domains as explained in \cite{automatic_statistician}.
+
+\subsubsection{Higher dimensionality}\label{higher_dim_section}
+So far we have only looked at the case where a GP is a function $\mathcal{GP}:\mathbb{R}\to\mathbb{R}$. However we often encounter the case where the function to be approximated by the GP is $\mathbb{R}^D\to\mathbb{R}$. In this case the formalism can be trivially modified by changing the kernel function such that $k(\bs{x},\bs{x}'): \mathbb{R}^D\times\mathbb{R}^D\to\mathbb{R}$. An example of a GP mapping $\mathbb{R}^2\to\mathbb{R}$ can be seen in Fig.\,\ref{2d_gp_toy_fig} (top) where the the kernel function is the RBF kernel:
+\begin{align*}
+k(\bs{x}, \bs{x}') = \exp\left(-\frac{|\bs{x}-\bs{x}'|^2}{2}\right)
+\end{align*}
+
+Additionally a way to construct a kernel is as a composition of kernels where each kernel only acts on a single direction. In this case a valid two-dimensional example using the RBF kernel could be
+\begin{align*}
+k\left(\twovec{x_1}{x_2},\twovec{x_1'}{x_2'}\right) =
+\exp\left(-\frac{|x_1-x_1'|^2}{2 l_1}\right)\cdot \exp\left(-\frac{|x_2-x_2'|^2}{2 l_2}\right)
+\end{align*}
+This GP with $l_1=10^{-3},l_2=1$ is shown in Fig.\,\ref{2d_gp_toy_fig} (bottom). The different length scales cause the GP to behave differently along the two dimensions. In principle it would also be possible to use different types of kernels e.g. an RBF kernel along one axis and a periodic kernel along the other if this reflects the prior knowledge about the hypothesis. 
+
+From a computational standpoint it is important to point out that for anisotropic kernels the number of hyperparameters increases proportionally to the number of dimensions of the data. This in turn means that obtaining the MAP estimate for these hyperparameters as explained in section \ref{map_hyperparams_subsection} becomes computationally more expensive.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.45\textwidth]{2d_gp_posterior.pdf}
+\includegraphics[width=0.45\textwidth]{2d_gp_posterior_std.pdf}
+\includegraphics[width=0.45\textwidth]{2d_gp_posterior_anis.pdf}
+\includegraphics[width=0.45\textwidth]{2d_gp_posterior_std_anis.pdf}
+\end{center}
+\caption{Top: Mean (left) and standard deviation (right) for Posterior GP with an isotropic RBF kernel with $l=1$ conditioned on five training points (black dots).\\
+Bottom: GP conditioned on the same training points with an anisotropic kernel with $l_1=10^{-3}, l_2=1$. The interpretation of the data changes considerably from the isotropic case to the anisotropic one.}\label{2d_gp_toy_fig}
+\end{figure}
+
+\subsubsection{Tuning the kernel's hyperparameters}\label{map_hyperparams_subsection}
+All the kernels that have been presented in the previous section have one or more free parameters, which are in principle dependent on the prior knowledge of the data. In the context of GPs these are usually referred to as \textit{hyperparameters}\footnote{There exists an ambiguity here since we also introduced hyperparameters and the letter $\theta$ in chapter \ref{bayesian_inference_section}. 
+
+This is no coincidence since the Gaussian Process prior and the training set also induce a likelihood. To avoid confusion the hyperparameters of the GP will be explicitly called \textit{GP hyperparameters} if not clear from the contest.} $\theta$. In many cases however the knowledge about e.g.\ the characteristic length scale $l$ or the variance $\sigma_n^2$ is missing or not immediately obvious.
+
+Fortunately the GP itself can be used to obtain a best estimate of these parameters using Bayesian inference. This is done by maximizing the marginal likelihood (or evidence) of the training data under the GP which is given as the integral over the prior times the likelihood \cite{GPML}:
+\begin{align}
+p(\bs{y}|\bs{x})=\int p(\bs{y}|\bs{f},\bs{x})p(\bs{f}|\bs{x})\d f
+\end{align}
+where $p(\bs{f}|\bs{x})$ is the prior which in our case is gaussian $\bs{f}|\bs{x}\sim\mathcal{N}(\bs{0}, K)$. Furthermore the likelihood is just the function (or a factorized gaussian if the training data has associated noise) with $\bs{y}|\bs{f}\sim\mathcal{N}(\bs{f},\sigma_n^2 I)$ which means that the integral can be analytically calculated which gives:
+\begin{align}\label{marginal_gp_likelihood}
+\log p(\bs{y}|X) = -\frac{1}{2}\bs{y}^T(K+\sigma_n^2 I)^{-1}\bs{y} - \frac{1}{2} \log|K+\sigma_n^2 I| - \frac{n}{2}\log 2\pi
+\end{align}
+For a full proof please refer to \ref{margin_gp_deriv}. This induces a posterior distribution for the hyperparameters $\theta$ which can be treated in two ways:
+\begin{itemize}
+\item In the full Bayesian treatment the posterior distribution will be fully taken into account. This is numerically problematic as the distribution of $\theta$ modifies the variance of the conditioned GP. Taking this into account is somewhat tricky and usually involves Monte Carlo methods which are numerically expensive.
+\item One can obtain a \textit{maximum a posteriori} (MAP) or \textit{Maximum Likelihood type II} (ML II) estimator of the optimal hyperparameters like in frequentist statistics. This is numerically less challenging since we are only required to maximize Eq.\,\ref{marginal_gp_likelihood} with a suitable algorithm however this essentially approximates the posterior distribution to a $\delta$-distribution which is no proper Bayesian treatment. To save on the computational complexity while still taking this into account some approximation techniques have been proposed in \cite{ALoMEuBQ} but we will ignore this detail for the moment and discuss the implications later.
+\end{itemize}
+
+
+\subsection{GP Regression}\label{gp_regression_section}
+Having discussed the ingredients of GPs it is now time to look at the full algorithm which is used to do GP regression. GP regression (sometimes also referred to as \textit{Kriging}) describes the construction of a GP with the help of some kernel $k(\bs{x}, \bs{x}'|\theta)$ with some unknown hyperparameters $\theta$ which are determined by Bayesian inference using the MAP estimate of $\theta$. The advantage of this method lies in the fact that the only choice which is left to the user is that of a suitable prior kernel which usually only incorporates some broad knowledge about the characteristics of the function which describes the data (differentiablity, periodicity, etc.). Furthermore the MAP estimators of the hyperparameters have an easy interpretation as shown in section \ref{kernels_chapter}. 
+
+The algorithm to approximate some unknown function $f(x)$ given some data pairs $\bs{x},\bs{y}$ (training inputs) with associated noise $\bs{y} =\bs{f}(\bs{x})+\bs{\sigma}_n$ can be divided into two steps:
+\begin{enumerate}
+\item In the \textit{training} step the hyperparameters of the model are optimized by maximizing Eq.\,\ref{marginal_gp_likelihood} and $(K+\sigma_n^2 I)$ is precomputed
+\item In the \textit{prediction} step the GP is conditioned according to Eq.\,\ref{conditional_noise_full}.
+\end{enumerate}
+Of course this can in principle be done in one step but it is specifically divided into two steps here to stress the fact that there is a distinct part which trains the GPs hyperparameters and another part which conditions this trained GP on the observations. In practice the prediction (conditioning) step is often called multiple times while the training only has to be performed once for a given training set $\bs{x},\bs{y}$.
+
+Pseudocode of the training step is shown in Algorithm\,\ref{gp_training_algo}.
+
+\IncMargin{1em}
+\begin{algorithm}[H]
+ \DontPrintSemicolon
+ \KwIn{$\bs{x}, \bs{y}$ (training inputs \& targets), $k(\bs{x},\bs{x}'|\theta)$ (covariance function), $\sigma_n$ (noise level), $\theta_0$ (initial hyperparameter(s))}
+ $\theta := \theta_0$\;
+  \Repeat{$\max[\log(p(\bs{y}|\bs{x}))]$ \CommentSty{reached}}{
+  $K := K(\bs{x},\bs{x}|\theta)$ \comment*[r]{\text{eq.}\,\eqref{gram_matrix_def}}
+  $L := \mathrm{cholesky}(K+\sigma_n^2 I)$\comment*[r]{eq.\,\eqref{cholesky_decomp}}
+  $\alpha := L^T\backslash(L\backslash\bs{y})$\comment*[r]{eq.\,\eqref{cholesky_inverse}}
+  $\log(p(\bs{y}|\bs{x},\theta)) := -\frac{1}{2}\bs{y}^T\alpha-\sum_i\log(L_{ii})-\frac{n}{2}\log 2\pi$\comment*[r]{eq.\,\eqref{marginal_gp_likelihood}}
+  vary $\theta$ according to some global optimizer  
+ }
+ \KwRet{$\alpha,\ L,\ \theta_{\mathrm{opt}}$}
+ \caption{Training step of the GP regression algorithm. The Inversion of the Gram matrix of $\bs{x}, \bs{x}'$ is not done directly but through Cholesky decomposition since it is numerically more stable. The computational complexity is dominated by the Cholesky decomposition in line 4 ($\mathcal{O}(n^3)$). The optimum $\theta_{\mathrm{opt}}$ is $\theta_{\mathrm{opt}}=\mathrm{argmax}[\log(p(\bs{y}|\theta))]$. The algorithm has been taken from \cite{GPML}.}\label{gp_training_algo}
+\end{algorithm}
+
+The computation of $(K+\sigma_n^2 I)^{-1}$ is usually not done directly but rather by first performing a Cholesky decomposition and then calculating $(K+\sigma_n^2 I)^{-1}\bs{y}$ directly (see \ref{cholesky_chap}). This is done since it is numerically more stable than direct inversion and because it allows for easy calculation of $|K+\sigma_n^2 I|$. In practice some small $\sigma_n$ is added for numerical stability of the Cholesky decomposition even if the training data has no associated noise \cite{GPML}.
+
+The prediction step for some test inputs $\bs{x}_*$ evaluates the conditioned mean and covariance at $\bs{x}_*$. In practice this step is often called for multiple different test inputs $\bs{x}_*$. Pseudocode of this step is shown in algorithm\,\ref{gp_prediction_algo}.
+
+\IncMargin{1em}
+\begin{algorithm}[H]
+ \DontPrintSemicolon
+ \KwIn{$L, \alpha, \theta_{\mathrm{opt}}, \bs{x}, \bs{y}, k(\bs{x}, \bs{x}'|\theta)$ (from training step), $\bs{x}_*$ (test input)}
+  $K_*:=K(\bs{x},\bs{x}_*|\theta_{\mathrm{opt}})$\;
+  $K_{**}:=K(\bs{x}_*,\bs{x}_*|\theta_{\mathrm{opt}})$\;
+  $\bs{v}:= L\backslash K_*$\comment*[r]{eq.\,\eqref{cholesky_cov}}
+  $\overline{\bs{f}}_*:= K_*^T\alpha$\comment*[r]{Predictive mean eq.\,\eqref{conditional_noise_full}}
+  $\cov(\bs{f}_*)=K_{**} - \bs{v}^T\bs{v}$\comment*[r]{Predictive covariance eq.\,\eqref{conditional_noise_full}}
+ \KwRet{$\overline{\bs{f}}_*, \cov(\bs{f}_*)$}
+ \caption{Prediction step of the GP regression algorithm. Returns the predictive mean and covariance at arbitrary locations $\bs{x}_*$. Since the computational complexity of this algorithm is $\mathcal{O}(n^2 m)$ for $n$ training and $m$ test points it is usually much faster than algorithm \ref{gp_training_algo}. The algorithm has been taken from \cite{GPML}.}\label{gp_prediction_algo}
+\end{algorithm}
+
+%It is important to stress here that the kernel itself gives rise to an infinite-dimensional covariance matrix between all points in $\mathbb{R}^D\times\mathbb{R}^D$. In literature this is called the \textit{kernel trick} which is also used in numerous other machine learning applications \cite{Scholkopf2018}.
+
+\subsection{Bayesian quadrature}\label{bayesian_quadrature_section}
+Let
+\begin{align}
+I = \int_{\bs{x}_0}^{\bs{x}_1} f(\bs{x})\d\bs{x}
+\end{align}
+be the integral of some arbitrary function $f(\bs{x})$ over possibly multiple dimensions such that $\bs{x}\in\mathbb{R}^d$. Bayesian quadrature (BQ) takes a statistical approach to calculating this integral by using a GP as an interpolator for $f(x)$ \cite{ALoMEuBQ}. This has two advantages compared to other commonly used numerical integration algorithms such as Monte Carlo or the trapezoid rule (see \ref{bayesian_inference_section}):
+\begin{enumerate}
+\item By staying in the Bayesian framework we can treat $I$ like a random variable for which we can then calculate a prior and Likelihood. In practice however it is easier to treat $f$ itself as a random function for which we can set a GP as prior:
+\begin{align}
+p(f((\bs{x})) = \GP(f,m,k)
+\end{align}
+By being able to place a prior on $m$ and $k$ this allows us to inject information we have about $f$ like differentiability, periodicity etc. (see section \ref{kernels_chapter}) into our approximation. This information is available in many cases where numerical integration is needed and can often be derived from the nature of the problem.
+\item The reason that a GP is such a good choice for placing a prior onto the function is that it is closed under any affine transformation $L$:
+\begin{align}
+p(L(f)) = \GP(L(f),L(\mu),L^2(k))
+\end{align}
+which is handy because integration is a linear operation which means that 
+\begin{align}\label{integral_gp}
+p\left(\int_{\bs{x}_0}^{\bs{x}_1}f(\bs{x})\d\bs{x}\right) = \mathcal{N}\left(Z; \int_{\bs{x}_0}^{\bs{x}_1}\mu(\bs{x})\d\bs{x},\int_{\bs{x}_0}^{\bs{x}_1}\int_{\bs{x}_0}^{\bs{x}_1}k(\bs{x},\bs{x}')\d\bs{x}\d\bs{x}'\right) \ .
+\end{align}
+We can then proceed to condition our GP according to Eq.\,\ref{conditional} on some training data $D$ which is drawn from $f$ which gives us a posterior for $I$ with the expectation value
+\begin{align}\label{mean_bq}
+\mathbb{E}[I|D] = \int_{\bs{x}_0}^{\bs{x}_1}\mu_{f|D}(\bs{x})\d\bs{x}
+\end{align}
+which means that the mean of our estimation of the integral is simply the integral of the mean of the GP. Furthermore we get a variance that is given by
+\begin{align}\label{variance_bq}
+\mathrm{var}[I|D] = \int_{\bs{x}_0}^{\bs{x}_1}\int_{\bs{x}_0}^{\bs{x}_1}k_{f|D}(\bs{x},\bs{x}')\d\bs{x}\d\bs{x}' \ .
+\end{align}
+This variance (or its square root) naturally lends itself to be used as a natural precision criterion for $I$. 
+\end{enumerate}
+If one takes a close look at Eqs.\,\ref{mean_bq} and \ref{variance_bq} one might observe that they still contain integrals, which means that we have replaced one integration by another. This does not seem to be particularly useful at first. However if the integrations in Eq.\,\ref{integral_gp} can be performed quicker than the integration of $I$ directly or, more importantly, if it is outright impossible to compute $I$ analytically, we do gain performance. An illustration of BQ with the function $f(x)=\sin(2\cdot x) \cdot \frac{x}{2}$ is shown in Fig\,\ref{bayes_quad_image}.
+
+\begin{figure}
+\begin{center}
+\input{../figures/bayesian_quadrature.pgf}
+\end{center}
+\caption{Illustration of the BQ procedure. Left: GP fit to the function $f(x)=\sin(2\cdot x) \cdot \frac{x}{2}$ with three sample functions (green, blue, orange) with $x\in[0,5]$. Right: Normal distribution induced by BQ for the integral $I=\int_0^5 f(x)\d x$. The three coloured dots correspond to the integrals of the sample functions. The true value for $I$ is shown in red.}\label{bayes_quad_image}
+\end{figure}
+
+Another important observation which can be extracted from Eq.\,\ref{conditional} is that the conditioned kernel $k_{f|D}$ and subsequently $\mathrm{var}[I|D]$ do not not directly depend on the training data. Despite this there is an implicit dependence on $y_{\mathrm{train}}$ if the MAP estimate is used to assign values to the hyperparameters of the kernel as described in \ref{gp_regression_section}. This property of GPs can be used to derive optimal quadrature rules for different classes of functions purely through conditioning the kernel function \cite{minka2000}. This procedure runs under the name of \textit{Bayes-Hermite quadrature} \cite{Cowan1998}
+
+In this thesis we will take a different approach which aims at finding the next best point to evaluate sequentially by optimization. This procedure is known as \textit{active sampling} and will be explained in the following.
+
+\subsubsection{Active sampling}\label{active_sampling_subsection}
+
+Optimization of non-analytic functions has long been a main concern in mathematics and science and has seen extensive research throughout the last decades. This is partly fueled by fast advancements in computational possibilities which enable evermore complex numerical simulations but also often include the numerical optimization of complicated and often high-dimensional functions. It is therefore no surprise that the idea of active sampling has its origins in optimization. 
+
+In search of efficient optimization algorithms the science community has often looked towards statistics and probability theory in the same way that probabilistic Monte Carlo methods provide efficient estimations for quadrature of high dimensional integrals (see section \ref{mcmc_section}).
+
+A different approach within the Bayesian framework relies on interpolating a function with a GP and using the mean and standard deviation of the interpolator to obtain a proposal for the next location to sample. The advantage of this is that with a good choice of this rule sampling will always be performed at the locations which add the most information to the GP model.
+
+Furthermore initial knowledge about the shape of the function can be incorporated into the mean function and kernel of the GP. This procedure is often referred to as \textit{active sampling} or \textit{Bayesian optimization} (BO) although the latter is only used when the objective is to find the global optimum of a function. Since the concept of active sampling is best explained in the optimization case we will use the maximization of an exemplary function $f$ to introduce the concept:
+
+In active sampling the approach to finding a new point to sample is inferring it by optimizing an \textit{acquisition function} (AF) which tries to maximize the information gained in each step. This AF usually only depends on the conditional mean and variance (or standard deviation) of the GP (see eq.\,\ref{conditional_noise_full}).
+
+Finding an appropriate AF depends very much on the task at hand which in BO is global optimization where we need to find a trade-off between exploration of the sampling space and exploitation of known maxima.
+
+One of the most commonly used AF for this is the \textit{expected improvement} (EI) AF \cite{Jones2001}. This is the expectation value of the improvement over the current best sample $f^+(\bs{x}) = \max(\bs{y})$ of the training set $\bs{x},\bs{y}$ of our GP:
+\begin{align*}
+a_{\mathrm{EI}}(\bs{x}) = \mathbb{E}(\max(f(\bs{x})-f^+(\bs{x})), 0)
+\end{align*}
+By using the GP as estimator for $f(\bs{x})$ this yields
+\begin{align}\label{expected_improvement}
+a_{\mathrm{EI}}(\bs{x}) = \begin{cases}
+(\mu(\bs{x})-f^+(\bs{x})-\xi)\Phi\left(\frac{\bs{x})-f^+(\bs{x})-\xi}{\sigma(\bs{x})}\right) + \sigma(\bs{x})\phi\left(\frac{\bs{x})-f^+(\bs{x})-\xi}{\sigma(\bs{x})}\right) & \text{if }\sigma(\bs{x}) > 0 \\
+0 & \text{else}
+\end{cases}
+\end{align}
+where $\Phi$ and $\phi$ are the PDF and CDF of the normal distribution, respectively. While this acquisition function is optimal for BO there are better choices if the goal is not optimization. An example of BO with the EI AF can be seen in Fig\,\ref{1d_acquisition_ei}. In this example four points are acquired sequentially. One can clearly see that the algorithm converges to the maximum of the function in a few steps and does not get stuck in local maxima. Pseudocode of the active sampling algorithm with $N$ steps is shown in algorithm \ref{active_sampling_algorithm}
+
+\IncMargin{1em}
+\begin{algorithm}
+ \DontPrintSemicolon
+ \KwIn{$\GP(0, k(\bs{x},\bs{x}'|\theta))$ (GP regressor with kernel), $\bs{x}_0, \bs{y}_0$ (initial training set), $a(\mu(x),\sigma(x))$ (acquisition function), $f(x)$ (function to be sampled)}
+ $x_{\mathrm{train}} := x_0$\;
+ $y_{\mathrm{train}} := y_0$\;
+  \For{$N$ \CommentSty{times}}{
+  Fit $\theta_{\mathrm{GP}}$ \comment*[r]{alg.\,\ref{gp_training_algo}}
+  Draw $x$\;
+    \Repeat{$\max[a(\mu(x),\sigma(x))]$ \CommentSty{reached}}{
+    $\mu(x), \sigma(x):=$GP prediction \comment*[r]{alg.\,\ref{gp_prediction_algo}}
+    $a_x := a(\mu(x),\sigma(x))$ \;
+    vary $x$ according to some global optimizer  \;
+  }
+  $x_{\max} := \mathrm{argmax}(a(x))$\;
+  $y_{\max} := f(x_{\max})$\;
+  $x_{\mathrm{train}} = \{x_{\mathrm{train}}, x_{\max}\}$\;
+  $y_{\mathrm{train}} = \{y_{\mathrm{train}}, y_{\max}\}$ \;  
+ }
+ \KwRet{GP regressor}
+ \caption{Illustration of the active sampling algorithm for $N$ acquisition steps. The algorithm first optimizes the hyperparameters of the GP surrogate model according to algorithm\,\ref{gp_training_algo} and then optimizes the acquisition function using algorithm\,\ref{gp_prediction_algo} to evaluate $\mu$ and $\sigma$ of the position $x$. When the optimization is done the $x$-coordinate of the maximum of the acquisition function is recorded and the true function is interrogated at this point. The computational complexity is roughly $\mathcal{O}(N^4)$ if one assumes that the time it takes to optimize the acquisition function is much smaller than the time it takes to optimize the hyperparameters of the GP. For large $N$ this is usually a good assumption since the fitting of the hyperparameters scales with $O(N^3)$ while predictions with the GP scale with $O(N^2)$.}\label{active_sampling_algorithm}
+\end{algorithm}
+
+While the concept of active sampling is best explained in the optimization case this is just as straightforward to apply to BQ. In this case there are usually more efficient AFs than EI. Since the choice of acquisition function depends on the nature of the integrand and the goal of this thesis is to integrate a special class of integrands (probability distributions) the discussion of suitable acquisition functions for BQ will be done in section \ref{optimal_acquisition_function}.
+
+Unfortunately the computational complexity of sequential active sampling scales proportional to $n^4$ where $n$ is the number of samples in the GP regressor. This is due to the fact that refitting the hyperparameters of the GP scales proportional to $n^3$ and thus the sequential algorithm with $n^4$. 
+
+This effectively limits the number of samples which can be acquired to $\mathcal{O}(10^{3}-10^{4})$ for most modern computers. This has led to many different approaches aimed at reducing this computational complexity which can be summarized under the term \textit{approximate GPs}\footnote{These approaches can broadly be divided into two categories: \textit{Sparse} GPs aim at introducing some sparsity in the covariance matrix \cite{sparse_gp, smola_sparse_greedy_gp_regression} and \textit{variational} GPs where the goal is approximation of the marginal likelihood for optimizing the hyperparameters of the model \cite{titsias_variational_gp, tran_variational_gp}.} \cite{sparse_gp, smola_sparse_greedy_gp_regression, titsias_variational_gp, tran_variational_gp}. 
+
+Approximate GPs have gained a lot of attention in recent years as combining the predictive power of GPs with a low computational cost is a very tempting idea even if it sacrifices the analytical tractability of the equations. A full review of the literature would be beyond the scope of this thesis but it is useful to keep in mind that some of these methods could in principle be applied to the algorithm presented in chapter \ref{bq_for_prob_dist}. 
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{active_sampling_1.pdf}
+\includegraphics[width=0.45\textwidth]{active_sampling_2.pdf}
+\includegraphics[width=0.45\textwidth]{active_sampling_3.pdf}
+\includegraphics[width=0.45\textwidth]{active_sampling_4.pdf}
+\end{center}
+\caption{Four iterations of BO of the function $f(x)=\sin(2\cdot x) \cdot \frac{x}{2}$ with EI in the interval $[0,5]$. The real function (blue) and the GP approximation (black) with its standard deviation (grey shaded area) are shown on the top and the values of the acquisition function (orange) on the bottom of each plot. The red dashed line indicates the location of the maximum of $a_{\mathrm{EI}}(x)$ where the function will be sampled next. Note how the algorithm finds a trade off between exploration of the full function space and exploitation of regions with high values.}\label{1d_acquisition_ei}
+\end{figure}
+
+\raggedbottom
+\cleardoublepage
+
+\section{Bayesian quadrature for probability distributions}\label{bq_for_prob_dist}
+As our goal is to do Bayesian inference with GPs we want to effectively perform Bayesian quadrature with the constraint that the function to integrate is an (unnormalized) probability distribution. The advantages of BQ for this task compared to other algorithms is motivated in section \ref{why_bayesian_quadrature} followed by a discussion of the use of performing a power reduction operation of the posterior in section \ref{power_reduct_op_sec}. Afterwards a suitable acquisition function for this task is derived in section \ref{optimal_acquisition_function}. Preprocessing of the training data is explained in section \ref{preprocessing}. Afterwards a novel way to parallelize the algorithm is introduced in section \ref{parallelizing}.
+
+A convergence criterion is then introduced in section \ref{convergence_criterion} followed by a discussion of the drawbacks of this approach which are explained in section \ref{the_problem_with_infinity} and \ref{preserving_bayesianity}.
+
+Lastly we perform some tests on artificial and real examples in section \ref{experiments_gpry} where we compare the performance to other state of the art methods.
+
+\subsection{Why Bayesian quadrature?}\label{why_bayesian_quadrature}
+Solving integrals of the form
+\begin{align}
+Z = \int L(\bs{\theta})\pi(\bs{\theta})\d\bs{\theta}
+\end{align}
+where $L(\bs{\theta})$ is a likelihood function and $\pi(\bs{\theta})$ a prior distribution is by no means a novel problem. In fact it might be one of the most extensively studied integration problems as integrals of this type appear in numerous scientific fields\footnote{In this case integration does not mean performing the full integral of $L(\bs{\theta})\pi(\bs{\theta})$ along all dimensions but instead only integrating along some subset of dimensions to get confidence intervals and marginal distributions.}. Crucially this problem also appears in many machine learning algorithms, which has led the machine learning community to conduct extensive studies into possibilities for solving this type of integral using Bayesian quadrature \cite{Henning_inference, bayesian_mc, ALoMEuBQ}.
+
+The reason for choosing this approach instead of the popular alternatives, the most important of which is MCMC, is that it solves some of MCMCs inherent problems\footnote{The term MCMC is a very broadly defined term and encompasses a large number of very different algorithms which have different sampling schemes. The problems with these which are pointed out in the following do not necessarily apply to every MCMC algorithm in existence. For instance HMC does not us a proposal distribution for jumps of the chain. The criticism here is mainly directed towards the Metropolis-Hastings algorithm and variants thereof. Nevertheless these shortcomings can be applied to all MCMC algorithms even if the arguments have to be slightly adjusted.}. These fundamental flaws have been neatly summarized in a very influential paper in 1992 \cite{ohagan_mc_is_fundamentally_unsound} where the author points out two main objections to using MCMC.
+
+First, the estimator for $Z$ does not only depend on the values of the posterior $L(\bs{\theta})\pi(\bs{\theta})$ but also on the sampling distribution $g(\bs{\theta}'|\bs{\theta})$ (see section \ref{mcmc_section}) which is arbitrary. This means that for different choices of sampling distributions different sets of sampling points are obtained even though the integral is the same. This dependence violates the Likelihood principle.
+
+The second objection is that classical Monte Carlo methods such as MCMC entirely ignore the values of the posterior during inference. Instead they are only used for determining where the chain should jump next. This throws away valuable information. To illustrate this imagine that the chain reaches some point $\bs{\theta}$ in the parameter space which is visited again after a number of iterations. Even though the value of the Likelihood at that point has been evaluated and the point contains no additional information, the algorithm is oblivious to this as it discards the values of the likelihood.
+
+While these two objections cannot directly be translated to nested sampling, where no arbitrary additional distribution has to be introduced and the value of the the integrand enters into the estimate for the integral, there is a third important flaw which is inherent to both MCMC and nested sampling. This is the fact that both algorithms do not sample the space in a deterministic way but rather rely on Monte Carlo techniques to map the posterior. While this brings with it the benefit of fast computation, as the computational complexity of sampling new points is independent of the number of points which have previously been sampled, it does have the downside that statistical sampling by definition cannot be the most efficient way to sample a space.
+
+All of these problems are solved by sequential Bayesian quadrature. The active sampling procedure (or alternatively Bayes-Hermite quadrature) makes the addition of new samples a purely deterministic optimization and the values of the posterior are not wasted as they are incorporated into the GP.
+
+\subsection{Power reduction operation}\label{power_reduct_op_sec}
+PDFs are always positive. This is an important consideration that we need to take into account when integrating them with Bayesian quadrature and which we can use to our advantage. This knowledge is usually accounted for by performing a power reduction operation $P\left(L(\bs{\theta})\right)$ on the likelihood and approximating this function by a GP. Several different proposals have been made for suitable $P$ in the literature \cite{Henning_inference, ALoMEuBQ}.
+
+In this work we will use the $\log$ transformation as power reduction operation following \cite{ALoMEuBQ} since many Likelihoods naturally "live" in the log space\footnote{More precisely many likelihoods belong to the \textit{exponential family} of probability distributions \cite{exponential_class}.}. Particularly in physics it is very common that likelihoods are directly generated in the log space due to the reasons given in section \ref{bayes_theorem_for_pdfs}. Therefore no additional transformation is required when working with these likelihoods which makes this especially convenient.
+
+If we want to model $Z$ with BQ and our goal is to achieve this by placing a GP prior on the likelihood function $L(\bs{\theta})$ this means that our Bayesian estimate for $\overline{Z}\approx\mathbb{E}(Z) $ becomes
+\begin{align}
+\overline{Z} = \int m_{\bs{L|D}}(\bs{\theta}) \pi(\bs{\theta})\d\bs{\theta}
+\end{align}
+where $D$ is some training data (samples) from $L$. This result can simply be obtained by modifying Eq.\,\ref{mean_bq} to our specific case. If we now perform the log transformation on $L(\bs{\theta})$ and set a GP prior on this the expectation value for $Z$ becomes
+\begin{align}\label{int_log_gp}
+\overline{Z}(\log(L(\bs{\theta}_D))) = \int \left(\exp(\log(L(\bs{\theta}))\pi(\bs{\theta})\d\theta)\right)\mathcal{N}(\log(L);\overline{\log L}_D, \cov_D(\log L)) \d \log L \ .
+\end{align} 
+Unfortunately this integral is intractable. A possibility for restoring tractability that has been proposed in \cite{ALoMEuBQ} is to do a Taylor expansion of $\exp(\log(L))$ around some point $L_0$
+\begin{align}
+\exp(\log(L)(\bs{\theta})) \approx \exp(\log L_0(\bs{\theta})) + \exp(\log L_0(\bs{\theta}))\exp(\log L(\bs{\theta})-\log L_0(\bs{\theta}))
+\end{align}
+This approximation restores tractability, however we will use a different approach in this work which relies on integrating the log-GP numerically with MCMC. This approach is taken since we want to be able to marginalize any number of dimensions without recomputing the whole integral, for which MCMC is a good choice. 
+
+Furthermore we want to avoid having to actually do the (very tedious) analytical integration of Eq.\,\ref{int_log_gp} along any subset of dimensions of $\bs{\theta}$. Nested sampling would be a similarly good choice. In addition both MCMC and nested sampling naturally operate in the $\log$ space which again makes transformations unnecessary.\\
+
+Another advantage of sampling in the log-space that has been pointed out in \cite{ALoMEuBQ} is that the characteristic length scale $l$ of the kernel when using a kernel of the form
+\begin{align}
+k(d) = c\cdot \tilde{k}_l(d)
+\end{align}
+where $\tilde{k}_l$ is an isotropic kernel like an RBF or Mat\'{e}rn kernel, is larger when sampling the log-likelihood as opposed to the likelihood as illustrated in Fig\,\ref{likelihood_scaling_log}. This allows the GP approximation to generalize better to distant parts of the function.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{log_scale_visual_1.pdf}
+\includegraphics[width=0.45\textwidth]{log_scale_visual_2.pdf}
+\end{center}
+\caption{Illustration of how fitting a GP to the likelihood $L(x)$ (left) causes the correlation length $l$ to be shorter than when fitting the GP to $\log L(x)$ (right). This Longer correlation length usually means that the GP will generalize better to function values which are far away.}\label{likelihood_scaling_log}
+\end{figure}
+
+Now one might ask why we have replaced MCMC by BQ just to perform the integration step with MCMC again which, at first glance, does not seem to be an advantageous thing to do. It is however if we keep computational speed in mind. For both cases the number of samples which need to be evaluated by the MCMC chain are roughly the same if the GP is a good approximation to the Likelihood function. 
+
+However the samples which actually have to be drawn from the likelihood function differ greatly as placing a prior on the functional shape of the likelihood allows us to use the advantages of active sampling to deterministically find an optimal set of inducing locations. This is a considerable advantage if $t_{\log L} \gg t_{\mathrm{GP}}$ where $t_{\log L}$ is the time it takes to calculate the likelihood function for a single sample and $t_{\mathrm{GP}}$ the time it takes our GP model to make a prediction.
+
+\subsection{Appropriate acquisition functions}\label{optimal_acquisition_function}
+Now that we have established that the likelihood function (or the posterior distribution) shall be sampled in the log space, the next question which arises is which acquisition function is suitable to sampling (log) probability distributions. To derive this consider the one-dimensional gaussian likelihood $L(x) = \mathcal{N}(x;0,1)$ with a uniform prior in $[-3,3]$ as shown in Fig.\,\ref{optimal_sampling_visualization}.
+
+Obviously the contribution of every small element $\D x$ to the integral is proportional to its posterior value since $L(x)\pi(x)$ is by definition positive. This means that a natural choice for an acquisition function is one which is designed such that the standard deviation of the GP is inversely proportional to the likelihood value at this point.\footnote{Strictly speaking it should be proportional to the posterior value at this point. We will omit this detail since we assume uniform priors in all examples which means that the uniform prior is essentially only a normalization constant. The formalism can trivially be extended to non-uniform priors by replacing $L(x)$ with $L(x)\pi(x)$ in all subsequent calculations.} The easiest example which achieves this is
+\begin{align}
+a_L(x) = L(x)\cdot \sqrt{\var_{L|D}(x)} \ .
+\end{align}
+Unfortunately we do not know the value of the likelihood at every point (otherwise our sampling would be pointless) but luckily our GP also gives an estimate for the value of $L(x)$ which means that the best estimate for acquisition function is
+\begin{align}
+a_L(x) = \overline{L}_{L|D}(x)\cdot \sigma_{L|D}(x) \ .
+\end{align}
+Of course we do not want to sample $L(x)$ but its logarithm which means that we need to transform our acquisition function into log space too. This is very straight forward since we can just perform gaussian error propagation:
+\begin{align}
+a_{\log L}(x) = \exp(\tilde{\mu}(x))\cdot \exp(\tilde{\mu}(x))\sigma_{\tilde{\mu}}(x) = \exp(2\cdot\tilde{\mu}(x))\sigma_{\tilde{\mu}}(x)
+\end{align}
+with $\mu = \overline{L}, \tilde{\mu} = \overline{\log L}$.
+
+%Some pgfstuff that needs to be declared
+\pgfmathdeclarefunction{gauss}{3}{%
+  \pgfmathparse{#3+1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+
+\begin{figure}[h]
+\begin{center}
+
+\pgfplotsset{
+    integral segments/.code={\pgfmathsetmacro\integralsegments{#1}},
+    integral segments=3,
+    integral/.style args={#1:#2}{
+        ybar interval,
+        domain=#1+((#2-#1)/\integralsegments)/2:#2+((#2-#1)/\integralsegments)/2,
+        samples=\integralsegments+1,
+        x filter/.code=\pgfmathparse{\pgfmathresult-((#2-#1)/\integralsegments)/2}
+    }
+}
+
+\begin{tikzpicture}
+\begin{axis}[
+    domain=-3:3,
+    samples=100,
+    ytick=\empty,
+    axis x line=bottom, % no box around the plot, only x and y axis
+  	axis y line=left, % the * suppresses the arrow tips
+  	xlabel={$x$},
+  	ylabel={$L(x)\pi(x)$}
+]
+	\draw [|-|] (axis cs:5/7,0.37) -- (axis cs:1,0.37) node[midway,above] {$\D x$};
+	\addplot[black] {gauss(0,1.,0)};
+	\addplot [
+    red,
+    integral segments=21,
+    integral=-3:3
+] {gauss(0,1.,0)};
+\end{axis}
+
+\end{tikzpicture}
+\caption{Illustration of the reasoning behind our choice of acquisition function. Every small interval $\D x$ contributes proportionally to its posterior value to the integral so the acquisition function should be designed to aim for high precision in regions of high posterior.}\label{optimal_sampling_visualization}
+\end{center}
+\end{figure}
+
+There is a catch though. The assumption which led to this conclusion is that $\overline{L}_{\mathrm{GP}}(x)\approx L(x)$ but is this is not necessarily a good assumption, especially when the number of acquired points is low. In fact it is an inherent mechanism of the algorithm to explore regions in which the model is very uncertain to achieve fast convergence. The longer the active sampling is running the better the space will be explored and our assumption will eventually hold true though. 
+
+In light of this one can argue that the factor $2$ appearing in the first exponent should be relaxed in the early phases of active sampling to encourage exploration and slowly converge towards its final value. One way to achieve this is by introducing a monotonically increasing term $\zeta\in (0,1]$ into the exponent:
+\begin{align}
+a_{\log L}(x) = \exp(2\zeta\cdot\tilde{\mu}(x))\sigma_{\tilde{\mu}}(x)
+\end{align} 
+A possibility inspired by simulated annealing \cite{Murphy2012} could be $\zeta = \exp(-N_0/N)$ where $N$ are the numbers of samples on which the GP is conditioned and $N_0$ a characteristic "decay constant" or temperature. This term will will suppress the first term $\exp(2\zeta\cdot\tilde{\mu}(x))$ for $N\ll N_0$ and monotonically approach one for $N\gg N_0$.
+
+In addition to the aforementioned correction factor we also need to account for statistical noise that the likelihood (or the log-likelihood) may have. While this is not the case for the examples we will be discussing in this chapter we will come back to this in chapter \ref{hybrid_gp_sampling_chapter}. For the moment let us assume that this statistical noise is i.i.d.\ gaussian noise $\sigma_n$ in which case the lower bound on $\sigma_{\mathrm{GP}}$ is effectively the amplitude of the statistical noise. This means that we need to adjust our acquisition function to take this into account by replacing $\sigma_{\tilde{\mu}}(x)$ by $(\sigma_{\tilde{\mu}}(x) - \sigma_n)$ such that the acquisition function is given by
+\begin{align}\label{full_acq_eq}
+a_{\log L}(x) = \exp(2\zeta\cdot\tilde{\mu}(x))(\sigma_{\tilde{\mu}}(x)-\sigma_n)
+\end{align}
+A visualization of this is shown in Fig.\,\ref{noise_acquisition_figure}. Without this addition the maximum of the AF will eventually converge towards one value which the algorithm will visit multiple times.\\
+This behaviour should be avoided at all costs since GP regressors are numerically unstable to training samples which are very close together. In addition we would be wasting evaluations when sampling the same location multiple times.\\
+
+Lastly one usually takes the logarithm of Eq.\,\ref{full_acq_eq} for numerical reasons:
+\begin{align}\label{full_acq_eq_log}
+\log(a_{\log L})(x) = 2\zeta\cdot\tilde{\mu}(x)+\log(\sigma_{\tilde{\mu}}(x)-\sigma_n)
+\end{align}
+This does not impact the optimization itself since the logarithm is monotonic. The logarithmic version of this has the disadvantage that it falls off towards $-\infty$ for $\sigma_{\tilde{\mu}}(x)\to\sigma_n$ but the advantage that it does not become flat far away from its maxima, which can be challenging to navigate for numerical optimizers. For both versions gradients are simple to calculate if there are gradients for the GP (the mean and variance) available which can aid in accelerating the numerical optimization of the acquisition function.\\
+
+To the best of my knowledge, this acquisition function has so far not been used in the literature.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{noise_sampling_2.pdf}
+\includegraphics[width=0.45\textwidth]{noise_sampling_1.pdf}
+\end{center}
+\caption{Illustration of the difference between including the statistical noise $\sigma_n$ into the acquisition function $a(x)$ (right) versus ignoring it (left). It is clear that the maximum of the acquisition function will converge towards the maximum of $\log L$ if the noise is ignored even though there is no information to be gained in this point. In addition to this, GPs cannot properly deal with samples that are very close together meaning that the algorithm will numerically break down if the effect of $\sigma_n$ is not subtracted.}\label{noise_acquisition_figure}
+\end{figure}
+
+\subsection{Preprocessing}\label{preprocessing}
+Preprocessing of data is a standard procedure when applying machine learning algorithms. This is done in an attempt to limit the input data to values which are not numerically problematic to compute. These requirements are different for the input locations $x_{\mathrm{train}}$ than for the target values $y_{\mathrm{train}}$.
+
+\paragraph{Input locations}\ \\
+The input locations (points in $\theta$-space) need to fulfil two conditions for the active sampling algorithm to be effective. First the scales along each dimension need to be roughly similar. This is necessary for the optimization algorithm for the AF to be efficient.
+
+Intuitively this becomes clear if one imagines a posterior distribution which is very stretched out along one axis while being very broad along another one. In this circumstance it will be very hard for a numerical optimizer to navigate along the narrow strip of optimal solutions, at least if this difference in length scales is not accounted for by the optimizer itself. This is the case for most standard numerical optimizers since they operate with a single characteristic length scale that the algorithm jumps at each iteration. Since we only need the length scales to be approximately similar i.e. a factor of two or three will not have a significant impact, it is enough to just take the bounds of the prior distribution (or some bounds which encompass the majority of the mass for unbounded priors) and normalize them to cover the unit hypercube.\\
+
+Another important observation is that for an isotropic kernel function the distribution should not show any correlation along the different axes and have the same characteristic length scale along every dimension. This is not necessarily given but can be enforced if we assume that our function is a unimodal, multivariate gaussian distribution, which is the approach that is used in \cite{paper_1}. In this scenario we can empirically estimate the mean vector $\bs{\mu}$ and covariance matrix $\Sigma$ along each dimension\footnote{Note that this is not the same as the mean vector and kernel of the GP. While the covariance matrix from the kernel for a GP model in $d$ dimensions with $N$ inputs has shape $N\times N$ while the covariance matrix in this method is of dimension $d\times d$.}. For a model containing $N$ sampling locations $\bs{\theta}_1,\dots,\bs{\theta}_N$ with $\bs{\theta}=(\theta^1, \dots, \theta^d)^T$ the mean and covariance are given by
+\begin{align}\label{input_empirical_m_and_C}
+\mu^i = \frac{1}{\sum_{k=1}^N w_k}\sum_{k=1}^N \theta_k^i w_k\qquad \Sigma^{ij} = \frac{1}{\sum_{k=1}^N w_k}\sum_{k=1}^N w_k (\theta_k^i-\mu^i)(\theta_k^j-\mu^j)
+\end{align}
+where $w_k$ is the value of the posterior distribution at location $\bs{\theta}_k$. The transformation that is applied to $\bs{\theta}_k$ is then
+\begin{align}
+\theta_k^i \to \frac{\mathbf{R}^{ij} (\theta_k^j - m^j)}{\sigma^i}
+\end{align}
+where $\mathbf{R}$ is the matrix which solves $\Sigma = \mathbf{R}\mathbf{\Lambda}\mathbf{R}^T$ where $\mathbf{\Lambda}$ is a diagonal matrix and $\sigma^i = \sqrt{\Sigma^{ii}}$. This transformation is often called \textit{whitening transformation} \cite{Kessy_2018} since it transforms the data into a decorrelated gaussian with unit variance.\\
+
+Unfortunately there are three major problems attached to this approach:
+\begin{enumerate}
+\item Correctly estimating the mean vector and the covariance matrix along each dimension is a challenge due to the high variability of the likelihood function compared to the log-likelihood function. One way to prevent this is to draw a large number of samples from the GP model and estimate the covariance from this however this introduces considerable computational overhead and also one needs an additional sampling algorithm like MCMC to correctly estimate the covariance matrix and mean vector.
+\item The assumption that the posterior distribution is a multivariate gaussian distribution is very restrictive and generally not a very good assumption. For any posterior shape which does not closely match a multivariate gaussian distribution this transformation will inevitably fail.
+\item The third issue which this transformation brings with it is the fact that we are empirically fitting the covariance matrix to the data. This is in essence MLII which means that it is technically not fully bayesian.
+\end{enumerate}
+It is due to the aforementioned reasons that this transformation was not used in the final algorithm presented in this thesis but instead an anisotropic kernel with a different characteristic length scale is used along every dimension. This proved to be more versatile and less prone to failure than the whitening transformation.\\
+This means that our choice for a kernel is a composite kernel consisting of a constant kernel multiplied with an anisotropic RBF or Matérn kernel:
+\begin{align}\label{algorithm_kernel}
+k(\bs{x},\bs{x}') = C\cdot\prod_{i=1}^d \mathrm{RBF}(x_i, x_i')\quad\mathrm{or}\quad k(\bs{x},\bs{x}') = C\cdot\prod_{i=1}^d \mathrm{Mat\'{e}rn}(x_i, x_i'|\nu)
+\end{align}
+with $\bs{x}=(x_1,\dots,x_d)^T,\bs{x}'=(x_1',\dots,x_d')\in\mathbb{R}^d$. Whether the RBF or Mat\'{e}rn kernel is the correct choice depends on the expected "smoothness" of the posterior distribution.
+
+\paragraph{Target values}\ \\
+The target values (values of the likelihood or posterior distribution) are transformed to be centered around zero with unit variance. This has two reasons:
+\begin{itemize}
+\item Scaling the target values in this way is a standard procedure with GP regression as it limits the scale of the constant kernel component in the composite kernel.
+\item The transformation of the data such that it has zero mean effectively acts as a constant mean function of the GP where the value is the empirical mean of the data. This means that the GP will approach this value far away from any sampling locations. This approach is chosen to encourage exploration when the majority of samples are close to the maximum of the posterior distribution and exploitation when the majority of samples is situated at lower values. An illustration of this is shown in Fig.\,\ref{preprocessing_y}.
+\end{itemize}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{preprocessing_y_1.pdf}
+\includegraphics[width=0.45\textwidth]{preprocessing_y_2.pdf}
+\end{center}
+\caption{Illustration of the behaviour of a GP fitted to a normal distribution without preprocessing the target values (left) and with preprocessing (right). One can clearly see that the GP model with preprocessed data encourages exploration since it tends towards the mean of its samples in far away regions.}\label{preprocessing_y}
+\end{figure}
+
+\subsection{Parallelizing the algorithm}\label{parallelizing}
+When doing Bayesian inference on expensive likelihoods there is usually an advantage to having some parallelization available in order to sample from the likelihood at different points at once. Many likelihoods have some internal mechanism for parallelization however we want to present a different approach which allows to acquire a batch of points for which the likelihood can then be interrogated. There have been a myriad of different proposals for batch acquisition for GPs in the past \cite{parallel_1, parallel_2, parallel_3, parallel_kriging_believer_1} which all have their advantages and disadvantages. 
+
+Generally these algorithms can be divided into two broad categories. Algorithms like the q-EI algorithm \cite{parallel_1, parallel_2, parallel_kriging_believer_1, parallel_kriging_believer_2} construct an acquisition function which can be jointly optimized for several points at once while the second category \cite{parallel_3, parallel_kriging_believer_1, parallel_kriging_believer_2} works by sequentially acquiring multiple points without having to sample from the function. 
+
+The advantage of the former method is that it will accurately estimate the impact that the acquisition of $q$ points and their location has on sampling and thus find a more efficient set of samples that the latter method. This however comes at the expense that the computational overhead is much bigger. The reason for this is that for a GP which has $d$ dimensions acquiring $q$ points at once involves global optimization in $d\cdot q$ dimensions. One can easily imagine that this will quickly reach a point where performing this optimization becomes unfeasible.\\
+
+Since our goal in this thesis is to eventually be able to tackle problems in higher dimensions we will focus on the latter, sequential method for batch acquisition. One of these methods is the \textit{Kriging believer} method \cite{parallel_kriging_believer_2}. 
+
+\paragraph{Kriging believer}\ \\
+The fundamental assumption of the Kriging believer method is that instead of optimizing a joint acquisition function for $q$ points they can be acquired sequentially assuming that, at the location of the $i$-th point, the value of the likelihood function equals the predictive mean of the GP. While this method does not take into account the implications of sampling a batch of points given the current surrogate model, it has the advantage that the optimization problem is still a $d$-dimensional one. 
+
+In addition this method will be increasingly accurate as points are added to the GP since the underlying assumption of this method is, similar to the assumption for constructing the acquisition function, that $\overline{L}_{\mathrm{GP}}(x)\approx L(x)$. Another advantage of this method is that it can be used for any acquisition function without additional computation in contrast to the joint approach where the acquisition function has to be derived from the single point AF by hand.
+
+This approach furthermore assumes that sequentially acquiring points is much faster than sampling from the likelihood, otherwise the algorithm will be inefficient. An illustration of the Kriging believer algorithm sampling on the log of a normal distribution is shown in Fig.\,\ref{1d_acquisition_kb}.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{active_sampling_kb_1.pdf}
+\includegraphics[width=0.45\textwidth]{active_sampling_kb_2.pdf}
+\includegraphics[width=0.45\textwidth]{active_sampling_kb_3.pdf}
+\includegraphics[width=0.45\textwidth]{active_sampling_kb_4.pdf}
+\end{center}
+\caption{Illustration of the Kriging believer method. Three points are acquired sequentially (top left, top right, bottom left) by using the prediction from the GP instead of sampling the likelihood at each iteration. After the three samples have been acquired the likelihood function can be interrogated for the true values at these points (bottom right). The hyperparameters of the GP regressor only need to be refit at the last step. Obviously using this approach comes at the expense of requiring more points to converge towards the right value of $Z$. This can however be compensated by the computation time that is saved by evaluating the posterior in parallel.}\label{1d_acquisition_kb}
+\end{figure}
+
+\paragraph{The update equation}\ \\
+One convenient property of GP regression that has been pointed out by multiple authors \cite{smola_sparse_greedy_gp_regression, efficient_implementation_of_gps, update_equation} is the fact that data can be added to GPs without having to perform the whole inversion of the Covariance matrix in Eq.\,\ref{mean_and_cov} when we do not want to perform regression (hence cannot change the hyperparameters of the kernel) but only want to condition the GP on additional data. In this case we can use the blockwise matrix inversion formula:\\
+Let $\mathbf{A}^{n\times n},\mathbf{B}^{n\times m}, \mathbf{C}^{m\times n}, \mathbf{D}^{m\times m}$ be four matrices and let $\mathbf{A}^{-1}$ and $(\mathbf{CA}^{-1}\mathbf{B})^{-1}$ be invertible. Then the inverse of the blockmatrix $\mathbf{M}$ is given by
+\begin{align}
+\mathbf{M}^{-1}=
+\begin{bmatrix}
+    \mathbf{A} & \mathbf{B} \\
+    \mathbf{C} & \mathbf{D}
+  \end{bmatrix}^{-1} = \begin{bmatrix}
+     \mathbf{A}^{-1} + \mathbf{A}^{-1}\mathbf{B}\mathbf{S}^{-1}\mathbf{CA}^{-1} &
+      -\mathbf{A}^{-1}\mathbf{B}\mathbf{S}^{-1} \\
+    -\mathbf{S}^{-1}\mathbf{CA}^{-1} &
+       \mathbf{S}^{-1} \ .
+  \end{bmatrix}
+\end{align}
+where $\mathbf{S} = \left(\mathbf{D} - \mathbf{B}^T\mathbf{A}^{-1}\mathbf{B}^T\right)$ is called the \textit{Schur complement} of $\mathbf{A}$. In our case the assumption that all inverses exist always holds true if $\mathbf{M}$ is a valid covariance matrix. In addition the formula can be simplified for the covariance matrix since $C=B^T$ which yields
+\begin{align}\label{blockwise_inversion_symmetric}
+\begin{bmatrix}
+    \mathbf{A} & \mathbf{B} \\
+    \mathbf{B}^T & \mathbf{D}
+  \end{bmatrix}^{-1} = \begin{bmatrix}
+     \mathbf{A}^{-1} + \mathbf{A}^{-1}\mathbf{B}\mathbf{S}^{-1}\mathbf{B}^T\mathbf{A}^{-1} &
+      -\mathbf{A}^{-1}\mathbf{B}\mathbf{S}^{-1} \\
+    -\mathbf{S}^{-1}\mathbf{B}^T\mathbf{A}^{-1} &
+       \mathbf{S}^{-1} \ .
+  \end{bmatrix}
+\end{align}
+A similar formula exists for the Cholesky decomposition which is handy since this is mostly used in practice when performing GP regression. This formula is especially useful if $\mathbf{A}^{-1}$ is already known from previous computations and $n\gg m$ since the algorithm scales with $\mathcal{O}(n^2 m)$.
+
+\paragraph{Combining the two}\ \\
+With the help of the blockwise matrix inversion formula it can be shown that the Kriging believer algorithm does not affect the mean prediction of the GP and thus we do not need to change the hyperparameters of our surrogate model between acquisitions. For a full proof see \ref{proof_kriging_mean}. Intuitively this makes sense since we are not adding any new information to the model. This in turn means that we can simply use the blockwise matrix inversion formula which saves time on the inversion of the $K(x,x)$ matrix. In particular the computational overhead when adding a single point to the GP containing $n$ points is only $\mathcal{O}(n^2)$ as opposed to $\mathcal{O}((n+1)^3)$ for the full inversion. To my knowledge this has not been pointed out in the past and is a good way to save time on the acquisition of points.
+
+With that in mind we can not only take advantage of the Kriging believer method to evaluate the likelihood in parallel but in addition also speed up the algorithm itself. The final algorithm taking this into account with $m$ points which are acquired by the Kriging believer algorithm and a total of $m\cdot n$ acquired points is presented in algorithm \ref{kriging_believer_algorithm} which is one of the main results of this thesis.
+
+\IncMargin{1em}
+\begin{algorithm}
+ \DontPrintSemicolon
+ \KwIn{$\GP(0, k(x,x'|\theta))$ (GP regressor with kernel), $n_{\mathrm{init}}$ (Number of initial samples), $a(\mu(x),\sigma(x))$ (acquisition function), $f(x)$ (function to be sampled)}
+ Randomly draw $n_{\mathrm{init}}$ initial samples $x_0$\;
+ $y_0:=f(x_0)$\;
+ $x_{\mathrm{train}} := x_0$\;
+ $y_{\mathrm{train}} := y_0$\;
+ \For{$n$ \CommentSty{times}}{
+  Fit $\theta_{\mathrm{GP}}$ with $x_{\mathrm{train}}, y_{\mathrm{train}}$ \comment*[r]{alg.\,\eqref{gp_training_algo}}
+  $x_{\mathrm{kb}}:=\mathrm{copy}(x_{\mathrm{trian}})$\;
+  $y_{\mathrm{kb}}:=\mathrm{copy}(y_{\mathrm{trian}})$\; 
+  \For{$m$ \CommentSty{times}}{
+  Draw $x$\;
+    \Repeat{$\max[a(\mu(x),\sigma(x))]$ \CommentSty{reached}}{
+    $\mu(x), \sigma(x):=$GP prediction \comment*[r]{alg.\,\eqref{gp_prediction_algo}}
+    $a_x := a(\mu(x),\sigma(x))$ \;
+    vary $x$ according to some global optimizer  \;
+  }
+  $x_{\mathrm{kb}} = \{x_{\mathrm{kb}},\mathrm{argmax}(a(x))\}$\;
+  $y_{\mathrm{kb}} = \{y_{\mathrm{kb}},\mu(\mathrm{argmax}(a(x))\}$ \comment*[r]{Kriging believer}
+  Update $K(x,x)^{-1}$ with Eq.\,\eqref{blockwise_inversion_symmetric}\;
+  }
+  $x_{\mathrm{train}} = x_{\mathrm{kb}}$\;
+  $y_{\mathrm{train}} = f(x_{\mathrm{kb}})$\comment*[r]{Can be parallelized}
+ }
+ \KwRet{GP regressor}
+\caption{Illustration of the active sampling algorithm with $m$ points being acquired at once with Kriging believer. $n$ Kriging believer steps are performed so a total of $n\cdot m$ points are added to the GP by active sampling. The advantage to the simple active sampling shown in algorithm\,\ref{active_sampling_algorithm} is the faster computation time and the possibility for the evaluation of the likelihood (line 19) to be performed in parallel. In practice the values for $y_{\mathrm{train}}$ are saved at every step which means that for each iteration of the outer loop only $m$ points have to be sampled from the likelihood.}\label{kriging_believer_algorithm}
+\end{algorithm}
+
+\subsection{Convergence criterion}\label{convergence_criterion}
+To efficiently be able to perform Bayesian inference we need to have some convergence criterion in place which we can use to assess to what degree our algorithm has converged. A natural candidate would be the variance of the integral over $Z$. For a $d$-dimensional likelihood this is unfortunately a $2\cdot d$ dimensional integral which is numerically challenging to handle. Furthermore our approach to optimizing the hyperparameters of the GP violates bayesianity and hence cannot be trusted, which is discussed in detail in section \ref{preserving_bayesianity}. Therefore we follow the approach from \cite{paper_1} and use the \textit{Kullback Leibler} (KL) divergence between consecutive acquisition steps to estimate the progress of the Bayesian inference. For two continuous probability distributions $P(\bs{x})$ and $Q(\bs{x})$ this is defined as the integral
+\begin{align}
+D_{\mathrm{KL}}(P|Q) = \int P(\bs{x})\log\left(\frac{P(\bs{x})}{Q(\bs{x})}\right)\d\bs{x}
+\end{align}
+Since this is again computationally quite expensive we approximate the posterior distribution to be a multivariate gaussian distribution for which the KL divergence is analytical and given by the formula
+\begin{align}
+  D_\text{KL}\left(\mathcal{N}_0 | \mathcal{N}_1\right) =
+  \frac{1}{2}\left(
+    \operatorname{tr}\left(\Sigma_1^{-1}\Sigma_0\right) +
+    \left(\mu_1 - \mu_0\right)^\mathsf{T} \Sigma_1^{-1}\left(\mu_1 - \mu_0\right) - k +
+    \ln\left(\frac{\det\Sigma_1}{\det\Sigma_0}\right)
+  \right)
+\end{align}
+where $\mu_0,\Sigma_0$ and $\mu_1,\Sigma_1$ are the mean and covariance of $\mathcal{N}_0$ and $\mathcal{N}_1$ and $k$ is the number of dimensions. $\bs{mu}$ and $\Sigma$ can be empirically estimated from the training data with Eq.\,\ref{input_empirical_m_and_C}. This has the same problems that have been explained for preprocessing in section \ref{preprocessing} but since this is only a stopping criterion it is not crucial that this gives the correct result right away.
+
+The KL divergence can be used as a convergence criterion by stopping the algorithm when $D_{\mathrm{KL}} < \varepsilon$ between a number of acquisition steps. \cite{paper_1} sets $\varepsilon=0.01$ which we will also do.
+Note that this convergence criterion assumes that the posterior distribution is a multivariate gaussian distribution which is by no means given. Therefore finding a better criterion is likely possible and advisable. However for our purposes this will suffice. The performance of this criterion is assessed in section \ref{experiments_gpry} and illustrated in Fig.\,\ref{conv_planck_6d_gpry}.
+
+\subsection{The problem with infinity}\label{the_problem_with_infinity}
+An issue that has to be addressed when sampling the log-posterior distribution is that it falls off towards $-\infty$ towards the edges. This is a problem since GPs cannot deal with infinite values as Eq.\,\ref{conditional} (or Eq.\,\ref{conditional_noise_full} in the noisy case ) become ill defined. This means that there needs to be a solid mechanism in place to deal with these points. In the context of BO some research has been conducted towards solving this problem which relies on defining a region in which it is safe to explore which is based on the observations that have been made up to this point \cite{safeopt, safeopt_2}. This approach has the advantage that it is keeps the GP stable but it comes at the expense of added computational overhead. Additionally finding a suitable region in high dimensions is a very challenging task.
+
+A different approach is to replace the $-\infty$ value by some large, negative finite value. While this is a computationally cheap and easy to implement method it unfortunately does not work very well in practice. This is because our initial assumption about the GP rests on the idea that the posterior distribution is a continuous, differentiable function which is violated by introducing discontinuity. Including these points will either distort the correlation length if the fixed points are added during the regression step or lead to unwanted oscillations if they are added with the blockwise matrix inversion formula. This behaviour is shown in Fig.\,\ref{infinities_plots} (left).
+
+The third idea for dealing with these points is to use the Kriging believer framework to make a prediction for these points. This preserves the continuity of the function but it drastically overestimates the posterior distribution in this point. This behaviour is shown in Fig.\,\ref{infinities_plots} (right).
+
+Lastly there is the possibility to simply ignore samples which yield $-\infty$. This has the advantage that the model stays exact but the disadvantage that the algorithm will repeatedly sample this location since the information about it is discarded. It can be somewhat alleviated when using batch acquisition with the Kriging believer algorithm since there is a good chance that this point will not be in the next batch. Eventually the algorithm will start exploring though, which inevitably will lead it into regions where the log-posterior distribution is $-\infty$. This topic will therefore require more research and a rigorous solution for a robust and versatile framework but for the sake of simplicity we will simply use the last option and ignore sampling locations where the posterior distribution vanishes. 
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{inf_constant.pdf}
+\includegraphics[width=0.45\textwidth]{inf_lie.pdf}
+\end{center}
+\caption{Illustration of different computationally cheap methods to deal with $-\infty$ values in the log likelihood with a gaussian posterior. The left plot shows the behaviour when samples which yield $-\infty$ are replaced by a constant value which in this case is the minimum of all finite values. $\mathrm{GP}_1$ (black) shows the behaviour when adding the points with the blockwise matrix inversion lemma and $\mathrm{GP}_2$ (red) when fitting the hyperparameters of the GP with the artificial samples included. The oscillations which this approach introduces are clearly visible. When the artificial values are set even lower the oscillations become more pronounced. The right plot shows the behaviour when setting all infinite samples to the mean of the GP at this point (essentially this is like the Kriging believer algorithm). This does not introduce any oscillations but gives a wrong shape for the posterior distribution.}\label{infinities_plots}
+\end{figure}
+
+\subsection{Preserving bayesianity}\label{preserving_bayesianity}
+A lot of effort so far has been directed into the conservation of bayesianity, i.e. using only Bayesian statistics to construct our full model. The final goal of this thesis is however to create a practical, fast and robust framework which unfortunately means that the bayesian approach had to be sacrificed when fitting the hyperparameters of the GP regressor since this is done with MLII. This could have been avoided but would have added computational overhead. This translates to a general underestimation of the variance of predictions by the GP.
+ 
+The second point where bayesianity is omitted is when performing the integration of the GP with MCMC. In principle it would be possible to include the variance of the predictions during this step but it again requires some computational overhead. Both of these points are connected since they both relate to the variance of the predictions by the GP. It is therefore only a good assumption to omit these when this variance is very small. It is therefore in our best interest to sample until the variance of the GP is a negligible contribution to the evidence. This is achieved by using the KL divergence as a convergence criterion and sampling until a good precision is reached.
+
+A more rigorous treatment of the two aforementioned issues would certainly be desirable but is beyond the scope of this thesis.
+
+\subsection{Experiments}\label{experiments_gpry}
+Now that we have established the full algorithm it is time to test it and compare its performance to the state of the art. Here we will use toy examples where we restrict ourselves to simple, unimodal gaussian posteriors since much of our algorithm assumes approximate gaussianity. Furthermore we will investigate how the algorithm performs on two real likelihoods. In these tests we are interested in three metrics:
+\begin{enumerate}
+\item Scaling of the required number of samples with dimensionality
+\item The computational overhead that our algorithm introduces
+\item The impact of the hyperparameters of the algorithm on the performance
+\end{enumerate}
+These hyperparameters are:
+\begin{itemize}
+\item The choice of kernel (RBF or Mat\'{e}rn)
+\item The number of initial samples before acquisition $n_{\mathrm{init}}$
+\item The number of times $n_{\mathrm{restart,GP}},n_{\mathrm{restart,} a}$ that the optimizers for the GP hyperparameters and for the acquisition function are restarted from random initial points. 
+\item The number of acquired points with Kriging believer $m$ which is done at every iteration before interrogating the likelihood and refitting the hyperparameters of the GP. This will henceforth be called the number of Kriging believer steps
+\item The correction factor of the acquisition function $\zeta$
+\end{itemize}
+However only the last two of these parameters are really variable. The choice of kernel depends on the prior knowledge of the shape of the likelihood and should thus be set according to the same criteria as the prior distribution. T
+
+he number of initial samples before acquisition is barely relevant as the algorithm is designed to explore the parameter space efficiently. However an initial set of samples which roughly follows the posterior distribution can accelerate convergence considerably. 
+
+How often the optimizers for the acquisition function and GP regressor should be restarted at random locations depends on the optimizer used and on the computational budget available. A good optimizer global should in principle be able to find the global maximum from any starting position. In practice this value will be set so that it ensures that the optimizer reliably finds the global maximum.
+
+This means that we are essentially only left with two free parameters to choose which are $m$ and $\zeta$. These will be investigated in the following.
+
+\paragraph{Toy examples}\ \\
+As the Kriging believer framework allows us to evaluate the posterior in parallel we should take this into account when benchmarking the algorithm. In addition the computational overhead of running the algorithm, which is performed sequentially and hence does not decrease with the number of cores available should be taken into consideration. 
+
+\begin{figure}
+\begin{center}
+%\input{../figures/n_evals_gp.pgf}
+%\input{../figures/t_evals_gp.pgf}
+\includegraphics[width=0.45\textwidth]{n_evals_gp.pdf}
+\includegraphics[width=0.45\textwidth]{t_evals_gp.pdf}
+\end{center}
+\caption{Scaling of the number of posterior evaluations (left) and computational overhead of our algorithm measured in wall clock time (right). The approximately exponential scaling of the number of points becomes apparent towards higher values of $d$. The computational overhead that our algorithm produces is purely sequential and hence increases with the number of Kriging believer steps. Nevertheless, for slow enough likelihoods, this overhead is compensated for by the low number of total evaluations required for the algorithm to converge which is shown in Fig.\,\ref{mcmc_comparison}.}\label{n_dim_scaling_gp}
+\end{figure}
+
+Both of these metrics are shown against the number of dimensions with 1, 2, 4 and 8 acquired points in parallel. To be able to compare against MCMC the tests were performed the same as the tests done for Fig.\,\ref{mcmc_scaling} meaning that we used mildly correlated\footnote{Mildly correlated means here that we transformed the randomly drawn covariance matrix such that the correlation coefficient between dimensions does not exceed $0.1$.} multivariate gaussian distributions were used. $\zeta$ was set to $1$ and the stopping criterion for reaching convergence was $D_{\mathrm{KL}}=0.01$. 
+
+During this test and all consecutive tests we set $n_{\mathrm{restart}, GP}=10$ and $n_{\mathrm{restart}, a}=5$ to make the optimizations robust. The results are shown in Fig.\,\ref{n_dim_scaling_gp}. One can see that both the number of points required as well as the computational overhead increase exponentially with the number of dimensions. Furthermore it is clear from the plot on the left that the Kriging believer algorithm decreases the number of points required per core although the algorithm does not parallelize perfectly. It is furthermore obvious from the right plot that the computational overhead of the algorithm increases with the number of Kriging believer steps $m$. This makes sense since overall more points are required until convergence is reached and the computational overhead of our algorithm does not decrease with the number of cores. 
+
+This effect is however mitigated by the fact that the computational overhead for acquiring a number of training points $n_{\mathrm{train}}$ decreases when raising $m$ because of the use of the blockwise inversion formula. This is visible in Fig\,\ref{t_disect_gp} (left). On the right of this figure the computational overhead of our algorithm is dissected into its main contributing components which are the acquisition of new samples and the GP regression step. One can see that the regression step gives the dominant contribution which was to be expected due to the $\mathcal{O}(n^3)$ scaling of the Cholesky decomposition.\\
+
+\begin{figure}
+\begin{center}
+%\input{../figures/n_evals_gp.pgf}
+%\input{../figures/t_evals_gp.pgf}
+\includegraphics[width=0.45\textwidth]{t_benchmark.pdf}
+\includegraphics[width=0.45\textwidth]{t_disect.pdf}
+\end{center}
+\caption{Cumulative computational overhead in seconds against the number of training samples $n_{\mathrm{train}}$ for $d=2,8$ (right). It is clear that the computational overhead per added training sample decreases for increased $m$. This is because the batch acquisition algorithm increases performance. Furthermore the computational overhead increases for higher dimensions $d$ but this is only a small effect. On the left side the computational overhead is dissected into its main contributions, the acquisition step and the regression step for $d=8$ and $m=1,8$. When using batch acquisition the computational overhead decreases both for the acquisition step and the regression step.}\label{t_disect_gp}
+\end{figure}
+
+Having investigated both the computational overhead and the number of evaluations needed to achieve convergence for the toy cases we can now proceed to make some predictions of the performance of our algorithm compared to MCMC. We are particularly interested in whether our algorithm can outperform MCMC in terms of speed (in wall clock time). Therefore we need to take into consideration the time it takes to calculate the posterior for a single sample (this will be assumed to be constant in the following), the number of evaluations for both MCMC and our algorithm which are required to achieve convergence as well as the computational overhead for our algorithm. We conservatively neglect the computational overhead of MCMC. 
+
+The results of this are shown for four different exemplary combinations of $m$ and $d$ in Fig.\,\ref{mcmc_comparison}. From this comparison it is clear that our algorithm will always win in terms of efficiency for slow likelihoods/posteriors since our algorithm only requires a small fraction of the samples that MCMC requires to converge. This comes at the cost of added computational overhead though which means that for fast likelihoods (in our examples $10^{-4}-10^{-3}$ evaluations per second) MCMC will converge faster. In addition to this MCMC is more robust and does not make the strong assumptions on smoothness that our algorithm makes. Furthermore it is important to keep in mind that the exponential scaling of the computational overhead and required numbers of samples with dimensionality effectively limit the number of dimensions this algorithm can efficiently used in to $d \lesssim 10$ for most practical examples.
+
+\begin{figure}
+\begin{center}
+%\input{../figures/n_evals_gp.pgf}
+%\input{../figures/t_evals_gp.pgf}
+\includegraphics[width=0.45\textwidth]{comparison_mcmc_2_1.pdf}
+\includegraphics[width=0.45\textwidth]{comparison_mcmc_2_4.pdf}
+\includegraphics[width=0.45\textwidth]{comparison_mcmc_8_1.pdf}
+\includegraphics[width=0.45\textwidth]{comparison_mcmc_8_4.pdf}
+\end{center}
+\caption{Comparison of the performance of our algorithm vs.\ MCMC in the toy setting for different combinations of $m$ and $d$ and assuming different times for evaluating the posterior distribution. One can see that our algorithm becomes more efficient than MCMC if the posterior evaluation time passes a certain limit. The reason for this is the small number of posterior samples required for our algorithm to converge. In addition the benefit of using batch acquisition if multiple cores are available is visible. This however moves the threshold after which our algorithm is faster than MCMC towards higher posterior evaluation times.}\label{mcmc_comparison}
+\end{figure}
+
+\paragraph{Real world data}\ \\
+Now that we have a robust understanding of how our algorithm scales with dimensionality and where its strengths and weaknesses lie it is time to try it on some real world data. For this two examples which fit our criteria (approximate gaussianity and $d<10$) were chosen:
+\begin{itemize}
+\item The two dimensional big bang nucleosynthesis (BBN) likelihood used in \cite{bbn_paper_nils}.
+\item The six dimensional Planck lite likelihood \cite{planck_lite_1, planck_lite_4} which is the 27 dimensional Planck likelihood marginalized over the 21 dimensions which do not correspond to cosmological observables. The theoretical predictions for the cosmological observables have been computed using the \texttt{CLASS} cosmological Boltzmann code \cite{class_1}.
+\end{itemize}
+We start by testing our algorithm on the Planck lite likelihood with uniform priors which have been set to $\sim 3\sigma$ of the marginalized distribution which was obtained from the official Planck chains \cite{planck_off_chains}. We then ran our algorithm with $m=2$ Kriging believer steps, $\zeta=1$ and $n_{\mathrm{init}}=10$ initial points until a KL divergence of $0.01$ was reached. 
+
+An MCMC chain was then run on the GP regressor and the resulting MCMC chain was marginalized and plotted with \texttt{GetDist} \cite{getdist}. This was compared to the official Planck chains. The result is shown in Fig\,\ref{planck_6d_gpry}. In total the posterior was evaluated 94 times with an average time of $\approx 5\,\mathrm{s}$ per posterior evaluation. The total computational overhead of our algorithm was $\approx 45\,\mathrm{s}$. This gives a total runtime of $\approx 280\,\mathrm{s}$. If we assume that the MCMC algorithm needs $\sim 10^4$ evaluations to reach convergence this amounts to a speed-up of $\mathcal{O}(10^2)$ which effectively allows the computation of this on a laptop instead of a cluster.\\
+
+\begin{figure}
+\begin{center}
+\input{../figures/planck_6d_gpry_2_0.pgf}
+\end{center}
+\caption{Marginalized 2d $1\sigma$ and $2\sigma$ contours as well as marginalized 1d distributions of our algorithm compared with the official Planck chains. The contours, correlations and marginal distributions are well recovered by our algorithm which offers a computational speed-up of $\mathcal{O}(10^2)$ (in wall clock time) compared to MCMC.}\label{planck_6d_gpry}
+\end{figure}
+
+Additionally the Planck likelihood can be used to test the influence of $m, \zeta$ and $n_{\mathrm{init}}$ on the convergence. The KL divergence against the number of posterior evaluations if either $m, \zeta$ or $n_{\mathrm{init}}$ is varied is shown in Fig.\,\ref{conv_planck_6d_gpry}. One can see that increasing $m$ leads to an increase in posterior evaluations to achieve convergence which is consistent with the results shown in Fig.\,\ref{n_dim_scaling_gp}. 
+
+Furthermore increasing $N_0$ where $\zeta = \exp(-N_0/N)$ where $N$ is the number of training points for the GP leads to slower convergence although the KL divergence shows less variability. Again this was to be expected due to the reasons given in section \ref{optimal_acquisition_function}. Changing the number of randomly drawn initial samples essentially has no impact on convergence which underlines the fact that our algorithm can efficiently explore the parameter space and find the maximum of the distribution. This also highlights the numerical issues with using the KL divergence though as it is numerically not very stable.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{conv_planck_6d.pdf}
+\end{center}
+\caption{KL divergence against the number of training samples of the GP (posterior evaluations) when varying $m, N_0$ where $\zeta=\exp(-N_0/N)$ and $n_{\mathrm{init}}$. Only one parameter is varied for each plot while the other ones are kept at $m=2$, $N_0=0$ and $n_{\mathrm{init}}=10$. One can see that increasing $m$ and $N_0$ causes the algorithm to converge slower although increasing $m$ allows for the parallel evaluation of the posterior and $N_0>0$ stabilizes convergence. Changing $n_{\mathrm{init}}$ essentially has no impact.}\label{conv_planck_6d_gpry}
+\end{figure}
+
+Next the algorithm was tested against the BBN likelihood with $m=2, n_{\mathrm{init}}=3$ and $N_0=0$. The result of this is shown in Fig.\,\ref{bbn_gpry_vanilla}. The posterior was evaluated $29$ times with a total computational overhead of $\approx 9\,\mathrm{s}$. The BBN likelihood is quite fast however as a single posterior evaluation takes $\approx 10^{-4}$ seconds. This means that if we conservatively assume that MCMC needs $\sim 10^{3}$ evaluations for convergence our algorithm is $\mathcal{O}(10^{2})$ times slower than MCMC. This illustrates that the posterior evaluation time is the crucial component when assessing whether using our algorithm is advantageous to using MCMC.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{gpry_bbn.pdf}
+\end{center}
+\caption{Comparison of our algorithm with MCMC for the two-dimensional BBN likelihood from \cite{bbn_paper_nils}. Our algorithm correctly captures the $1$ and $2$ $\sigma$ contours. It is however less efficient than MCMC since the computational overhead dominates the evaluation time.}\label{bbn_gpry_vanilla}
+\end{figure}
+
+The same BBN likelihood also lends itself to experimentation regarding the robustness of the algorithm for non-gaussian likelihoods. We can get such likelihoods if we only include the measurement of the primordial helium abundance $Y_P$ by \cite{yp_measurement_bbn} or the primordial deuterium abundance $y_{\mathrm{DP}} = 10^5 n_{\mathrm{D}}/n_{\mathrm{H}}$ instead of both. This gives an elongated, non-gaussian shape in both cases which we can give to our algorithm. The result is shown in Fig\,\ref{bbn_gpry_yp_dh} with $m=2$, $n_{init}=1$ and $\zeta=1$ the KL divergence for terminating the algorithm was set to $0.005$. 
+
+When only including the measurement of $Y_P$ convergence convergence was reached after 37 posterior evaluations, when only including $y_{\mathrm{DP}}$ after 55 evaluations. Although the 2d $1\sigma$ and $2\sigma$ contours are recovered well the marginalized distributions do not match fully. Nevertheless this shows that the algorithm is robust enough to deal with non gaussian posterior shapes. 
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.45\textwidth]{gpry_bbn_yp.pdf}
+\includegraphics[width=0.45\textwidth]{gpry_bbn_dh.pdf}
+\end{center}
+\caption{The same BBN likelihood as in Fig\,\ref{bbn_gpry_vanilla} when only including the measurement of the primordial helium abundance $Y_P$ (left) or primordial deuterium abundance $y_{\mathrm{DP}}$ (right). Even though both posterior distributions are non-gaussian the 1 and 2 $\sigma$ contours are recovered correctly. The algorithm struggles to correctly recover the 1d marginal distributions though.}\label{bbn_gpry_yp_dh}
+\end{figure}
+
+All tests shown here were done on an Intel Core i5-6300U CPU with $4\times 2.4$ GHZ clock speed. The posterior of the BBN likelihood as well as the numerical integration of the GP regressor has been performed with the MCMC algorithm that has been developed for \texttt{CosmoMC} \cite{mcmc_sampler_1, mcmc_sampler_2}. The \texttt{Cobaya} package has been used for translating between our algorithm and the MCMC sampler and between our algorithm and the Planck likelihood. Figures \ref{planck_6d_gpry}, \ref{bbn_gpry_vanilla} and \ref{bbn_gpry_yp_dh} were generated using \texttt{GetDist} \cite{getdist}. Our algorithm which has the preliminary name \texttt{GPry} uses the packages \texttt{numpy} \cite{numpy}, \texttt{Scikit-learn} \cite{sklearn} and modified parts of \texttt{scikit-optimize} \cite{skopt}. The GP hyperparameters and the Acquisition function are optimized using the \texttt{scipy} \cite{scipy} implementation of the Large-Scale Bound Constrained Optimization algorithm (L-BFGS-B) \cite{lbfgs_1, lbfgs_2}. \texttt{GPry} will be released for public use in the near future.
+
+\raggedbottom
+\cleardoublepage
+
+\section{A hybrid Nested Sampling/GP approach}\label{hybrid_gp_sampling_chapter}
+This chapter will present the methodology used to develop an algorithm that uses a combination of GPs and nested sampling to build a framework which can exploit the advantages of both methods. 
+\subsection{Taking advantage of speed hierarchies}
+As Bayesian inference requires the partial or full marginalization of the Likelihood function as explained in \ref{bayesian_inference_section} this necessitates the accurate numerical modelling of the latter such that the value of the integral convergences to the true value. This can be done with Nested Sampling methods as explained in \ref{mcmc_section}.
+
+For simple (analytic) $p$ the Likelihood function can be computed analytically too which usually means that its calculation is not particularly computationally demanding. However for many examples in science this Likelihood can be quite tricky to compute and may involve numerical methods like integration, $n$-body simulations or approximate solvers for differential equations \cite{ex_l_1, ex_l_2}. This means that an evaluation for a single set of parameters $\theta$ demands a lot of computational resources which raises the need for more efficient algorithms than MCMC which discards many of the evaluations of the Likelihood.
+
+On the other hand Bayesian quadrature which is very efficient at sampling a parameter space have been brought forward as possible solutions to this problem \cite{paper_1}. However this method suffers heavily under the curse of dimensionality. This has three reasons:
+\begin{enumerate}
+\item With a higher dimensional parameter space one inevitably needs to get a higher number of samples from the likelihood to achieve convergence as the hyper volume of the parameter space increases exponentially. Furthermore the number of corners also rises exponentially which means that the volume where the bulk of the mass is concentrated decreases exponentially with respect to the hypervolume of the prior.
+\item The computational complexity of fitting the hyperparameters of a GP with MAP increases proportional to $n^3$. This means that sequentially acquiring points with active sampling increases the computational complexity to $\sim n^4$. It is therefore in our interest to keep the number of samples in the GP as low as possible which conflicts with the first point.
+\item The acquisition function has as many dimensions as the parameter space which needs to be sampled. Since this needs to be optimized that means that higher dimensionality also requires higher dimensional global optimization which is generally harder to achieve than in lower dimensions. This problem is not quite as significant as the last two ones as even if the global maximum is not reached during the optimization of the acquisition function getting stuck in a local maximum does not break or slow down the algorithm significantly. Furthermore with enough tries and a good choice of acquisition function all global optima will be explored eventually. \\
+Nevertheless it is good to keep this issue in mind. This overall exponential scaling of the number of evaluations as well as the computational overhead required to reach convergence means that the GP is only useful for likelihoods which are below a certain number of dimensions which is illustrated in Fig.\,\ref{gp_poly_mcmc_scaling}. Here we assumed that the number of evaluations for the GP increases $\propto \exp(0.2\cdot d)$ while it increases for MCMC and \texttt{PolyChord} polynomially with $\propto d^{1.7}$ and $\propto d^{2.5}$ respectively. One can see that at $d\approx 60$ BQ and MCMC need approximately the same number of evaluations for convergence which makes MCMC the method of choice since it does not require any additional computational overhead. Furthermore one has to keep in mind that the computational overhead of BQ also approximately increases exponentially which makes this prohibitively expensive for most likelihoods if the number of points reaches $\mathcal{O}(10^3)$. This means that for most practical applications BQ can only efficiently be applied if $d\lesssim 10$.
+\end{enumerate}
+
+\begin{figure}
+\begin{center}
+\includegraphics{gp_poly_mcmc_n.pdf}
+\end{center}
+\caption{Illustration of the approximate number of evaluations required for convergence against the number of dimensions. We empirically assume that MCMC and \texttt{PolyChord} scale polynomially $\propto d^{1.7}$ and $\propto d^{2.5}$ respectively and that BQ scales exponentially $\propto \exp(0.2 d)$. It is clear that MCMC is preferable over BQ when $n_{\mathrm{GP}}>n_{\mathrm{MCMC}}$ which is at $d\approx 60$. If one also takes into consideration the computational overhead that BQ introduces however which also scales approximately exponentially it is clear that BQ becomes prohibitively expensive for most cases if $d\gtrsim 10$}\label{gp_poly_mcmc_scaling}
+\end{figure}
+
+In addition to the aforementioned issues associated with MCMC and GP algorithms for Bayesian inference, likelihoods in physics often have some common properties which can be exploited in an algorithm:
+\begin{enumerate}
+\item In most cases one is only interested in performing Bayesian inference\footnote{In this context Bayesian inference means that we want a full characterization of a parameter space $\overline{\bs{\theta}}\subseteq\bs{\theta}$ such that we can obtain marginal quantities etc.} on a small subset of parameters $\bs{\theta}_{\mathrm{p}}=(\theta_{\mathrm{p,1}}, \theta_{\mathrm{p,2}},\dots)^T\subseteq\bs{\theta}$ which we will henceforth call \textit{physical} parameters since they are usually associated with underlying physics in contrast to the rest $\bs{\theta}_{\mathrm{n}}=(\theta_{\mathrm{n,1}}, \theta_{\mathrm{n,2}},\dots)^T=\bs{\theta}\backslash \bs{\theta}_{\mathrm{p}}$ which we will summarize under the name of \textit{nuisance} parameters. These are typically parameters which are associated to the experiment like cuts, filters and instrument parameters. The number of nuisance parameters often exceeds that of physical parameters.
+\item Many likelihoods in physics have an inherent speed hierarchy meaning that changing some parameters requires more computation than changing others. As such parameters can usually be grouped into a "slow" and a "fast" category where the difference in time it takes for recomputing the likelihood when changing a slow parameter can often exceed the time it takes when changing a fast parameter by a factor of $10^3$ or more.\\
+Luckily for us this speed hierarchy very often translates to physical and nuisance parameters where $\bs{\theta}_{\mathrm{p}}$ are slow and $\bs{\theta}_{\mathrm{n}}$ fast. The reason for this is that recalculating the physical model often involves some heavy numerical computation of integrals and non-linear effects while changing $\bs{\theta}_{\mathrm{n}}$ essentially just reweighs the likelihood function.\\
+\end{enumerate}
+An example of such a hierarchy is the likelihood of the Planck experiment which 27 parameters assuming $\Lambda$CDM. Only six of those are parameters which depend on the underlying cosmology which require numerically solving the Boltzmann equation while the 21 other parameters are instrument parameters and astrophysical effects which are  $\mathcal{O}(10^3)$ faster to compute.
+
+Due to the reasons explained above it is clear that MCMC, nested sampling and Bayesian quadrature each have their strengths and weaknesses: MCMC and nested sampling scale better with dimensions but need a higher number of posterior evaluations in low dimensions while Bayesian quadrature is very efficient in low dimensions but does not scale very well. In addition the computational overhead of GP regression makes it prohibitively expensive for $d\gtrsim 10$. This naturally raises the question whether we can exploit these characteristics by using nested sampling for nuisance parameters, which are typically fast parameters and more numerous than the physical parameters and using Bayesian quadrature for the slow, physical parameters.
+
+It turns out that this is indeed possible when a number of criteria are met which will be detailed in the following.
+
+\subsection{The method}\label{the_method}
+Our goal in Bayesian inference is to solve the integral
+\begin{align*}
+I = \int L(D|\bs{\theta})\pi(\bs{\theta})\d\tilde{\bs{\theta}}
+\end{align*}
+where $D$ is some data, $L$ the likelihood and $\pi$ the prior. $\tilde{\bs{\theta}}$ is any subset of $\bs{\theta}$. As discussed above $\tilde{\bs{\theta}}$ usually includes all nuisance parameters $\bs{\theta}_{\mathrm{n}}$ and usually all physical parameters apart from one or two to display the marginal distribution of each pair of parameters graphically. This means that we can perform the integration in two steps by noticing that
+\begin{align}
+I = \iint L(D|\bs{\theta}) \pi(\bs{\theta})\d\tilde{\bs{\theta}}_{\mathrm{p}}\d\bs{\theta}_{\mathrm{n}}
+\end{align}
+where $\tilde{\bs{\theta}}_{\mathrm{p}}\subseteq \bs{\theta}_{\mathrm{p}}$. If the prior is separable (i.e. $\pi(\bs{\theta}) = \pi(\bs{\theta}_{\mathrm{p}})\cdot \pi(\bs{\theta}_{\mathrm{n}})$), which is given in most cases, we can simplify this integral further:
+\begin{align}
+I = \iint L(D|\bs{\theta}) \pi(\bs{\theta}_{\mathrm{p}})\d\tilde{\bs{\theta}}_{\mathrm{p}} \pi(\bs{\theta}_{\mathrm{n}})\d\bs{\theta}_{\mathrm{n}}
+\end{align}
+The outer integral can be computed using nested sampling and the inner integral with Bayesian quadrature. This way we can exploit the advantages of both methods. This method is illustrated in two dimensions in Fig.\,\ref{method_schematic}.
+
+\begin{figure}[h]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+	%every axis plot post/.append style={
+  	%	mark=none,domain=-3:3,samples=50,smooth},
+  	name=plot1,
+	ticks=none,
+	xmin=-3,   xmax=3,
+	ymin=-3,   ymax=3,
+	%axis x line=bottom, % no box around the plot, only x and y axis
+  	%axis y line=left, % the * suppresses the arrow tips
+  	xlabel={$\theta_{\mathrm{n}}$},
+  	ylabel={$\theta_{\mathrm{p}}$},
+  	samples=100
+]
+	\draw[black] \pgfextra{
+	  \pgfpathellipse{\pgfplotspointaxisxy{0}{0}}
+		{\pgfplotspointaxisdirectionxy{1.5}{1.5}}
+		{\pgfplotspointaxisdirectionxy{0}{1.5}}
+	  % see also the documentation of 
+	  % 'axis direction cs' which
+	  % allows a simpler way to draw this ellipse
+	};
+	\addplot[black] {gauss(0,1.,0)};
+	\addplot[black, dashed] {0*x};
+	\addplot[black] {gauss(0.75,0.75,1.5)};
+	\addplot[black, dashed] {1.5};
+	\node (source) at (axis cs:-2.2,-2.78){};
+	\node[anchor=south] (t) at (axis cs:0,-2.78){Marginalize with nested sampling};
+    \node (destination) at (axis cs:2.2,-2.78){};
+    \draw[->](source)--(destination);
+	% \addplot [only marks,mark=*] coordinates { (1.5,1.5) };
+\end{axis}
+\begin{axis}[
+	hide axis,
+	%scale only axis=true,
+	width = 5cm,
+	height=\axisdefaultheight,
+	ticks=none,
+    name=plot2,
+    at=(plot1.right of south east), anchor=left of south west,
+    xmin=0,   xmax=1.2,
+	ymin=-3,   ymax=3,
+	samples=100]
+	\addplot[black] (3/(1.5*sqrt(2*pi))*exp(-((x-0)^2)/(2*1.5^2)),x);
+	\draw[black, dashed] (axis cs:0,0) -- (axis cs:0.7978845608,0);
+	\draw[black, dashed] (axis cs:0,1.5) -- (axis cs:0.48394144903,1.5);
+	\node[draw,shape=circle,fill=black,scale=0.4] (p1) at (axis cs:0.48394144903,1.5){};
+	\node[draw,shape=circle,fill=black,scale=0.4] (p2) at (axis cs:0.7978845608,0){};
+	\node (source) at (axis cs:0.9,2.5){};
+	\node[anchor=south, rotate=-90] (t) at (axis cs:0.9,0){Sample with GP};
+    \node (destination) at (axis cs:0.9,-2.5){};
+    \draw[->](source)--(destination);
+\end{axis}
+% 3/(1.5*sqrt(2*pi))*exp(-((1.5-0)^2)/(2*1.5^2))
+% 3/(1.5*sqrt(2*pi))
+\end{tikzpicture}
+\caption{Graphical illustration of the principle of the hybrid GP/nested sampling method with one physical and one nuisance parameter. The ellipse represents the one $\sigma$ contour of the posterior distribution. For every $\theta_{\mathrm{p}}$ that is sampled by the active sampling algorithm, the posterior distribution is marginalized along $\theta_{\mathrm{n}}$ with nested sampling.}\label{method_schematic}
+\end{center}
+\end{figure}
+
+In particular we can fully utilize the algorithm that was developed in chapter \ref{bq_for_prob_dist} for performing the bayesian quadrature part of this while the nested sampling can be performed with \texttt{PolyChord} which conveniently also gives us an estimate for the variance of $\log(Z)$ where $Z$ is posterior distribution marginalized over the nuisance parameters:
+\begin{align}
+Z = \int L(D|\bs{\theta}) \pi(\bs{\theta}) \d\bs{\theta}_{\mathrm{n}}
+\end{align}
+This variance can naturally be accommodated in our algorithm since the GP regressor can account for statistical noise. This means that the GP needs more training points and thus more evaluations of the posterior distribution are needed for convergence. It however does not generally limit the ability of our algorithm to correctly map the posterior if the estimate for the statistical noise that we get for $\log(Z)$ is correct. One issue which has to be addressed though is that subtracting the numerical noise in the acquisition function assumes i.i.d.\ gaussian noise which means that incorporating different noise levels at different locations in the parameter space is not supported. There are two possibilities to work around this:
+\begin{enumerate}
+\item We could interpolate the noise levels between different regions in the parameter space. This lets us correctly deal with the statistical noise in $\log(Z)$. A natural choice for an interpolator here would be a GP however this almost doubles the amount of computational overhead of our algorithm. In addition to this the noise level estimation also has some statistical noise attached to it which makes the problem even harder. Therefore this is, while being the rigorous solution, not an efficient one.
+\item The noise level on $\log(Z)$ that \texttt{PolyChord} returns essentially only depends on the number of live points ($N$ in algorithm \ref{nested_sampling_algorithm}). If we keep this fixed for all evaluations we will receive very similar estimates for this noise level and treat it like a constant number by setting the constant variance $\sigma_n^2$ to the mean value of the variances\footnote{One could also argue that we should take the conservative approach and take the maximum of all noise levels or something like the $95\%$ quantile. This could easily be done but if $\sigma_{\log(Z_0)}$ is approximately the same for all points this should only have a minor impact.}.
+\end{enumerate}
+Pseudocode for this method is shown in algorithm \ref{hybrid_algo}. The integration of the nuisance parameters $\bs{\theta}_{\mathrm{n}}$ with nested sampling (algorithm \ref{nested_sampling_algorithm}) is done every time the physical parameters $\bs{theta}_{\mathrm{p}}$ are changed when evaluating the posterior for a newly acquired sample. Furthermore while the Kriging believer algorithm can be used in this case for batch acquisition it generally parallelizes worse than \texttt{PolyChord} meaning that it is likely most efficient to acquire a single point per step and use parallel computation for integrating over the nuisance parameters.
+
+\IncMargin{1em}
+\begin{algorithm}
+ \DontPrintSemicolon
+ \KwIn{$\GP(0, k(\bs{\theta}_{\mathrm{p}},\bs{\theta}_{\mathrm{p}}'|\xi))$ (GP regressor with kernel), $n_{\mathrm{init}}$ (Number of initial samples), $a(\mu(\bs{\theta}_{\mathrm{p}}),\sigma(\bs{\theta}_{\mathrm{p}}))$ (acquisition function), $P(\bs{\theta})$ (log-posterior)}
+ Randomly draw $n_{\mathrm{init}}$ initial phys. samples $\bs{\theta}_{\mathrm{p},0}$\;
+ $\log(Z_0), \sigma_{\log(Z_0)} := \int P(\bs{\theta})\d\bs{\theta}_{n}$\comment*[r]{alg.\,\ref{nested_sampling_algorithm}}
+ $\bs{\theta}_{\mathrm{p, train}} := \bs{\theta}_{\mathrm{p},0}$\;
+ $y_{\mathrm{train}} := \log(Z_0)$\;
+ $\sigma_n^2 := \sigma_{\log(Z_0)}^2$\;
+ $\Sigma_n^2 = \mathrm{diag}(\overline{\sigma_n^2})$ (crude) or $\mathrm{diag}(\sigma_{n,i}^2)$\;
+  \For{$N$ \CommentSty{times}}{
+  Fit $\xi$ with $\bs{\theta}_{\mathrm{p, train}}, y_{\mathrm{train}}, \Sigma_n^2$ \comment*[r]{alg.\,\ref{gp_training_algo}}
+  Acquire $m$ points $\bs{\theta}_{\mathrm{p}}$ with Kriging believer \comment*[r]{alg.\,\ref{kriging_believer_algorithm}}
+  $\log(Z), \sigma_{\log(Z)} = \int P(\bs{\theta})\d\bs{\theta}_{\mathrm{n}}$\comment*[r]{alg.\,\ref{nested_sampling_algorithm}}
+  $y_{\mathrm{train}} = \{y_{\mathrm{train}}, \log(Z)\}$\;
+  $\sigma_n^2 = \{\sigma_n^2,\sigma_{\log(Z)}^2\}$\;
+  }
+ \KwRet{GP regressor}
+ \caption{Pseudocode of the method presented in section \ref{the_method}. The integration over the nuisance parameters $\bs{\theta}_{\mathrm{n}}$ is done using \texttt{PolyChord} at every location $\bs{\theta}_{\mathrm{p}}$ in the physical parameter space, that our algorithm proposes. While the Kriging believer can be used for batch acquisition it generally parallelizes worse than \texttt{PolyChord} which means that in practice it is usually best to not use batch acquisition but rather parallelize the integration over $\bs{\theta}_{\mathrm{n}}$. }\label{hybrid_algo}
+\end{algorithm}
+
+Again we can use MCMC or any other convenient algorithm to perform the integration in 
+
+\subsection{Efficiency}
+One unfortunate drawback of this approach is that the nested sampling procedure needs to be performed for every posterior evaluation of the GP algorithm. This means that the total evaluation time for the algorithm is given by
+\begin{align}\label{hybrid_total_time_eq}
+t_{\mathrm{tot}} \simeq n_{\mathrm{GP}}\cdot n_{\mathrm{NS}}\cdot t_{\mathrm{fast}} + n_{\mathrm{GP}}\cdot t_{\mathrm{slow}} + t_{\mathrm{overhead}}
+\end{align}
+where $n_{\mathrm{GP}}$ and $n_{\mathrm{NS}}$ are the number of evaluations required for the GP algorithm or nested sampling to converge respectively and $t_{\mathrm{fast}}$ and $t_{\mathrm{slow}}$ are the times it takes for evaluating the posterior when only a fast parameter is changed or when slow parameters are changed too. $t_{\mathrm{overhead}}$ is the computational overhead that the GP algorithm introduces\footnote{We will henceforth neglect the computational overhead that that the nested sampling algorithm introduces.}. We will be using \texttt{PolyChord} which is implemented in \texttt{Cobaya} to perform the nested sampling marginalization for which we know the scaling of $n_{\mathrm{NS}}$ with the number of dimensions from Fig.\,\ref{nested_sampling_scaling} which can be empirically estimated to be $n_{\mathrm{NS}} = 5000 \cdot d^{2.5}$.
+
+Additionally we can empirically estimate the number of evaluations that the MCMC algorithm needs which is $n_{\mathrm{MCMC}} = 1000\cdot 10^{1.7}$. However the MCMC algorithm that we use can also take advantage of a speed hierarchy by \textit{dragging} the fast parameters \cite{mcmc_sampler_3}. This means that the slow parameters are not changed at every iteration. We account for this effect by conservatively assuming that the speed-up that this method provides scales proportionally to the ratio of the number fast dimensions $d_{\mathrm{fast}}$ to the total number of dimensions $d_{\mathrm{slow}}+d_{\mathrm{fast}}$:
+\begin{align}
+n_{\mathrm{MCMC, fast}} = n_{\mathrm{MCMC}} \cdot\frac{d_{\mathrm{fast}}}{d_{\mathrm{slow}} + d_{\mathrm{fast}}}\ ,\qquad n_{\mathrm{MCMC, slow}} = n_{\mathrm{MCMC}} \cdot\frac{d_{\mathrm{slow}}}{d_{\mathrm{slow}} + d_{\mathrm{fast}}}
+\end{align}
+The statistical noise, that the estimation of $Z$ with \texttt{PolyChord} introduces means that our algorithm will need more evaluations to converge which we account for by conservatively estimating that this doubles the total number of training points in the GP required for convergence.
+
+These estimates now allow us to evaluate the efficiency of our hybrid approach as a function of $t_{\mathrm{slow}}$ and the speed hierarchy $t_{\mathrm{fast}}/t_{\mathrm{slow}}$ for different combinations of $d_{\mathrm{fast}}$ and $d_{\mathrm{slow}}$ which is shown in Fig.\,\ref{hybrid_to_mcmc_timing}. We are especially interested in cases where $d_{\mathrm{slow}}\lesssim 10$ since the exponential scaling of the number of evaluations and of the computational overhead means that this is the maximum amount that is practical except for very slow likelihoods as illustrated in Fig.\,\ref{gp_poly_mcmc_scaling}. 
+
+Furthermore the number of nuisance parameters is often greater than the number of physical dimensions hence we will investigate how the algorithm behaves when we increase the number of fast dimensions drastically. As visible in Fig.\,\ref{hybrid_to_mcmc_timing} there is a distinctive area in where our algorithm is faster than MCMC. This depends mostly on the speed hierarchy $t_{\mathrm{fast}}/t_{\mathrm{slow}}$ with a less pronounced dependence on $t_{\mathrm{slow}}$. The former comes mostly from the big difference in the number of evaluations required for MCMC to converge versus the GP approach while the latter comes from the computational overhead that our algorithm introduces. 
+
+The region where our algorithm is faster than MCMC does not change very much with the number of slow dimensions $d_{\mathrm{slow}}$ as visible in the first two plots of Fig.\,\ref{hybrid_to_mcmc_timing} however changing the number of fast dimensions has a large impact on the area where our algorithm wins, the reason for which is because for large $d_{\mathrm{fast}}$ the fist term in Eq.\,\ref{hybrid_total_time_eq} dominates and $n_{\mathrm{NS}}$ scales worse than $n_{\mathrm{MCMC}}$ with the number of dimensions ($\propto d^{2.5}$ vs $\propto d^{1.7}$).
+
+This shows that there is a range where this hybrid approach can extend the range of problems for which using \texttt{GPry} can be advantageous to using MCMC. Another problem which is solved by this approach is that the fraction of the prior hypervolume that is occupied by a non-infinite log-likelihood shrinks with $e^{-d}$. This is a problem for the GP algorithm which has been discussed in detail in section \ref{the_problem_with_infinity}. \texttt{PolyChord} however can deal with $-\infty$ in the log-likelihood allowing us to keep the number of dimensions of the GP low enough so that this is not an issue.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.45\textwidth]{hybrid_mcmc_comparison_4_4.pdf}
+\includegraphics[width=0.45\textwidth]{hybrid_mcmc_comparison_8_4.pdf}
+\includegraphics[width=0.45\textwidth]{hybrid_mcmc_comparison_8_16.pdf}
+\includegraphics[width=0.45\textwidth]{hybrid_mcmc_comparison_8_32.pdf}
+\end{center}
+\caption{Ratio of (wall clock) evaluation times for our algorithm and MCMC for different combinations of $d_{\mathrm{slow}}$ and $d_{\mathrm{fast}}$ assuming that the algorithm is not parallelized as function of the slow evaluation time $t_{\mathrm{slow}}$ and the speed hierarchy $t_{\mathrm{fast}}/t_{\mathrm{slow}}$. Increasing the number of slow dimensions shifts the region where our algorithm is preferred over MCMC towards higher values of $t_{\mathrm{fast}}/t_{\mathrm{slow}}$ while increasing the number of fast dimensions pushes this region towards lower $t_{\mathrm{fast}}/t_{\mathrm{slow}}$. Increasing $d_{\mathrm{slow}}$ a value which is significantly higher than 10 is not feasible since the number of evaluations required for convergence will drastically increase the computational overhead. We can however observe that there clearly is a region where our algorithm can achieve much faster convergence than MCMC.}\label{hybrid_to_mcmc_timing}
+\end{figure}
+
+These test assume however, that there is only one single core available for computation which does not take advantage of the very good parallel performance of \texttt{PolyChord} which parallelizes almost perfectly (actually it parallelizes proportional to $n_{\mathrm{cores}}-1$ because one core stays idle when running \texttt{PolyChord} in parallel) while the parallel performance of MCMC is much worse. This changes the equations in our favour. 
+
+An illustration of this effect is given in Fig.\,\ref{hybrid_to_mcmc_cores} for $d_{\mathrm{slow}}=d_{\mathrm{fast}}=4$. Having more cores also makes the MCMC chains converge in less iterations per core which does not happen for the GP algorithm. This makes our algorithm less efficient than MCMC towards low $t_{\mathrm{slow}}$ however the better parallelization of \texttt{PolyChord} also pushes the equilibrium ($10^0$) line towards higher values for $t_{\mathrm{fast}}/t_{\mathrm{slow}}$. This means that parallelization works in favour of our algorithm if $t_{\mathrm{slow}}$ is sufficiently high which is reflected in the plot.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.45\textwidth]{hybrid_n_cores_2.pdf}
+\includegraphics[width=0.45\textwidth]{hybrid_n_cores_4.pdf}
+\includegraphics[width=0.45\textwidth]{hybrid_n_cores_8.pdf}
+\includegraphics[width=0.45\textwidth]{hybrid_n_cores_16.pdf}
+\end{center}
+\caption{Ratio of evaluation times for our algorithm and MCMC for $d_{\mathrm{slow}}=d_{\mathrm{fast}}=4$ with different numbers of parallel processes. Running more parallel processes shifts the area where our algorithm is preferred to higher values of $t{\mathrm{slow}}/t_{\mathrm{fast}}$ but at the same time the computational overhead of BQ, which does not decrease by parallelizing, becomes more pronounced.}\label{hybrid_to_mcmc_cores}
+\end{figure}
+
+\subsection{Experiments}
+What is left to do for us is to actually try our approach on some posterior distribution. For this we are using an artificial multivariate gaussian distribution with a randomly drawn mean vector and covariance matrix in 8 dimensions of which we will treat 4 as "nuisance dimensions" and marginalize over them (so in total we have $d_{\mathrm{fast}}=d_{\mathrm{slow}}=4$). 
+
+The resulting $1\sigma$ and $2\sigma$ contours as well as the marginalized $1d$ distributions are shown in in Fig.\,\ref{hybrid_4d_toy} where we compare the the results we would get when running an MCMC chain on the same posterior distribution. The MCMC algorithm needed $\approx 6\cdot 10^4$ evaluations of the posterior which amounts to $\approx 3\cdot 10^4$ slow evaluations. In contrast our algorithm needs a total of $\approx 10^6$ posterior evaluations but only 35 slow evaluations with an added computational overhead of $\approx 18\,\mathrm{s}$. It is easy to see that if the slow evaluation time is for example $10\,\mathrm{s}$ and the fast one $10^{-4}\,\mathrm{s}$ our algorithm will be far superior to MCMC since it converges in $\sim 500\,\mathrm{s}\approx 10\,\mathrm{min}$ compared to MCMC which would need $\sim 6\cdot 10^5\,\mathrm{s}\approx 1\,\mathrm{week}$ to converge. 
+
+In addition one can see in Fig.\,\ref{hybrid_4d_toy} that the posterior shape is correctly recovered even though some of the mode is partly cut off by the prior bounds which shows that our algorithm has no problem handling these kinds of posteriors. Additionally the number of posterior evaluations in the slow dimensions seems to be consistent with our approximation which assumed that the added statistical noise roughly doubles the required number of posterior evaluations for convergence (see Fig.\,\ref{n_dim_scaling_gp} for comparison).
+
+\begin{figure}
+\begin{center}
+\includegraphics{hybrid_4d_toy.pdf}
+\end{center}
+\caption{8 dimensional toy examples ($d_{\mathrm{slow}}=d_{\mathrm{fast}}=4$) where 4 dimensions are marginalized over with our algorithm and MCMC. Our algorithm correctly recovers the posterior shapes and converges with only $35$ evaluations in the slow parameter space as opposed to $\mathcal{O}(10^4)$ slow evaluations for MCMC. This comes at the expense of having to evaluate the posterior at more locations in the fast dimensions which can be viable if the evaluation in the fast dimensions is computationally much cheaper than evaluations in the slow dimensions.}\label{hybrid_4d_toy}
+\end{figure}
+
+\paragraph{Issues}\ \\
+
+While the algorithm developed in this section shows some great potential for making BQ a viable solution for performing Bayesian inference on a wide variety of different problems there are some known caveats that need to be addressed before this algorithm can be considered robust. These issues have to do with the posterior shape in the nuisance dimensions. For this imagine being close to the priors in the physical dimension while having a degeneracy between physical parameters and nuisance parameters.
+ 
+In this scenario the posterior shape in the nuisance dimensions is pushed towards the edge of the prior box and only a tiny proportion of the prior volume in the nuisance dimensions is occupied by a non-vanishing posterior distribution. This effect is illustrated in Fig.\,\ref{hybrid_4d_poly} where one can see that the posterior contour shifts in the nuisance dimensions for different sampling locations in the physical dimensions. The effect in this example is very mild so \texttt{PolyChord} can easily deal with this, however with a higher number of nuisance dimensions and more pronounced degeneracies between the physical and nuisance dimensions this becomes problematic. 
+
+The problem is even worse when the sample in the physical dimensions is located at a point where the posterior in the nuisance dimensions vanishes everywhere. This is equivalent to having a $-\infty$ value in the log-posterior in the physical dimensions. Since \texttt{PolyChord} is not designed to deal with such cases it gets stuck in an infinite loop.
+
+Solving these problems should however be a manageable task and with this our algorithm would be a robust and very efficient alternative to MCMC for a wide range of problems.
+
+\begin{figure}
+\begin{center}
+\includegraphics{hybrid_4d_poly.pdf}
+\end{center}
+\caption{Illustration of how the posterior shape shifts in the nuisance dimensions for different sampling locations in the physical dimensions. In high dimensions and with large degeneracies between physical and nuisance parameters this can lead to the mode moving such that it only occupies a small strip along the edge of the prior. This makes it very hard for \texttt{PolyChord} to navigate such a space.}\label{hybrid_4d_poly}
+\end{figure}
+
+\cleardoublepage
+
+\section{Conclusion \& Outlook}
+In this thesis we developed a set of algorithms which can be used for performing Bayesian inference by interpolating the posterior distribution with a GP regressor where we improved on previous work in three ways.
+
+First we derived an acquisition function for efficient sampling of the log-posterior distribution for Bayesian quadrature from a few basic assumptions. This was successfully used in our algorithm and proved to provide good performance.
+
+Second we introduces an improved version of the Kriging believer algorithm for batch acquisition which saves computation time by using the blockwise matrix inversion formula to update the inverse gram matrix instead of fully recomputing it. We showed that this reduces the computational overhead per acquired point considerably and that it is numerically robust. As such it can be used to parallelize the evaluation of the posterior distribution.
+
+Lastly we proposed a novel algorithm which takes advantage of the inherent speed hierarchies of many likelihoods in physics by marginalizing over the posterior's nuisance parameters with nested sampling while using a GP to interpolate the remaining dimensions. We show that this can extend the number of dimensions in which the GP can efficiently operate by a considerable amount and that it can speed up overall computation time.
+
+We developed an algorithm that incorporates the first two of these improvements and tested its performance when performing Bayesian inference on unimodal gaussian likelihood toy models as well as two real likelihoods from cosmology. With the six dimensional Planck Lite likelihood we report a decrease of $\mathcal{O}(10^{2})$ in wall clock time for convergence which effectively reduces the computation time required for characterizing the posterior from $\mathcal{O}(\mathrm{hours})$ required on a cluster to $\mathcal{O}(\mathrm{minutes})$ on a laptop. We also tested our model on some highly non-gaussian posterior shapes which it could recover correctly.
+
+Next we tested an algorithm which incorporates all three of these novel ideas on gaussian toy likelihoods as a proof of concept. We were able to successfully apply this algorithm to gaussian toy likelihoods and were also able to assess for which posterior distributions it is superior to MCMC in terms of convergence speed. Nevertheless there are some issues with this approach that still need to be addressed in the future.
+
+Despite these minor issues our proof of concept shows that this algorithm can outperform MCMC by several orders of magnitude in terms of wall clock time for a wide range of likelihoods which significantly reduces the time and computational power required to infer parameters from these models. This will provide exciting opportunities for testing theoretical models against data which have previously been out of reach due to the computation time which would be required to perform Bayesian inference of these models with classical approaches like MCMC. 
+
+\cleardoublepage
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - APPENDICES
+%---------------------------------------------------------------
+
+\begin{appendices}
+\huge{\textbf{Appendix}}\normalsize
+\section*{The Cholesky decomposition}\label{cholesky_chap}
+Let $A\in M$ be matrix. If and only if $A$ is positive semidefinite it can be decomposed into a product of a lower triangular matrix $L\in M$ with non-negative diagonal elements and its conjugate transpose:
+\begin{align}\label{cholesky_decomp}
+A = L L^*
+\end{align}
+If $A$ is positive definite $L$ is unique \cite{Horn2013}.\\
+
+The Cholesky decomposition can be used to solve linear equations of the form
+\begin{align}\label{cholesky_solve}
+A\bs{x} = \bs{b}
+\end{align}
+To solve for $\bs{x}$ one first solves the system $L\bs{z}=\bs{b}$ by forward substitution and then $L^T\bs{x}=\bs{z}$ by backward substitution \cite{GPML}. This can be written as $x=L^T\backslash(L\backslash\bs{b})$\\
+
+In algorithm\ref{gp_training_algo} $(K+\sigma_n^2 I)^{-1}\bs{y}$ is needed to solve eq.\,\eqref{conditional_noise_full} and \eqref{marginal_gp_likelihood} which can be done by replacing $A=(K+\sigma_n^2 I)$, $\bs{x}=(K+\sigma_n^2 I)^{-1}\bs{y}$ and $\bs{b}=y$:
+\begin{align}\label{cholesky_inverse}
+(K+\sigma_n^2 I)^{-1}\bs{y} = L^T\backslash (L\backslash \bs{y})
+\end{align}
+
+The computational complexity for the Cholesky decomposition is $\mathcal{O}(n^3)$ and for foreward and backwards substitution $\mathcal{O}(n^2)$. Furthermore this algorithm is numerically very robust \cite{GPML}.\\
+
+For the second expression appearing in eq.\,\eqref{conditional_noise_full} one needs to compute
+\begin{align}\label{cholesky_cov}
+\bs{v} := L^{-1} K(\bs{x},\bs{x}_*) = L\backslash K(\bs{x},\bs{x}_*)
+\end{align}
+since
+\begin{align}\label{cholesky_cov_full}
+\bs{v}^T\bs{v} &= K(\bs{x}_*,\bs{x}) (L^{-1})^T (L^{-1}) K(\bs{x},\bs{x}_*)\\
+&= K(\bs{x}_*,\bs{x}) (K+\sigma_n^2 I)^{-1} K(\bs{x},\bs{x}_*)
+\end{align}
+
+Lastly the determinant of $A$ can be computed very easily if $L$ is known:
+\begin{align}\label{cholesky_det}
+|A| = \prod_{i=1}^n L_{ii}^2
+\end{align}
+
+\section*{Derivation of the marginalized GP}\label{margin_gp_deriv}
+The goal is to derive the marginal distribution for a GP:
+\begin{align*}
+\log p(\bs{y}|X) = -\frac{1}{2}\bs{y}^T(K+\sigma_n^2 I)^{-1}\bs{y} - \frac{1}{2} \log|K+\sigma_n^2 I| - \frac{n}{2}\log 2\pi
+\end{align*}
+We start by taking the general expression for the marginal distribution
+\begin{align*}
+p(\bs{y}|\bs{x})=\int p(\bs{y}|\bs{f},\bs{x})p(\bs{f}|\bs{x})\d f
+\end{align*}
+and inserting the expressions for the prior and posterior which are
+\begin{align*}
+p(\bs{f}|\bs{x}) = \mathcal{N}(\bs{0}, K) = (2\pi)^{-n/2} |K|^{-1/2} \exp\left(-\bs{f}^T K^{-1} \bs{f}\right)
+\end{align*}
+and
+\begin{align*}
+p(\bs{y}|\bs{f},\bs{x}) = \mathcal{N}(\bs{f}, \sigma_n^2 I) = (2\pi)^{-n/2} |\sigma_n^2 I|^{-1/2} \exp\left(-(\bs{y}-\bs{f})^T (\sigma_n^2 I)^{-1} (\bs{y}-\bs{f})\right)\ .
+\end{align*}
+Their product can then be calculated using \cite{GPML}
+\begin{align*}
+\mathcal{N}(\bs{x}|\bs{a}, A)\mathcal{N}(\bs{x}|\bs{b}, B) = Z^{-1} \mathcal{N}(\bs{x}|\bs{c}, C)\ .
+\end{align*}
+Since the second term integrates out to one we only need to know $Z^{-1}$ which is
+\begin{align*}
+Z^{-1} = (2\pi)^{d/2} |A+B|^{-1} \exp\left((\bs{a}-\bs{b})^T(A+B)^{-1}(\bs{a}-\bs{b})\right) \ .
+\end{align*}
+and with $\bs{a}=\bs{0},\ A=K,\ \bs{b}=-\bs{y},\ B=\sigma_n^2 I$ we get
+\begin{align*}
+p(\bs{y}|X) = (2\pi)^{d/2} |K+\sigma_n^2 I|^{-1} \exp\left(\bs{y}^T(K+\sigma_n^2 I)^{-1}\bs{y}\right)\ .
+\end{align*}
+By taking the logarithm we arrive at the desired result.
+
+\section*{Proof that the Kriging believer algorithm conserves $\mu_{\mathrm{GP}}$}\label{proof_kriging_mean}
+The idea is to prove that the expectation value of the GP does not change if we lie to the model by pretending that $y_0(x_1)=\mu_0(x_1)$.\\
+First start by predicting $\mu_0(x_1)$ for given training points $x_0$ and inference points $x_1$. The formula for $\mu_0(x_1)$ (the prediction) is given by:
+\begin{align*}
+\mu_0(x_1) = K(x_1, x_0) K(x_0, x_0)^{-1} y_0
+\end{align*}
+where $K(x, x')$ is the covariance matrix resulting from the covariance function $k(x, x')$. The next step is to assume $y_0(x_1)=\mu_0(x_1)$ and then make a new prediction at a new place $x_2$. The mean at this point will be given by:
+\begin{align*}
+\mu_1(x_2) &= (K_{20}, K_{21})\twovec{K_{00} & K_{01}}{K_{10} & K_{11}}^{1}\twovec{y_0}{\mu_0(x_1)} \\
+&= (K_{20}, K_{21})\twovec{K_{00} & K_{01}}{K_{10} & K_{11}}^{-1}\twovec{1}{K_{10}K_{00}^{-1}}y_0
+\end{align*}
+where $K(x_i,x_j):= K_{ij}$. Now we can use the blockwise inversion lemma to get:
+\begin{align*}
+\mu_1(x_2) &= (K_{20}, K_{21})\twovec{K_{00}^{-1} + K_{00}^{-1} K_{01} S K_{10}K_{00}^{-1} & -K_{00}^{-1} K_{01} S}{S K_{10}K_{00}^{-1} & S}\twovec{1}{K_{10}K_{00}^{-1}}y_0 \\
+&= (K_{20}, K_{21}) {K_{00}^{-1} + K_{00}^{-1} K_{01} S K_{10}K_{00}^{-1} - K_{00}^{-1} K_{01} S K_{10}K_{00}^{-1}}{K_{00}^{-1} K_{01} S K_{10}K_{00}^{-1} - K_{00}^{-1} K_{01} S K_{10}K_{00}^{-1}} y_0\\
+%= (K_{20}, K_{21})\twovec{K_{00}^{-1}}{0} y\\
+&= K_{20}K_{00}^{-1}y_0 \\
+&= \mu_0(x_2)
+\end{align*}
+where $S=(K_{11}-K_{01}K_{00}^{-1}K_{10})^{-1}$. This proves that indeed if we lie to the model by giving it its own mean we do not need change the hyperparameters of the GP. As such we can use the matrix inversion lemma to include this point into the GP without having to do the expensive recalculation of the full inverse.
+
+
+\end{appendices}
+\cleardoublepage
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \printbibliography[heading=bibintoc]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \cleardoublepage
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             %----------------------------------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+%  DANKSAGUNG
+%----------------------------------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+\section*{Acknowledgements}
+First of all I would like to thank my main supervisor Jesús Torrado for countless hours of answering questions, discussing, correcting and helping me at any day and any time. It is hard to overstate the amount of dedication he has put towards this project and I am very grateful for this. I would also like to thank my official supervisor Julien Lesgourgues as well as my two other inofficial supervisors Nils Schöneberg and Christian Fidler for being very patient, helpful and interested. We had many insightful and enlightening discussions and this was a great year for me, both academically and personally.\\
+I would also like to thank Felix Kahlhoefer for taking on the task of being my second corrector.\\
+Despite the special circumstances which have unfortunately severely limited the time I could physically spend at the institute I want to thank the whole TTK for becoming friends to me. It was a great time which I will look back to in joy and I will sincerely miss you all. It has has been a great pleasure to share my office with my fellow master students and I would like to thank them for a lot of good conversations, laughs and advices. Last but not least I would like to thank my partner Anne who has helped me throughout the last, very stressful weeks of this year with a lot of emotional support.
+
+\cleardoublepage
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+
+%----------------------------------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+%  EIDESSTATTLICHE VERSICHERUNG
+%----------------------------------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+%\begin{center}
+%\includegraphics[width=1.0\textwidth]{eidesstattliche_versicherung.pdf}
+%\end{center}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+\includepdf[pages=-,scale=0.86]{eidesstattliche_versicherung.pdf}
+
+%\thispagestyle{empty}
+
+\end{document}  
+
+%\input{sections/erklaerung}
+%\includepdf[pages={1}]{Versicherung2.pdf}
+
+
+ 
+ 
+ 

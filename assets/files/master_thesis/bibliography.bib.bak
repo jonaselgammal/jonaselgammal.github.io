@@ -1,0 +1,808 @@
+@book{GPML,
+  author={Rasmussen, Carl Edward and Williams, Christopher K. I.},
+  title={Gaussian processes for machine learning},
+  publisher={MIT Press},
+  address={Cambridge, Mass. [u.a.]},
+  year={2006},
+  pages={XVIII, 248 S.},
+  language={eng},
+  isbn={0-262-18253-X and 978-0-262-18253-9},
+  series={Adaptive computation and machine learning},
+  keywords={Maschinelles Lernen ; Gauß-Prozess / Maschinelles Lernen / Mathematisches Modell},
+  library={MA [Signatur: Rasmu]},
+}
+
+@BOOK{Lamperti2012,
+	AUTHOR = {Lamperti, J.},
+	YEAR = {2012},
+	TITLE = {Stochastic Processes - A Survey of the Mathematical Theory},
+	EDITION = {},
+	ISBN = {978-1-468-49358-0},
+	PUBLISHER = {Springer Science \& Business Media},
+	ADDRESS = {Berlin Heidelberg},
+}
+
+@BOOK{Stoch_diff_eq,
+	AUTHOR = {Øksendal, Bernt},
+	YEAR = {2010},
+	TITLE = {Stochastic Differential Equations - An Introduction with Applications},
+	EDITION = {},
+	ISBN = {978-3-642-14394-6},
+	PUBLISHER = {Springer Science \& Business Media},
+	ADDRESS = {Berlin Heidelberg},
+}
+
+@BOOK{Scholkopf2018,
+	AUTHOR = {Scholkopf, Bernhard AND Smola, Alexander J.},
+	YEAR = {2018},
+	TITLE = {Learning with Kernels - Support Vector Machines, Regularization, Optimization, and Beyond},
+	EDITION = {},
+	ISBN = {978-0-262-53657-8},
+	PUBLISHER = {MIT Press},
+	ADDRESS = {Cambridge},
+}
+
+@BOOK{Murphy2012,
+	AUTHOR = {Murphy, Kevin P.},
+	YEAR = {2012},
+	TITLE = {Machine Learning - A Probabilistic Perspective},
+	EDITION = {},
+	ISBN = {978-0-262-01802-9},
+	PUBLISHER = {MIT Press},
+	ADDRESS = {Cambridge},
+}
+% Simulated annealing: page 869
+
+@Incollection{MacKay98:gp,
+  author = 	 "D. J. C.  MacKay",
+  title = 	 "Introduction to {G}aussian Processes",
+  publisher = "Kluwer Academic Press",
+ booktitle={Neural Networks and Machine Learning},
+ series={NATO ASI Series},
+  year = 	 "1998",
+  editor = 	 "C. M. Bishop",
+  pages = 	 "133-166"
+}
+
+@phdthesis{Duvenaud2014,
+	AUTHOR = {Duvenaud, David},
+	YEAR = {2014},
+	TITLE = {Automatic Model Construction with Gaussian Processes},
+	EDITION = {},
+	ISBN = {},
+	PUBLISHER = {University of Cambridge},
+	ADDRESS = {Cambridge},
+}
+
+@misc{wilson2013gaussian,
+      title={Gaussian Process Kernels for Pattern Discovery and Extrapolation}, 
+      author={Andrew Gordon Wilson and Ryan Prescott Adams},
+      year={2013},
+      eprint={1302.4245},
+      archivePrefix={arXiv},
+      primaryClass={stat.ML}
+}
+
+@Inbook{automatic_statistician,
+author="Steinruecken, Christian
+and Smith, Emma
+and Janz, David
+and Lloyd, James
+and Ghahramani, Zoubin",
+editor="Hutter, Frank
+and Kotthoff, Lars
+and Vanschoren, Joaquin",
+title="The Automatic Statistician",
+bookTitle="Automated Machine Learning: Methods, Systems, Challenges",
+year="2019",
+publisher="Springer International Publishing",
+address="Cham",
+pages="161--173",
+isbn="978-3-030-05318-5",
+doi="10.1007/978-3-030-05318-5_9"
+}
+
+@inbook{Cressie2015,
+publisher = {John Wiley \& Sons, Ltd},
+author = {Noel A. C. Cressie},
+isbn = {978-1-119-11515-1},
+title = {Geostatistics},
+booktitle = {Statistics for Spatial Data},
+chapter = {2},
+pages = {27-104},
+doi = {10.1002/9781119115151.ch2},
+year = {2015}
+}% theorem on page 84
+
+@BOOK{Horn2013,
+	AUTHOR = {Horn, Roger A. AND Johnson, Charles R.},
+	YEAR = {2013},
+	TITLE = {Matrix Analysis},
+	EDITION = {2},
+	ISBN = {978-1-139-78888-5},
+	PUBLISHER = {Cambridge University Press},
+	ADDRESS = {Cambridge}
+} % Cholesky decomp. on page 441
+
+@BOOK{Cowan1998,
+	AUTHOR = {Cowan, Glen},
+	YEAR = {1998},
+	TITLE = {Statistical Data Analysis},
+	EDITION = {},
+	ISBN = {978-0-198-50155-8},
+	PUBLISHER = {Clarendon Press},
+	ADDRESS = {Oxford}
+}% bayes theorem on p 3
+
+@article{ex_l_1,
+   title={Cosmology in the era of Euclid and the Square Kilometre Array},
+   volume={2019},
+   ISSN={1475-7516},
+   DOI={10.1088/1475-7516/2019/02/047},
+   number={02},
+   journal={Journal of Cosmology and Astroparticle Physics},
+   publisher={IOP Publishing},
+   author={Sprenger, Tim and Archidiacono, Maria and Brinckmann, Thejs and Clesse, Sébastien and Lesgourgues, Julien},
+   year={2019},
+   month={Feb},
+   pages={047–047}
+}% Paper for euclid forecast with likelihood calc
+
+@article{ex_l_2,
+author = {Prinz,Jan-Hendrik  and Wu,Hao  and Sarich,Marco  and Keller,Bettina  and Senne,Martin  and Held,Martin  and Chodera,John D.  and Schütte,Christof  and Noé,Frank },
+title = {Markov models of molecular kinetics: Generation and validation},
+journal = {The Journal of Chemical Physics},
+volume = {134},
+number = {17},
+pages = {174105},
+year = {2011},
+doi = {10.1063/1.3565032},
+    
+}
+
+}
+
+@article{planck_2018_results,
+   title={Planck 2018 results},
+   volume={641},
+   ISSN={1432-0746},
+   DOI={10.1051/0004-6361/201936386},
+   journal={Astronomy \& Astrophysics},
+   publisher={EDP Scifor the Planck 2018 Likelihood \cite{}ences},
+   author={Aghanim, N. and Akrami, Y. and Ashdown, M. and Aumont, J. and Baccigalupi, C. and Ballardini, M. and Banday, A. J. and Barreiro, R. B. and Bartolo, N. and et al.},
+   year={2020},
+   month={Sep},
+   pages={A5}
+}
+
+@BOOK{Gelman2013,
+	AUTHOR = {Gelman, Andrew AND Carlin, John B. AND Stern, Hal S. AND Dunson, David B. AND Vehtari, Aki AND Rubin, Donald B.},
+	YEAR = {2013},
+	TITLE = {Bayesian Data Analysis},
+	EDITION = {3},
+	ISBN = {978-1-439-84095-5},
+	PUBLISHER = {CRC Press},
+	ADDRESS = {Boca Raton, Fla},
+}
+
+@INBOOK{neal_2011,
+	AUTHOR = {Neal, Radford},
+	TITLE = {MCMC Using Hamiltonian Dynamics},
+	CHAPTER = {5},
+	PAGES = {113-162},
+	YEAR = {2011},
+	BOOKTITLE = {Handbook of Markov Chain Monte Carlo},
+	EDITOR = {Brooks, Steve AND Gelman, Andrew AND Jones, Galin AND Meng, Xiao-Li},
+	ISBN = {978-1-420-07942-5},
+	PUBLISHER = {CRC Press},
+	DOI = {10.1201/b10905},
+}
+
+@article{skilling_nested_sampling,
+author = {Skilling,John },
+title = {Nested Sampling},
+journal = {AIP Conference Proceedings},
+volume = {735},
+number = {1},
+pages = {395-405},
+year = {2004},
+doi = {10.1063/1.1835238}
+}
+
+@article{paper_1,
+    author = {Pellejero-Ibañez, Marcos and Angulo, Raul E and Aricó, Giovanni and Zennaro, Matteo and Contreras, Sergio and Stücker, Jens},
+    title = "{Cosmological parameter estimation via iterative emulation of likelihoods}",
+    journal = {Monthly Notices of the Royal Astronomical Society},
+    volume = {499},
+    number = {4},
+    pages = {5257-5268},
+    year = {2020},
+    month = {10},
+    issn = {0035-8711},
+    doi = {10.1093/mnras/staa3075}
+}
+
+@techreport{minka2000,
+author = {Minka, Tom},
+title = {Deriving Quadrature Rules from Gaussian Processes},
+year = {2000},
+month = {June},
+institution = {Microsoft Research},
+address = {Cambridge, UK},
+url = {https://www.microsoft.com/en-us/rminka2000esearch/publication/deriving-quadrature-rules-gaussian-processes/},
+}
+
+@inproceedings{Henning_inference,
+  title = {Sampling for Inference in Probabilistic Models with Fast Bayesian Quadrature},
+  author = {Gunter, T. and Osborne, M. and Garnett, R. and Hennig, P. and Roberts, S.},
+  booktitle = {Advances in Neural Information Processing Systems 27},
+  pages = {2789--2797},
+  editors = {Z. Ghahramani, M. Welling, C. Cortes, N.D. Lawrence and K.Q. Weinberger},
+  publisher = {Curran Associates, Inc.},
+  year = {2014},
+  url = {http://papers.nips.cc/paper/5483-sampling-for-inference-in-probabilistic-models-with-fast-bayesian-quadrature.pdf}
+}
+
+@inproceedings{bayesian_mc,
+author = {Rasmussen, Carl Edward and Ghahramani, Zoubin},
+title = {Bayesian Monte Carlo},
+year = {2002},
+publisher = {MIT Press},
+address = {Cambridge, MA, USA},
+abstract = {We investigate Bayesian alternatives to classical Monte Carlo methods for evaluating integrals. Bayesian Monte Carlo (BMC) allows the incorporation of prior knowledge, such as smoothness of the integrand, into the estimation. In a simple problem we show that this outperforms any classical importance sampling method. We also attempt more challenging multidimensional integrals involved in computing marginal likelihoods of statistical models (a.k.a. partition functions and model evidences). We find that Bayesian Monte Carlo outperformed Annealed Importance Sampling, although for very high dimensional problems or problems with massive multimodality BMC may be less adequate. One advantage of the Bayesian approach to Monte Carlo is that samples can be drawn from any distribution. This allows for the possibility of active design of sample points so as to maximise information gain.},
+booktitle = {Proceedings of the 15th International Conference on Neural Information Processing Systems},
+pages = {505–512},
+numpages = {8},
+series = {NIPS'02}
+}
+
+@article{ohagan_mc_is_fundamentally_unsound,
+author = {O'Hagan, A.},
+title = {Monte Carlo is Fundamentally Unsound},
+journal = {Journal of the Royal Statistical Society: Series D (The Statistician)},
+volume = {36},
+number = {2-3},
+pages = {247-249},
+doi = {https://doi.org/10.2307/2348519},
+year = {1987}
+}
+
+@article{bayes_hermite_quadrature,
+title = "Bayes–Hermite quadrature",
+journal = "Journal of Statistical Planning and Inference",
+volume = "29",
+number = "3",
+pages = "245 - 260",
+year = "1991",
+issn = "0378-3758",
+doi = "https://doi.org/10.1016/0378-3758(91)90002-V",
+url = "http://www.sciencedirect.com/science/article/pii/037837589190002V",
+author = "A. O'Hagan",
+keywords = "Bayesian quadrature, numerical integration, Gaussian process, product rule, Gaussian quadrature"
+}
+  
+@misc{tran_variational_gp,
+      title={The Variational Gaussian Process}, 
+      author={Dustin Tran and Rajesh Ranganath and David M. Blei},
+      year={2016},
+      eprint={1511.06499},
+      archivePrefix={arXiv},
+      primaryClass={stat.ML}
+}
+
+ @InProceedings{titsias_variational_gp, 
+title = {Variational Learning of Inducing Variables in Sparse Gaussian Processes}, 
+author = {Michalis Titsias}, 
+booktitle = {Proceedings of the Twelth International Conference on Artificial Intelligence and Statistics}, 
+pages = {567--574}, 
+year = {2009}, 
+editor = {David van Dyk and Max Welling}, 
+volume = {5}, 
+series = {Proceedings of Machine Learning Research}, 
+address = {Hilton Clearwater Beach Resort, Clearwater Beach, Florida USA}, 
+month = {16--18 Apr}, 
+publisher = {PMLR}, 
+url = {http://proceedings.mlr.press/v5/titsias09a.html} 
+} 
+
+@thesis{sparse_gp,
+           month = {March},
+           title = {Gaussian processes:iterative sparse approximations},
+          school = {Aston University},
+          author = {Lehel Csat{\'o}},
+            year = {2002},
+             url = {http://publications.aston.ac.uk/id/eprint/1327/}
+}
+
+% Paper points out that the matrix inv lemma can be used!
+@inproceedings{smola_sparse_greedy_gp_regression,
+  title={Sparse greedy Gaussian process regression},
+  author={Smola, Alex J and Bartlett, Peter L},
+  booktitle={Advances in neural information processing systems 14},
+  isbn={978-0-262-04208-6},
+  pages={619--625},
+  year={2001}
+}
+
+% Second paper which points out that the matrix inversion lemma can be used for data addition
+@TECHREPORT{efficient_implementation_of_gps,
+    author = {Mark Gibbs and David J.C. MacKay},
+    title = {Efficient Implementation of Gaussian Processes},
+    institution = {Cavendish Laboratory, Cambridge UK},
+    year = {1997}
+}
+
+@inproceedings{ALoMEuBQ,
+ author = {Osborne, Michael and Garnett, Roman and Ghahramani, Zoubin and Duvenaud, David K and Roberts, Stephen J and Rasmussen, Carl},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {F. Pereira and C. J. C. Burges and L. Bottou and K. Q. Weinberger},
+ pages = {46--54},
+ publisher = {Curran Associates, Inc.},
+ title = {Active Learning of Model Evidence Using Bayesian Quadrature},
+ url = {https://proceedings.neurips.cc/paper/2012/file/6364d3f0f495b6ab9dcf8d3b5c6e0b01-Paper.pdf},
+ volume = {25},
+ year = {2012}
+}
+
+@article{parallel_1,
+  author  = {Thomas Desautels and Andreas Krause and Joel W. Burdick},
+  title   = {Parallelizing Exploration-Exploitation Tradeoffs in Gaussian Process Bandit Optimization},
+  journal = {Journal of Machine Learning Research},
+  year    = {2014},
+  volume  = {15},
+  number  = {119},
+  pages   = {4053-4103},
+  url     = {http://jmlr.org/papers/v15/desautels14a.html}
+}
+
+@InProceedings{parallel_2,
+author={Chevalier, Cl{\'e}ment and Ginsbourger, David},
+editor={Nicosia, Giuseppe and Pardalos, Panos},
+title={Fast Computation of the Multi-Points Expected Improvement with Applications in Batch Selection},
+booktitle={Learning and Intelligent Optimization},
+year={2013},
+publisher={Springer Berlin Heidelberg},
+address={Berlin, Heidelberg},
+pages={59--69},
+isbn={978-3-642-44973-4}
+}
+
+@techreport{parallel_kriging_believer_1,
+  TITLE = {{A Multi-points Criterion for Deterministic Parallel Global Optimization based on Gaussian Processes}},
+  AUTHOR = {Ginsbourger, David and Le Riche, Rodolphe and Carraro, Laurent},
+  URL = {https://hal.archives-ouvertes.fr/hal-00260579},
+  YEAR = {2008},
+  MONTH = Mar,
+  HAL_ID = {hal-00260579},
+  HAL_VERSION = {v1},
+}
+
+@conference{parallel_3,
+  title = {Batch Bayesian Optimization via Local Penalization},
+  author = {González, J. and Dai, Z. and Hennig, P. and Lawrence, N.},
+  booktitle = {Proceedings of the 19th International Conference on Artificial Intelligence and Statistics (AISTATS)},
+  volume = {51},
+  pages = {648--657},
+  series = {JMLR Workshop and Conference Proceedings},
+  editors = {Gretton, A. and Robert, C. C.},
+  month = may,
+  year = {2016},
+  url = {http://jmlr.org/proceedings/papers/v51/gonzalez16a.pdf},
+  month_numeric = {5}
+}
+
+@inbook{parallel_kriging_believer_2,
+author = {Ginsbourger, David and Le Riche, Rodolphe and Carraro, Laurent},
+year = {2010},
+month = {01},
+pages = {131-162},
+title = {Kriging Is Well-Suited to Parallelize Optimization},
+volume = {2},
+journal = {Computational Intelligence in Expensive Optimization Problems},
+doi = {10.1007/978-3-642-10701-6_6}
+}
+
+@Article{update_equation,
+author={Barnes, R. J.
+and Watson, A. G.},
+title={Efficient updating of kriging estimates and variances},
+journal={Mathematical Geology},
+year={1992},
+month={Jan},
+day={01},
+volume={24},
+number={1},
+pages={129-133},
+issn={1573-8868},
+doi={10.1007/BF00890091}
+}
+
+@article{polychord_1,
+   title={polychord: nested sampling for cosmology},
+   volume={450},
+   ISSN={1745-3925},
+   DOI={10.1093/mnrasl/slv047},
+   number={1},
+   journal={Monthly Notices of the Royal Astronomical Society: Letters},
+   publisher={Oxford University Press (OUP)},
+   author={Handley, W. J. and Hobson, M. P. and Lasenby, A. N.},
+   year={2015},
+   month={Apr},
+   pages={L61–L65}
+}
+
+@article{polychord_2,
+   title={polychord: next-generation nested sampling},
+   volume={453},
+   ISSN={1365-2966},
+   DOI={10.1093/mnras/stv1911},
+   number={4},
+   journal={Monthly Notices of the Royal Astronomical Society},
+   publisher={Oxford University Press (OUP)},
+   author={Handley, W. J. and Hobson, M. P. and Lasenby, A. N.},
+   year={2015},
+   month={Sep},
+   pages={4385–4399}
+}
+
+@article{multinest_1,
+   title={Multimodal nested sampling: an efficient and robust alternative to Markov Chain Monte Carlo methods for astronomical data analyses},
+   volume={384},
+   ISSN={1365-2966},
+   DOI={10.1111/j.1365-2966.2007.12353.x},
+   number={2},
+   journal={Monthly Notices of the Royal Astronomical Society},
+   publisher={Oxford University Press (OUP)},
+   author={Feroz, F. and Hobson, M. P.},
+   year={2008},
+   month={Jan},
+   pages={449–463}
+}
+
+@article{multinest_2,
+   title={MultiNest: an efficient and robust Bayesian inference tool for cosmology and particle physics},
+   volume={398},
+   ISSN={1365-2966},
+   DOI={10.1111/j.1365-2966.2009.14548.x},
+   number={4},
+   journal={Monthly Notices of the Royal Astronomical Society},
+   publisher={Oxford University Press (OUP)},
+   author={Feroz, F. and Hobson, M. P. and Bridges, M.},
+   year={2009},
+   month={Oct},
+   pages={1601–1614}
+}
+
+@article{multinest_3,
+   title={Importance Nested Sampling and the MultiNest Algorithm},
+   volume={2},
+   ISSN={2565-6120},
+   DOI={10.21105/astro.1306.2144},
+   number={1},
+   journal={The Open Journal of Astrophysics},
+   publisher={The Open Journal},
+   author={Feroz, Farhan and Hobson, Michael P. and Cameron, Ewan and Pettitt, Anthony N.},
+   year={2019},
+   month={Nov}
+}
+
+@article{Kessy_2018,
+   title={Optimal Whitening and Decorrelation},
+   volume={72},
+   ISSN={1537-2731},
+   DOI={10.1080/00031305.2016.1277159},
+   number={4},
+   journal={The American Statistician},
+   publisher={Informa UK Limited},
+   author={Kessy, Agnan and Lewin, Alex and Strimmer, Korbinian},
+   year={2018},
+   month={Jan},
+   pages={309–314}
+}
+
+@InProceedings{safeopt,
+  title = 	 {Stagewise Safe {B}ayesian Optimization with {G}aussian Processes},
+  author =       {Sui, Yanan and Vincent Zhuang and Burdick, Joel and Yue, Yisong},
+  booktitle = 	 {Proceedings of the 35th International Conference on Machine Learning},
+  pages = 	 {4781--4789},
+  year = 	 {2018},
+  editor = 	 {Jennifer Dy and Andreas Krause},
+  volume = 	 {80},
+  series = 	 {Proceedings of Machine Learning Research},
+  address = 	 {Stockholmsmässan, Stockholm Sweden},
+  month = 	 {10--15 Jul},
+  publisher =    {PMLR},
+  url = 	 {http://proceedings.mlr.press/v80/sui18a.html}
+}
+
+@article{safeopt_2,
+  author    = {Felix Berkenkamp and
+               Andreas Krause and
+               Angela P. Schoellig},
+  title     = {Bayesian Optimization with Safety Constraints: Safe and Automatic
+               Parameter Tuning in Robotics},
+  journal   = {CoRR},
+  volume    = {abs/1602.04450},
+  year      = {2016},
+  archivePrefix = {arXiv},
+  eprint    = {1602.04450}
+}
+
+@article{mcmc_sampler_1,
+      author         = "Lewis, Antony",
+      title          = "{Efficient sampling of fast and slow cosmological
+                        parameters}",
+      journal        = "Phys. Rev.",
+      volume         = "D87",
+      year           = "2013",
+      number         = "10",
+      pages          = "103529",
+      doi            = "10.1103/PhysRevD.87.103529",
+      eprint         = "1304.4473",
+      archivePrefix  = "arXiv",
+      primaryClass   = "astro-ph.CO",
+      SLACcitation   = "%%CITATION = ARXIV:1304.4473;%%"
+}
+
+@article{mcmc_sampler_2,
+      author         = "Lewis, Antony and Bridle, Sarah",
+      title          = "{Cosmological parameters from CMB and other data: A Monte
+                        Carlo approach}",
+      journal        = "Phys. Rev.",
+      volume         = "D66",
+      year           = "2002",
+      pages          = "103511",
+      doi            = "10.1103/PhysRevD.66.103511",
+      eprint         = "astro-ph/0205436",
+      archivePrefix  = "arXiv",
+      primaryClass   = "astro-ph",
+      SLACcitation   = "%%CITATION = ASTRO-PH/0205436;%%"
+}
+
+@article{mcmc_sampler_3,
+      author    = {{Neal}, R.~M.},
+      title     = "{Taking Bigger Metropolis Steps by Dragging Fast Variables}",
+      journal   = {ArXiv Mathematics e-prints},
+      eprint    = {math/0502099},
+      keywords  = {Mathematics - Statistics, Mathematics - Probability, 65C05, 65C60},
+      year      = 2005,
+      month     = feb
+}
+
+@Article{Jones2001,
+author={Jones, Donald R.},
+title={A Taxonomy of Global Optimization Methods Based on Response Surfaces},
+journal={Journal of Global Optimization},
+year={2001},
+month={Dec},
+day={01},
+volume={21},
+number={4},
+pages={345-383},
+issn={1573-2916},
+doi={10.1023/A:1012771025575}
+}
+
+@article{bbn_paper_nils,
+   title={The BAO+BBN take on the Hubble tension},
+   volume={2019},
+   ISSN={1475-7516},
+   DOI={10.1088/1475-7516/2019/10/029},
+   number={10},
+   journal={Journal of Cosmology and Astroparticle Physics},
+   publisher={IOP Publishing},
+   author={Schöneberg, Nils and Lesgourgues, Julien and Hooper, Deanna C.},
+   year={2019},
+   month={Oct},
+   pages={029–029}
+}
+
+@article{planck_lite_1,
+      author         = "Aghanim, N. and others",
+      title          = "{Planck 2018 results. V. CMB power spectra and
+                        likelihoods}",
+      collaboration  = "Planck",
+      year           = "2019",
+      eprint         = "1907.12875",
+      archivePrefix  = "arXiv",
+      primaryClass   = "astro-ph.CO",
+      SLACcitation   = "%%CITATION = ARXIV:1907.12875;%%"
+}
+
+@article{planck_lite_4,
+      author         = "Aghanim, N. and others",
+      title          = "{Planck 2018 results. VIII. Gravitational lensing}",
+      collaboration  = "Planck",
+      year           = "2018",
+      eprint         = "1807.06210",
+      archivePrefix  = "arXiv",
+      primaryClass   = "astro-ph.CO",
+      SLACcitation   = "%%CITATION = ARXIV:1807.06210;%%"
+}
+
+@article{class_1,
+      author         = "Blas, Diego and Lesgourgues, Julien and Tram, Thomas",
+      title          = "{The Cosmic Linear Anisotropy Solving System (CLASS) II:
+                        Approximation schemes}",
+      journal        = "JCAP",
+      volume         = "1107",
+      year           = "2011",
+      pages          = "034",
+      doi            = "10.1088/1475-7516/2011/07/034",
+      eprint         = "1104.2933",
+      archivePrefix  = "arXiv",
+      primaryClass   = "astro-ph.CO",
+      reportNumber   = "CERN-PH-TH-2011-082, LAPTH-010-11",
+      SLACcitation   = "%%CITATION = ARXIV:1104.2933;%%"
+}
+
+@article{planck_off_chains,
+	author = {{Planck Collaboration} and {Aghanim, N.} and {Akrami, Y.} and {Ashdown, M.} and {Aumont, J.} and {Baccigalupi, C.} and {Ballardini, M.} and {Banday, A. J.} and {Barreiro, R. B.} and {Bartolo, N.} and {Basak, S.} and {Battye, R.} and {Benabed, K.} and {Bernard, J.-P.} and {Bersanelli, M.}},
+	title = {Planck 2018 results - VI. Cosmological parameters},
+	DOI= "10.1051/0004-6361/201833910",
+	journal = {Astronomy \& Astrophysics},
+	year = 2020,
+	volume = 641,
+	pages = "A6",
+}
+
+@article{getdist,
+ author         = "Lewis, Antony",
+ title          = "{GetDist: a Python package for analysing Monte Carlo
+                   samples}",
+ year           = "2019",
+ eprint         = "1910.13970",
+ archivePrefix  = "arXiv",
+ primaryClass   = "astro-ph.IM",
+ SLACcitation   = "%%CITATION = ARXIV:1910.13970;%%"
+}
+
+@article{yp_measurement_bbn,
+   title={The effects of He I $\lambda$10830 on helium abundance determinations},
+   volume={2015},
+   ISSN={1475-7516},
+   DOI={10.1088/1475-7516/2015/07/011},
+   number={07},
+   journal={Journal of Cosmology and Astroparticle Physics},
+   publisher={IOP Publishing},
+   author={Aver, Erik and Olive, Keith A. and Skillman, Evan D.},
+   year={2015},
+   month={Jul},
+   pages={011–011}
+}
+
+@article{dh_measurement_bbn,
+   title={One Percent Determination of the Primordial Deuterium Abundance},
+   volume={855},
+   ISSN={1538-4357},
+   DOI={10.3847/1538-4357/aaab53},
+   number={2},
+   journal={The Astrophysical Journal},
+   publisher={American Astronomical Society},
+   author={Cooke, Ryan J. and Pettini, Max and Steidel, Charles C.},
+   year={2018},
+   month={Mar},
+   pages={102}
+}
+
+@article{cobaya,
+    author = "Torrado, Jesus and Lewis, Antony",
+    title = "{Cobaya: Code for Bayesian Analysis of hierarchical physical models}",
+    eprint = "2005.05290",
+    archivePrefix = "arXiv",
+    primaryClass = "astro-ph.IM",
+    reportNumber = "TTK-20-15",
+    month = "5",
+    year = "2020"
+}
+
+@Article{         numpy,
+ title         = {Array programming with {NumPy}},
+ author        = {Charles R. Harris and K. Jarrod Millman and Stéfan J.
+                 van der Walt and Ralf Gommers and Pauli Virtanen and David
+                 Cournapeau and Eric Wieser and Julian Taylor and Sebastian
+                 Berg and Nathaniel J. Smith and Robert Kern and Matti Picus
+                 and Stephan Hoyer},
+ year          = {2020},
+ month         = sep,
+ journal       = {Nature},
+ volume        = {585},
+ number        = {7825},
+ pages         = {357--362},
+ doi           = {10.1038/s41586-020-2649-2},
+ publisher     = {Springer Science and Business Media {LLC}}
+}
+
+@article{sklearn,
+  author  = {Fabian Pedregosa and Gaël Varoquaux and Alexandre Gramfort and Vincent Michel and Bertrand Thirion and Olivier Grisel and Mathieu Blondel and Peter Prettenhofer and Ron Weiss and Vincent Dubourg and Jake Vanderplas and Alexandre Passos and David Cournapeau and Matthieu Brucher},
+  title   = {Scikit-learn: Machine Learning in Python},
+  journal = {Journal of Machine Learning Research},
+  year    = {2011},
+  volume  = {12},
+  number  = {85},
+  pages   = {2825-2830},
+  url     = {http://jmlr.org/papers/v12/pedregosa11a.html}
+}
+
+@software{skopt,
+  author       = {Tim Head and
+                  MechCoder and
+                  Gilles Louppe and
+                  Iaroslav Shcherbatyi and
+                  fcharras and
+                  Zé Vinícius and
+                  cmmalone and
+                  Christopher Schröder and
+                  nel215 and
+                  Nuno Campos and
+                  Todd Young and
+                  Stefano Cereda and
+                  Thomas Fan and
+                  rene-rex and
+                  Kejia (KJ) Shi and
+                  Justus Schwabedal and
+                  carlosdanielcsantos},
+  title        = {scikit-optimize/scikit-optimize: v0.5.2},
+  month        = mar,
+  year         = 2018,
+  publisher    = {Zenodo},
+  version      = {v0.5.2},
+  doi          = {10.5281/zenodo.1207017}
+}
+
+@article{lbfgs_1,
+author = {Byrd, Richard H. and Lu, Peihuang and Nocedal, Jorge and Zhu, Ciyou},
+title = {A Limited Memory Algorithm for Bound Constrained Optimization},
+journal = {SIAM Journal on Scientific Computing},
+volume = {16},
+number = {5},
+pages = {1190-1208},
+year = {1995},
+doi = {10.1137/0916069}    
+}
+
+}
+
+@article{lbfgs_2,
+author = {Zhu, Ciyou and Byrd, Richard H. and Lu, Peihuang and Nocedal, Jorge},
+title = {Algorithm 778: L-BFGS-B: Fortran Subroutines for Large-Scale Bound-Constrained Optimization},
+year = {1997},
+issue_date = {Dec. 1997},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {23},
+number = {4},
+issn = {0098-3500},
+doi = {10.1145/279232.279236},
+journal = {ACM Trans. Math. Softw.},
+month = dec,
+pages = {550–560},
+numpages = {11}
+}
+
+@ARTICLE{scipy,
+  author  = {Virtanen, Pauli and Gommers, Ralf and Oliphant, Travis E. and
+            Haberland, Matt and Reddy, Tyler and Cournapeau, David and
+ 			{SciPy 1.0 Contributors}},
+  title   = {{{SciPy} 1.0: Fundamental Algorithms for Scientific
+            Computing in Python}},
+  journal = {Nature Methods},
+  year    = {2020},
+  volume  = {17},
+  pages   = {261--272},
+  doi     = {10.1038/s41592-019-0686-2}
+}
+
+@article{exponential_class,
+author = "Kupperman, Morton",
+doi = "10.1214/aoms/1177706633",
+fjournal = "Annals of Mathematical Statistics",
+journal = "Ann. Math. Statist.",
+month = "06",
+number = "2",
+pages = "571--575",
+publisher = "The Institute of Mathematical Statistics",
+title = "Probabilities of Hypotheses and Information-Statistics in Sampling from Exponential-Class Populations",
+volume = "29",
+year = "1958"
+}

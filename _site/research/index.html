@@ -110,7 +110,14 @@ I have developed a software package called <a href="https://github.com/jonaselga
 
 <h3 id="fast-pta-inference">Fast PTA inference</h3>
 
-<p>I recently started working on PTA data analysis as part of EPTA, where I am trying to speed up Bayesian inference for PTAs using the jax-enabled PTA likelihood from Discovery.</p>
+<p>I recently started working on PTA data analysis as part of EPTA, where I am trying to speed up Bayesian inference for PTAs using the jax-enabled PTA likelihood from <a href="https://github.com/nanograv/discovery"><strong>discovery</strong></a>. As part of this, I have written a number of interfaces to samplers that I am collecting <a href="https://github.com/jonaselgammal/discoverysamplers"><strong>here</strong></a>. Currently supported samplers are:</p>
+<ul>
+  <li><a href="https://nessai.readthedocs.io/en/latest/">nessai</a>: Nested sampling with normalizing flows</li>
+  <li><a href="https://github.com/mikekatz04/Eryn">eryn</a>: RJMCMC sampler with parallel tempering</li>
+  <li><a href="https://gpry.readthedocs.io/en/latest/">GPry</a>: See above for details</li>
+</ul>
+
+<p>In addition, I am working on interfacing with <a href="https://blackjax-devs.github.io/blackjax/">blackjax</a> to enable end-to-end jax-based PTA inference.</p>
 
   </div>
 
