@@ -4,8 +4,6 @@ title: Resume
 permalink: /resume/
 ---
 
-# Resume
-
 **You can [download my resume (PDF)](/assets/files/CV_jonas_el_gammal.pdf)** ...
 
 ... or view a brief overview below:

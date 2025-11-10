@@ -1,9 +1,14 @@
 ---
 layout: home
-title: Hi, I'm Jonas!
 ---
 
-<div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; margin-bottom: 20px;">
+<div style="font-size: 2.5em; font-weight: bold; text-align: center;">
+  Hi, I'm Jonas!
+</div>
+
+<img src="/assets/img/me.jpg" alt="Me" style="height: 200px; width: 200px; border-radius: 50%; object-fit: cover; display: block; margin: auto;">
+
+<div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; margin-bottom: 20px; justify-content: center;">
 
   <a href="mailto:jonas.el.gammal@rwth-aachen.de">
     <img src="/assets/icons/email.png" alt="Email" style="width: 40px; height: 40px;">

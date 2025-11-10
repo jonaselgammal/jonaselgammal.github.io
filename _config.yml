@@ -17,6 +17,14 @@ defaults:
     values:
       css: "assets/css/style.css"
 
+social_links:
+  - title: GitHub
+    icon: github
+    url: "https://github.com/jonaselgammal"
+  - title: LinkedIn
+    icon: linkedin
+    url: "https://www.linkedin.com/in/jelgammal/"
+
 plugins:
   - jekyll-feed
 
