@@ -118,6 +118,11 @@ Born 04 May 1997 in Bochum, Germany
   - A template-based approach using common inflationary models.
   - A first-principles approach solving the background and perturbation EOM for single-field inflation.
 
+#### [![GitHub logo](/assets/icons/github.png){: style="height: 1em; vertical-align: middle;"}](https://github.com/jonaselgammal/discoverysamplers) discoverysamplers
+
+- Bridge interfaces connecting Discovery PTA models to various sampling backends (Eryn, Nessai, JAX-NS, GPry).
+- Provides a unified prior specification format and seamless sampler switching for PTA inference.
+
 ---
 
 ## 💻 Technologies

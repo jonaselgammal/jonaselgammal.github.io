@@ -66,9 +66,19 @@ We are currently working on extending the analysis to include **non-standard the
 
 ### Fast PTA inference
 
-I recently started working on PTA data analysis as part of EPTA, where I am trying to speed up Bayesian inference for PTAs using the jax-enabled PTA likelihood from [**discovery**](https://github.com/nanograv/discovery). As part of this, I have written a number of interfaces to samplers that I am collecting [**here**](https://github.com/jonaselgammal/discoverysamplers). Currently supported samplers are:
-- [nessai](https://nessai.readthedocs.io/en/latest/): Nested sampling with normalizing flows
-- [eryn](https://github.com/mikekatz04/Eryn): RJMCMC sampler with parallel tempering
-- [GPry](https://gpry.readthedocs.io/en/latest/): See above for details
+<img src="/assets/img/pta_inference.png" alt="PTA Inference" style="max-width: 65%; display:block; margin:auto;">
 
-In addition, I am working on interfacing with [blackjax](https://blackjax-devs.github.io/blackjax/) to enable end-to-end jax-based PTA inference.
+Pulsar Timing Arrays (PTAs) are a powerful tool for detecting low-frequency gravitational waves by monitoring the precise timing of millisecond pulsars. However, Bayesian inference for PTA data is notoriously expensive, often requiring millions of likelihood evaluations due to the high dimensionality of the parameter space and the complexity of the noise models involved.
+
+To address this, I have developed [**discoverysamplers**](https://github.com/jonaselgammal/discoverysamplers), a Python package that provides lightweight bridge interfaces connecting [**Discovery**](https://github.com/nanograv/discovery) (a JAX-enabled PTA likelihood code developed by NANOGrav) to various state-of-the-art sampling backends. The package is designed to be modular and easy to use, allowing researchers to seamlessly switch between different samplers while maintaining a consistent interface.
+
+Currently supported samplers include:
+- [**Eryn**](https://github.com/mikekatz04/Eryn): Ensemble MCMC with parallel tempering and reversible-jump support
+- [**Nessai**](https://nessai.readthedocs.io/en/latest/): Flow-based nested sampling with importance sampling
+- [**JAX-NS**](https://github.com/Joshuaalbert/jaxns): Pure JAX nested sampling with native GPU support
+- [**GPry**](https://gpry.readthedocs.io/en/latest/): Gaussian process emulation via the Cobaya framework (see above)
+
+The package uses a unified prior specification format and handles all the necessary transformations between Discovery's callable interface and each sampler's expected API. This makes it straightforward to benchmark different sampling strategies and identify the most efficient approach for a given PTA dataset.
+
+#### What's next?
+We are currently working on extending discoverysamplers to support additional backends, including [blackjax](https://blackjax-devs.github.io/blackjax/) for end-to-end JAX-based inference with gradient-based samplers like NUTS. The goal is to fully leverage hardware acceleration (GPUs/TPUs) to achieve significant speed-ups in PTA parameter estimation.
