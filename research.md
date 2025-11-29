@@ -66,8 +66,6 @@ We are currently working on extending the analysis to include **non-standard the
 
 ### Fast PTA inference
 
-<img src="/assets/img/pta_inference.png" alt="PTA Inference" style="max-width: 65%; display:block; margin:auto;">
-
 Pulsar Timing Arrays (PTAs) are a powerful tool for detecting low-frequency gravitational waves by monitoring the precise timing of millisecond pulsars. However, Bayesian inference for PTA data is notoriously expensive, often requiring millions of likelihood evaluations due to the high dimensionality of the parameter space and the complexity of the noise models involved.
 
 To address this, I have developed [**discoverysamplers**](https://github.com/jonaselgammal/discoverysamplers), a Python package that provides lightweight bridge interfaces connecting [**Discovery**](https://github.com/nanograv/discovery) (a JAX-enabled PTA likelihood code developed by NANOGrav) to various state-of-the-art sampling backends. The package is designed to be modular and easy to use, allowing researchers to seamlessly switch between different samplers while maintaining a consistent interface.
