@@ -31,5 +31,6 @@ plugins:
 # Navigation links
 header_pages:
   - research.md
+  - projects.md
   - resources.md
   - resume.md
