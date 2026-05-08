@@ -5,7 +5,7 @@ permalink: /research/
 ---
 
 Here you find an overview of my research interests and projects that I have been working on. There is a bunch of other stuff in the pipeline that I haven't had time to write up yet, so check back later for updates!
-I am currently working on three main topics:
+I am currently working on four main topics:
 
 ---
 
@@ -80,3 +80,28 @@ The package uses a unified prior specification format and handles all the necess
 
 #### What's next?
 We are currently working on extending discoverysamplers to support additional backends, including [blackjax](https://blackjax-devs.github.io/blackjax/) for end-to-end JAX-based inference with gradient-based samplers like NUTS. The goal is to fully leverage hardware acceleration (GPUs/TPUs) to achieve significant speed-ups in PTA parameter estimation.
+
+---
+
+### Statistical diagnostics for the PTA gravitational-wave background
+
+One of the central open questions in PTA science is whether the observed nanohertz gravitational-wave background is of **astrophysical** origin, most likely a population of supermassive black hole binaries, or whether it could instead be sourced by the **early Universe**. In current work with **Chiara Cecchini**, **Gabriele Franciolini**, and **Mauro Pieroni**, I study whether this question can be answered directly from the **statistics of the signal** rather than from detailed population or cosmological modeling.
+
+The paper makes two closely related points. First, PTA data must be **whitened** before any statistical test is meaningful. The built-in Hellings-Downs correlations otherwise generate false positives even under a perfectly Gaussian and isotropic null hypothesis. Second, after whitening, the PTA response itself becomes the main limitation: because each pulsar averages the signal over a broad region of the sky, the response rapidly **Gaussianizes** the signal, even when the underlying source population is discrete and intrinsically non-Gaussian.
+
+In practice, this means that once the overall signal amplitude is estimated from the same realization, simple model-agnostic tests of non-Gaussianity lose almost all of their discriminatory power. What remains is mostly a mismatch in the overall variance, and that information is removed by the scale fit itself. Our conclusion is therefore fairly negative but important: in an idealized signal-dominated setup, PTAs are largely **insensitive to non-Gaussianity** in a model-agnostic sense, precisely because the broad antenna patterns wash the signal out. The current preprint is available on [arXiv:2605.05157](https://arxiv.org/abs/2605.05157).
+
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; align-items: flex-start;">
+  <div style="max-width: 360px; text-align: center;">
+    <a href="/assets/img/pta_whitening_qq.pdf">
+      <img src="/assets/img/pta_whitening_qq.png" alt="QQ plot showing false positives without whitening and good calibration after whitening" style="max-width: 100%; height: auto;">
+    </a>
+    <p style="font-size: 0.92rem; margin-top: 0.5rem;">Without whitening, even a Gaussian isotropic null produces miscalibrated p-values. Whitening restores the expected null behavior.</p>
+  </div>
+  <div style="max-width: 360px; text-align: center;">
+    <a href="/assets/img/pta_scale_estimation_hist_multisrc.pdf">
+      <img src="/assets/img/pta_scale_estimation_hist_multisrc.png" alt="Scale estimation and antenna-pattern broadening wash out non-Gaussian signal information in PTAs" style="max-width: 100%; height: auto;">
+    </a>
+    <p style="font-size: 0.92rem; margin-top: 0.5rem;">After scale normalization, the broad true PTA antenna pattern drives the whitened distributions close to the Gaussian null, while narrower synthetic responses retain more visible non-Gaussian structure.</p>
+  </div>
+</div>
