@@ -13,7 +13,7 @@ const id = `gpry-${compact ? 'compact' : 'full'}`;
     <svg viewBox="0 0 900 405" role="img" aria-label="Target log posterior, Gaussian-process surrogate, uncertainty, and selected evaluations">
       <defs><clipPath id={`${id}-plot-clip`}><rect x="48" y="22" width="834" height="330" /></clipPath></defs>
       <g data-grid></g><g clip-path={`url(#${id}-plot-clip)`}><path data-band></path><path data-truth></path><path data-mean></path><path data-acq></path><g data-points></g><g data-next></g></g>
-      <text x="18" y="26" class="plot-label">log posterior</text><text x="450" y="400" class="plot-label">parameter x</text>
+      <text x="18" y="26" class="plot-label">log posterior</text><text x="468" y="393" text-anchor="middle" class="plot-label">parameter x</text>
     </svg>
     <div class="gp-lab__legend"><span class="truth">target</span><span class="mean">GP mean</span><span class="uncertainty">uncertainty</span><span class="acquisition">acquisition</span><span class="sample">evaluations</span></div>
   </div>
