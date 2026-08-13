@@ -10,6 +10,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';import GPryExplorer from
     <h2>Evidence</h2><ol><li><a href="https://arxiv.org/abs/2211.02045">Fast and Robust Bayesian Inference using Gaussian Processes with GPry</a> introduced the core framework.</li><li><a href="https://arxiv.org/abs/2305.19267">Parallelized Acquisition for Active Learning using Monte Carlo Sampling</a> introduced NORA for parallel batch acquisition.</li><li><a href="https://arxiv.org/abs/2503.21871">Accelerating LISA inference with Gaussian processes</a> validated the method on expensive LISA inference.</li></ol>
     <h2>Where it works—and where it doesn’t</h2><p>GPry is most useful for deterministic, sufficiently smooth, low- to moderate-dimensional targets where likelihood evaluations dominate runtime. It is not a universal replacement for MCMC or nested sampling, and difficult separated modes or very high dimensionality require care.</p>
   </article>
-  <div class="shell lab-embed"><GPryExplorer /></div>
+  <section class="lab-embed"><div class="shell"><GPryExplorer /></div></section>
 </BaseLayout>
-<style>.feature-gif{margin-block:3rem 5rem}.feature-gif img{background:#fff;border:1px solid var(--line);margin:auto;max-height:620px}.feature-gif p{color:var(--ink-soft);font-family:var(--mono);font-size:.68rem;text-align:center}.lab-embed{margin-top:6rem}</style>
+<style is:global>.feature-gif{margin-block:3rem 5rem}.feature-gif img{background:#fff;border:1px solid var(--line);margin:auto;max-height:620px}.feature-gif p{color:var(--ink-soft);font-family:var(--mono);font-size:.68rem;text-align:center}.lab-embed{background:var(--night);margin-top:6rem;padding-block:clamp(2rem,4vw,3.5rem)}</style>

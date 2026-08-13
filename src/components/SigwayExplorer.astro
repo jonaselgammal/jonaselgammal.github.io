@@ -2,7 +2,7 @@
   <div class="sig-lab__head"><div><span class="eyebrow">SIGWAY kernel lab</span><h2>Paint a primordial spectrum</h2><p>Draw the binned curvature spectrum. The induced gravitational-wave spectrum updates through SIGWAY’s precomputed bilinear kernel.</p></div><div class="sig-lab__formula">Ω<sub>GW</sub>[m] = Σ<sub>ij</sub> C<sub>mij</sub>A<sub>i</sub>A<sub>j</sub></div></div>
   <div class="sig-lab__toolbar">
     <div class="sig-lab__presets" role="group" aria-label="Curvature spectrum presets"><button data-preset="single">Single peak</button><button data-preset="broad">Broad peak</button><button data-preset="double">Double peak</button><button data-preset="flat">Reset</button></div>
-    <label>Resolution <select data-resolution><option value="10">10 bins · instant</option><option value="50">50 bins · detailed</option><option value="100">100 bins · high resolution</option></select></label>
+    <label>Resolution <select data-resolution><option value="50">50 bins · standard</option><option value="100">100 bins · high resolution</option></select></label>
   </div>
   <div class="sig-lab__loading" data-loading hidden>Loading coefficient grid…</div>
   <div class="sig-lab__plots">
@@ -25,7 +25,7 @@
     function paint(e:PointerEvent){if(!active||!d)return;const rect=pz.getBoundingClientRect(),px=(e.clientX-rect.left)/rect.width*W,py=(e.clientY-rect.top)/rect.height*H;const q=Math.max(0,Math.min(1,(px-L)/(W-L-R))),i=Math.round(q*(amps.length-1)),exponent=-1-(Math.max(T,Math.min(H-B,py))-T)/(H-T-B)*5;amps[i]=10**exponent;drawInput();if(!pending)calculate();}
     pz.addEventListener('pointerdown',e=>{active=true;pz.setPointerCapture(e.pointerId);paint(e)});pz.addEventListener('pointermove',paint);pz.addEventListener('pointerup',()=>active=false);
     worker.onmessage=e=>{if(e.data.type==='loaded'){d=e.data.kernel;amps=Array(d.fp.length).fill(1e-5);grid(pz,Math.min(...d.fp),Math.max(...d.fp),1e-6,1e-1);grid(og,Math.min(...d.fk)/(2*Math.PI),Math.max(...d.fk)/(2*Math.PI),1e-18,1e-6);root.querySelector<HTMLElement>('[data-loading]')!.hidden=true;preset('single');}if(e.data.type==='result'){pending=false;if(e.data.token===token){og.querySelector('[data-response]')!.setAttribute('d',line(d.fk.map((k:number)=>k/(2*Math.PI)),e.data.omega,Math.min(...d.fk)/(2*Math.PI),Math.max(...d.fk)/(2*Math.PI),1e-18,1e-6));}if(active)calculate();}};
-    root.querySelectorAll<HTMLButtonElement>('[data-preset]').forEach(b=>b.addEventListener('click',()=>preset(b.dataset.preset!)));root.querySelector<HTMLSelectElement>('[data-resolution]')!.addEventListener('change',e=>{root.querySelector<HTMLElement>('[data-loading]')!.hidden=false;worker.postMessage({type:'load',nbins:Number((e.target as HTMLSelectElement).value)});});worker.postMessage({type:'load',nbins:10});
+    root.querySelectorAll<HTMLButtonElement>('[data-preset]').forEach(b=>b.addEventListener('click',()=>preset(b.dataset.preset!)));root.querySelector<HTMLSelectElement>('[data-resolution]')!.addEventListener('change',e=>{root.querySelector<HTMLElement>('[data-loading]')!.hidden=false;worker.postMessage({type:'load',nbins:Number((e.target as HTMLSelectElement).value)});});worker.postMessage({type:'load',nbins:50});
   })();
 </script>
 <style>
