@@ -39,7 +39,7 @@ button, input { font: inherit; }
 .page-head h1 { font-family:var(--serif); font-size:clamp(3.2rem,8vw,7.2rem); font-weight:400; letter-spacing:-.06em; line-height:.9; margin:.7rem 0 1.4rem; max-width:1000px; }
 .page-head p { color:var(--ink-soft); font-size:clamp(1rem,2vw,1.3rem); line-height:1.65; max-width:720px; }
 .figure { margin:2.5rem 0; }
-.figure img, .figure object { background:#fff; border:1px solid var(--line); width:100%; }
+.figure img, .figure object { background:transparent; border:1px solid var(--line); width:100%; }
 .figure figcaption { color:var(--ink-soft); font-size:.78rem; line-height:1.55; padding-top:.65rem; }
 .status { border:1px solid var(--line); display:inline-flex; font-family:var(--mono); font-size:.68rem; letter-spacing:.06em; padding:.3rem .5rem; text-transform:uppercase; }
 

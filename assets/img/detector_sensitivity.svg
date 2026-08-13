@@ -26,7 +26,7 @@ L 416.176907 221.791163
 L 416.176907 0 
 L 0 0 
 z
-" style="fill: #ffffff"/>
+" style="fill: none"/>
   </g>
   <g id="axes_1">
    <g id="patch_2">
@@ -35,7 +35,7 @@ L 401.31327 182.891017
 L 401.31327 11.005173 
 L 55.309299 11.005173 
 z
-" style="fill: #ffffff"/>
+" style="fill: none"/>
    </g>
    <g id="PolyCollection_1">
     <defs>
