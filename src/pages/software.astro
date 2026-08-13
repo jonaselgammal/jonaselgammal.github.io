@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const packages=[
+  {name:'GPry',tag:'Scientific ML',text:'Gaussian-process surrogate modelling and active learning for expensive Bayesian inference.',href:'/gpry/',repo:'https://github.com/jonaselgammal/GPry'},
+  {name:'SIGWAY',tag:'Early universe',text:'Simulation and inference for scalar-induced gravitational waves and primordial curvature perturbations.',href:'/research/early-universe/',repo:'https://github.com/jonaselgammal/SIGWAY'},
+  {name:'discoverysamplers',tag:'PTA inference',text:'A unified bridge from Discovery PTA models to Eryn, Nessai, JAX-NS, and GPry.',href:'/research/pta/',repo:'https://github.com/jonaselgammal/discoverysamplers'},
+  {name:'fastropop',tag:'Population simulation',text:'JAX-backed simulations of supermassive black-hole binary populations and their nanohertz signals.',href:'/research/pta/',repo:'https://github.com/jonaselgammal/fastropop'},
+  {name:'Graphsmith',tag:'Reliable AI',text:'Typed graph planning with deterministic compilation, validation, execution, and local repair.',href:'/projects/',repo:'https://github.com/jonaselgammal/Graphsmith'},
+];
+---
+<BaseLayout title="Research software — Jonas El Gammal" description="Open-source scientific software by Jonas El Gammal for Bayesian inference, gravitational-wave cosmology, PTA analysis, and reliable AI systems.">
+<header class="page-head"><div class="shell"><span class="eyebrow">Open source</span><h1>Research software</h1><p>Tools built around a recurring idea: make difficult computations tractable without hiding what the machinery is doing.</p></div></header>
+<section class="shell package-list">{packages.map((p,i)=><article><span class="index">0{i+1}</span><div><span class="eyebrow">{p.tag}</span><h2><a href={p.href}>{p.name}</a></h2><p>{p.text}</p></div><a class="repo" href={p.repo}>GitHub ↗</a></article>)}</section>
+</BaseLayout>
+<style>.package-list{padding-top:3rem}.package-list article{align-items:start;border-bottom:1px solid var(--line);display:grid;gap:2rem;grid-template-columns:50px 1fr auto;padding:2.2rem 0}.index,.repo{font-family:var(--mono);font-size:.68rem;text-decoration:none;text-transform:uppercase}.package-list h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3.4rem);font-weight:400;letter-spacing:-.04em;margin:.35rem 0}.package-list h2 a{text-decoration:none}.package-list p{color:var(--ink-soft);line-height:1.65;margin:0;max-width:660px}.repo:hover,h2 a:hover{color:var(--signal)}@media(max-width:650px){.package-list article{grid-template-columns:34px 1fr}.repo{grid-column:2}}</style>

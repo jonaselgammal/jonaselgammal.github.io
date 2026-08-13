@@ -1,0 +1,20 @@
+---
+interface Props { number:string; title:string; text:string; href:string; meta:string; visual?:string; visualAlt?:string; }
+const {number,title,text,href,meta,visual,visualAlt=''}=Astro.props;
+---
+<a class="research-row" href={href}>
+  <span class="research-row__number">{number}</span>
+  <div><span class="eyebrow">{meta}</span><h3>{title}</h3><p>{text}</p></div>
+  {visual ? <img src={visual} alt={visualAlt} loading="lazy" /> : <span class="research-row__arrow">↗</span>}
+</a>
+<style>
+  .research-row{align-items:center;border-top:1px solid var(--line);display:grid;gap:clamp(1rem,3vw,3rem);grid-template-columns:48px 1fr minmax(130px,260px);padding:clamp(1.5rem,3vw,2.6rem) 0;text-decoration:none}
+  .research-row:last-child{border-bottom:1px solid var(--line)}
+  .research-row__number{color:var(--ink-soft);font-family:var(--mono);font-size:.66rem}
+  h3{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,3.25rem);font-weight:400;letter-spacing:-.04em;line-height:1;margin:.25rem 0 .55rem;transition:color .2s}
+  p{color:var(--ink-soft);font-size:.9rem;line-height:1.55;margin:0;max-width:650px}
+  img{background:#fff;height:120px;object-fit:contain;width:100%}
+  .research-row__arrow{font-size:2rem;text-align:right}
+  .research-row:hover h3{color:var(--signal)}
+  @media(max-width:620px){.research-row{grid-template-columns:28px 1fr}.research-row img,.research-row__arrow{display:none}}
+</style>

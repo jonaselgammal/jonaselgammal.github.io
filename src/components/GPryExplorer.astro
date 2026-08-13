@@ -1,0 +1,74 @@
+---
+import data from '../data/gpry-toy.json';
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+const id = `gpry-${compact ? 'compact' : 'full'}`;
+---
+<section class:list={["gp-lab", compact && "gp-lab--compact"]} id={id}>
+  <div class="gp-lab__head">
+    <div><span class="eyebrow">Precomputed active-learning run</span><h2>Watch the surrogate learn</h2></div>
+    <div class="gp-lab__metric"><span>expensive evaluations</span><strong data-count>3</strong></div>
+  </div>
+  <div class="gp-lab__plot">
+    <svg viewBox="0 0 900 390" role="img" aria-label="Target log posterior, Gaussian-process surrogate, uncertainty, and selected evaluations">
+      <g data-grid></g><path data-band></path><path data-truth></path><path data-mean></path><path data-acq></path><g data-points></g><g data-next></g>
+      <text x="18" y="26" class="plot-label">log posterior</text><text x="450" y="380" class="plot-label">parameter x</text>
+    </svg>
+    <div class="gp-lab__legend"><span class="truth">target</span><span class="mean">GP mean</span><span class="uncertainty">uncertainty</span><span class="sample">evaluations</span></div>
+  </div>
+  <div class="gp-lab__controls">
+    <button type="button" data-play aria-label="Play active-learning sequence">Play</button>
+    <label>Iteration <input data-slider type="range" min="0" max={data.states.length - 1} value="0" /></label>
+    <output data-step>01 / {String(data.states.length).padStart(2,'0')}</output>
+  </div>
+  {!compact && <p class="gp-lab__note">The browser replays a deterministic, precomputed RBF-GP run. No fitting or inference is performed client-side. The target is an illustrative asymmetric two-feature log posterior.</p>}
+  <script is:inline type="application/json" data-gp-json set:html={JSON.stringify(data)}></script>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.gp-lab').forEach((root) => {
+    const json = root.querySelector('[data-gp-json]')?.textContent || '{}';
+    const data = JSON.parse(json);
+    const slider = root.querySelector<HTMLInputElement>('[data-slider]')!;
+    const play = root.querySelector<HTMLButtonElement>('[data-play]')!;
+    const W=900,H=390,L=42,R=18,T=22,B=38;
+    const xScale=(x:number)=>L+(x+4)/8*(W-L-R);
+    const yScale=(y:number)=>T+(1-(y+5.2)/5.8)*(H-T-B);
+    const path=(values:number[], scale=yScale)=>values.map((v:number,i:number)=>`${i?'L':'M'}${xScale(data.x[i]).toFixed(1)},${scale(v).toFixed(1)}`).join(' ');
+    const grid=root.querySelector('[data-grid]')!;
+    grid.innerHTML=[-4,-2,0,2,4].map(x=>`<line x1="${xScale(x)}" y1="${T}" x2="${xScale(x)}" y2="${H-B}"/><text x="${xScale(x)}" y="${H-14}">${x}</text>`).join('')+[-4,-2,0].map(y=>`<line x1="${L}" y1="${yScale(y)}" x2="${W-R}" y2="${yScale(y)}"/><text x="8" y="${yScale(y)+4}">${y}</text>`).join('');
+    root.querySelector('[data-truth]')!.setAttribute('d',path(data.truth));
+    let timer:number|undefined;
+    function draw(index:number){
+      const s=data.states[index];
+      const upper=s.mean.map((v:number,i:number)=>v+1.5*s.std[i]);
+      const lower=s.mean.map((v:number,i:number)=>v-1.5*s.std[i]);
+      const band=path(upper)+' '+path(lower.slice().reverse(),(v:number)=>yScale(v)).replace(/^M/,'L')+' Z';
+      root.querySelector('[data-band]')!.setAttribute('d',band);
+      root.querySelector('[data-mean]')!.setAttribute('d',path(s.mean));
+      const maxA=Math.max(...s.acquisition,1e-9);
+      root.querySelector('[data-acq]')!.setAttribute('d',path(s.acquisition.map((v:number)=>-5+v/maxA*.65)));
+      root.querySelector('[data-points]')!.innerHTML=s.selected.map((i:number)=>`<circle cx="${xScale(data.x[i])}" cy="${yScale(data.truth[i])}" r="5"/>`).join('');
+      root.querySelector('[data-next]')!.innerHTML=`<line x1="${xScale(data.x[s.next])}" y1="${T}" x2="${xScale(data.x[s.next])}" y2="${H-B}"/><text x="${xScale(data.x[s.next])+7}" y="${T+14}">next</text>`;
+      root.querySelector('[data-count]')!.textContent=String(s.selected.length);
+      root.querySelector('[data-step]')!.textContent=`${String(index+1).padStart(2,'0')} / ${String(data.states.length).padStart(2,'0')}`;
+      slider.value=String(index);
+    }
+    slider.addEventListener('input',()=>{if(timer)window.clearInterval(timer);timer=undefined;play.textContent='Play';draw(Number(slider.value));});
+    play.addEventListener('click',()=>{if(timer){window.clearInterval(timer);timer=undefined;play.textContent='Play';return;}play.textContent='Pause';timer=window.setInterval(()=>{const next=(Number(slider.value)+1)%data.states.length;draw(next);},650);});
+    draw(0);
+  });
+</script>
+
+<style>
+  .gp-lab{background:var(--night);color:var(--cream);padding:clamp(1.2rem,3vw,2.2rem)}
+  .gp-lab__head{align-items:end;display:flex;justify-content:space-between;margin-bottom:1rem}
+  h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,3.2rem);font-weight:400;letter-spacing:-.04em;margin:.3rem 0 0}
+  .gp-lab__metric{text-align:right}.gp-lab__metric span{color:rgba(246,242,233,.5);display:block;font-family:var(--mono);font-size:.62rem;text-transform:uppercase}.gp-lab__metric strong{color:var(--signal-soft);font-family:var(--serif);font-size:2.5rem;font-weight:400}
+  .gp-lab__plot{border:1px solid var(--line-dark);position:relative}svg{width:100%}
+  [data-grid] :global(line){stroke:rgba(246,242,233,.1);stroke-width:1}[data-grid] :global(text),.plot-label{fill:rgba(246,242,233,.48);font-family:var(--mono);font-size:11px}
+  [data-truth]{fill:none;stroke:var(--cream);stroke-dasharray:5 5;stroke-width:2}[data-mean]{fill:none;stroke:var(--signal);stroke-width:3}[data-band]{fill:rgba(227,107,89,.16);stroke:none}[data-acq]{fill:none;stroke:#75b9b1;stroke-width:2}[data-points] :global(circle){fill:var(--cream);stroke:var(--night);stroke-width:2}[data-next] :global(line){stroke:#75b9b1;stroke-dasharray:3 4}[data-next] :global(text){fill:#75b9b1;font-family:var(--mono);font-size:11px}
+  .gp-lab__legend{bottom:12px;display:flex;gap:1rem;position:absolute;right:16px}.gp-lab__legend span{font-family:var(--mono);font-size:.58rem;text-transform:uppercase}.gp-lab__legend span:before{content:"";display:inline-block;height:2px;margin-right:.35rem;vertical-align:middle;width:16px}.truth:before{background:var(--cream)}.mean:before{background:var(--signal)}.uncertainty:before{background:rgba(227,107,89,.45)}.sample:before{background:#75b9b1}
+  .gp-lab__controls{align-items:center;display:grid;gap:1rem;grid-template-columns:auto 1fr auto;padding-top:1rem}.gp-lab__controls button{background:transparent;border:1px solid var(--line-dark);color:var(--cream);cursor:pointer;font-family:var(--mono);font-size:.65rem;padding:.6rem .8rem;text-transform:uppercase}.gp-lab__controls label{align-items:center;color:rgba(246,242,233,.55);display:grid;font-family:var(--mono);font-size:.62rem;gap:.7rem;grid-template-columns:auto 1fr;text-transform:uppercase}.gp-lab__controls input{accent-color:var(--signal);width:100%}.gp-lab__controls output{font-family:var(--mono);font-size:.65rem}.gp-lab__note{color:rgba(246,242,233,.5);font-size:.72rem;line-height:1.5;margin:1rem 0 0}.gp-lab--compact .gp-lab__head{margin-bottom:.5rem}.gp-lab--compact .gp-lab__note{display:none}
+  @media(max-width:600px){.gp-lab__metric{display:none}.gp-lab__legend{display:none}.gp-lab__controls{grid-template-columns:auto 1fr}.gp-lab__controls output{display:none}}
+</style>

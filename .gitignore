@@ -3,6 +3,7 @@
 *.bst
 *.py
 !scripts/generate_cv.py
+!scripts/generate_lab_data.py
 *.mw
 *.ppt
 *.pptx
@@ -28,8 +29,12 @@ Gemfile*
 *.rake
 *.gemspec
 *.lock
+!package-lock.json
 /vendor/bundle/
 /.bundle/
+/node_modules/
+/.astro/
+/dist/
 
 # Ignore LaTeX source files (but keep PDFs)
 *.tex

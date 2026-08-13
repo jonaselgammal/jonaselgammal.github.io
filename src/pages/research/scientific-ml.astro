@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';import GPryExplorer from '../../components/GPryExplorer.astro';
+---
+<BaseLayout title="Scientific ML & Bayesian Inference — Jonas El Gammal" description="Gaussian-process surrogate models and active learning for expensive Bayesian inference.">
+  <div class="shell"><header class="page-head"><span class="eyebrow">Research · Scientific ML</span><h1>Learning expensive posteriors.</h1><p>Gaussian-process surrogate models and active learning for Bayesian inference when every call to the likelihood matters.</p></header></div>
+  <div class="shell feature-gif"><img src="/assets/img/gpry_animation.gif" alt="GPry building a surrogate posterior through active learning"/><p>The GPry loop: evaluate, learn a surrogate, acquire the next informative locations, and test convergence.</p></div>
+  <article class="prose">
+    <h2>The computational bottleneck</h2><p>Bayesian inference can become prohibitive when each likelihood evaluation calls a cosmological solver, waveform model, or slow simulation. Conventional Monte Carlo methods may require far more evaluations than the available budget permits.</p>
+    <h2>GPry</h2><p>I develop <a href="/gpry/"><strong>GPry</strong></a>, an open-source framework that learns a Gaussian-process surrogate of the log-posterior. An active-learning loop chooses evaluations where they are most useful, while explicit diagnostics decide when the reconstruction is sufficiently stable.</p>
+    <h2>Evidence</h2><ol><li><a href="https://arxiv.org/abs/2211.02045">Fast and Robust Bayesian Inference using Gaussian Processes with GPry</a> introduced the core framework.</li><li><a href="https://arxiv.org/abs/2305.19267">Parallelized Acquisition for Active Learning using Monte Carlo Sampling</a> introduced NORA for parallel batch acquisition.</li><li><a href="https://arxiv.org/abs/2503.21871">Accelerating LISA inference with Gaussian processes</a> validated the method on expensive LISA inference.</li></ol>
+    <h2>Where it works—and where it doesn’t</h2><p>GPry is most useful for deterministic, sufficiently smooth, low- to moderate-dimensional targets where likelihood evaluations dominate runtime. It is not a universal replacement for MCMC or nested sampling, and difficult separated modes or very high dimensionality require care.</p>
+  </article>
+  <div class="shell lab-embed"><GPryExplorer /></div>
+</BaseLayout>
+<style>.feature-gif{margin-block:3rem 5rem}.feature-gif img{background:#fff;border:1px solid var(--line);margin:auto;max-height:620px}.feature-gif p{color:var(--ink-soft);font-family:var(--mono);font-size:.68rem;text-align:center}.lab-embed{margin-top:6rem}</style>

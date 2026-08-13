@@ -1,0 +1,3 @@
+export const prerender = true;
+const paths=['/','/research/','/research/scientific-ml/','/research/pta/','/research/early-universe/','/research/ai-systems/','/software/','/gpry/','/lab/','/lab/gpry/','/lab/sigway/','/resources/','/resume/','/projects/','/teaching/'];
+export function GET(){const body=`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths.map(p=>`<url><loc>https://jonaselgammal.github.io${p}</loc></url>`).join('')}</urlset>`;return new Response(body,{headers:{'Content-Type':'application/xml'}})}

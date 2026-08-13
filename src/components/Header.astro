@@ -1,0 +1,28 @@
+---
+const nav = [
+  ['/research/', 'Research'],
+  ['/software/', 'Software'],
+  ['/lab/', 'Lab'],
+  ['/resources/', 'Resources'],
+  ['/resume/', 'CV'],
+];
+---
+<header class="header">
+  <div class="shell header__inner">
+    <a class="header__brand" href="/"><span>JEG</span><b>Jonas El Gammal</b></a>
+    <nav aria-label="Main navigation">
+      {nav.map(([url,label]) => <a href={url}>{label}</a>)}
+    </nav>
+  </div>
+</header>
+<style>
+  .header{background:var(--paper);border-bottom:1px solid var(--line);position:relative;z-index:10}
+  .header__inner{align-items:center;display:flex;height:74px;justify-content:space-between}
+  .header__brand{align-items:center;display:flex;gap:.7rem;text-decoration:none}
+  .header__brand span{border:1px solid var(--ink);font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;padding:.45rem}
+  .header__brand b{font-size:.86rem;font-weight:600}
+  nav{display:flex;gap:clamp(.8rem,2.2vw,2rem)}
+  nav a{font-family:var(--mono);font-size:.7rem;text-decoration:none;text-transform:uppercase}
+  nav a:hover{color:var(--signal)}
+  @media(max-width:700px){.header__brand b{display:none}.header__inner{height:auto;padding-block:16px}nav{gap:.75rem;overflow-x:auto}nav a{font-size:.62rem}}
+</style>
