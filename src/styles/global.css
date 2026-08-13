@@ -2,17 +2,18 @@
 
 :root {
   --paper: #f4f1ea;
-  --paper-deep: #e9e4da;
-  --ink: #17191c;
-  --ink-soft: #555a61;
-  --night: #111419;
-  --night-raised: #181c22;
-  --night-soft: #242a32;
-  --cream: #f6f2e9;
-  --signal: #e36b59;
-  --signal-soft: #f0a094;
-  --line: rgba(23,25,28,.16);
-  --line-dark: rgba(246,242,233,.15);
+  --paper-deep: #e5e8e4;
+  --ink: #182328;
+  --ink-soft: #626b6b;
+  --night: #152326;
+  --night-raised: #1b2c30;
+  --night-soft: #22363a;
+  --cream: #f4f1ea;
+  --signal: #527a7b;
+  --signal-soft: #9ab3ae;
+  --warm-signal: #a87f68;
+  --line: rgba(24,35,40,.16);
+  --line-dark: rgba(244,241,234,.15);
   --sans: 'Manrope', system-ui, sans-serif;
   --serif: 'Newsreader', Georgia, serif;
   --mono: 'DM Mono', ui-monospace, monospace;
@@ -36,7 +37,7 @@ button, input { font: inherit; }
 .button--solid { background:var(--ink); border-color:var(--ink); color:var(--cream); }
 .button:hover { background:var(--signal); border-color:var(--signal); color:var(--night); }
 .page-head { border-bottom:1px solid var(--line); padding:clamp(4rem,9vw,8rem) 0 clamp(2.5rem,5vw,4.5rem); }
-.page-head h1 { font-family:var(--serif); font-size:clamp(3.2rem,8vw,7.2rem); font-weight:400; letter-spacing:-.06em; line-height:.9; margin:.7rem 0 1.4rem; max-width:1000px; }
+.page-head h1 { font-family:var(--serif); font-size:clamp(3.2rem,6vw,5.5rem); font-weight:400; letter-spacing:-.055em; line-height:.92; margin:.7rem 0 1.4rem; max-width:1000px; }
 .page-head p { color:var(--ink-soft); font-size:clamp(1rem,2vw,1.3rem); line-height:1.65; max-width:720px; }
 .figure { margin:2.5rem 0; }
 .figure img, .figure object { background:transparent; border:1px solid var(--line); width:100%; }
