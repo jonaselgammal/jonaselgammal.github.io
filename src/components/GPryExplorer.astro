@@ -78,7 +78,18 @@ const id = `gpry-${compact ? 'compact' : 'full'}`;
       animation=requestAnimationFrame(frame);
     }
     slider.addEventListener('input',()=>{if(timer)window.clearInterval(timer);timer=undefined;play.textContent='Play';draw(Number(slider.value));});
-    play.addEventListener('click',()=>{if(timer){window.clearInterval(timer);timer=undefined;play.textContent='Play';return;}play.textContent='Pause';timer=window.setInterval(()=>{const next=(Number(slider.value)+1)%data.states.length;draw(next);},900);});
+    play.addEventListener('click',()=>{
+      if(timer){window.clearInterval(timer);timer=undefined;play.textContent='Play';return;}
+      if(Number(slider.value)===data.states.length-1)draw(0,false);
+      play.textContent='Pause';
+      timer=window.setInterval(()=>{
+        const current=Number(slider.value);
+        if(current>=data.states.length-1){window.clearInterval(timer);timer=undefined;play.textContent='Play';return;}
+        const next=current+1;
+        draw(next);
+        if(next===data.states.length-1){window.clearInterval(timer);timer=undefined;play.textContent='Play';}
+      },900);
+    });
     draw(0,false);
   });
 </script>
