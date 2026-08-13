@@ -1,11 +1,19 @@
 ---
 layout: page
 title: Research
+description: Research by Jonas El Gammal in scientific machine learning, Bayesian inference, cosmology, LISA, and Pulsar Timing Array analysis.
 permalink: /research/
 ---
 
-Here you find an overview of my research interests and projects that I have been working on. There is a bunch of other stuff in the pipeline that I haven't had time to write up yet, so check back later for updates!
-I am currently working on four main topics:
+<p class="page-lede">My research connects cosmology and gravitational-wave astronomy with Bayesian inference, scientific machine learning, and high-performance scientific software.</p>
+
+<nav class="section-nav" aria-label="Research topics">
+  <strong>On this page</strong>
+  <a href="#machine-learning-for-bayesian-inference">Machine learning for Bayesian inference</a>
+  <a href="#reconstructing-curvature-perturbations-via-scalar-induced-gws">Scalar-induced gravitational waves</a>
+  <a href="#fast-pta-inference">Fast PTA inference</a>
+  <a href="#statistical-diagnostics-for-the-pta-gravitational-wave-background">PTA statistical diagnostics</a>
+</nav>
 
 ---
 
@@ -13,8 +21,9 @@ I am currently working on four main topics:
 
 ![GP surrogate and Active Learning procedure](/assets/img/Figure1.jpg)
 
-Bayesian inference is central to much of modern astrophysics, yet its application to complex models with expensive likelihoods can be computationally prohibitive. To address this, I have been working on a series of methods that use **Gaussian Processes** (GPs) as surrogate models to accelerate Bayesian analysis, particularly in the context of cosmological and gravitational wave data (though the approach is general and can be applied to any expensive likelihood).
-I have developed a software package called [**GPry**](https://github.com/jonaselgammal/GPry), which implements these methods and is designed to be a user-friendly and efficient drop-in replacement for existing samplers. The project has been developed with in collabroation with [**Jesús Torrado**](https://jesustorrado.github.io), [**Nils Schöneberg**](https://schoeneberg.github.io), [**Christian Fidler**](https://www.physik.rwth-aachen.de/cms/physik/die-fachgruppe/institute-und-lehrstuehle/~bbxnga/mitarbeiter-campus-/?gguid=PER-7PFRSMS&allou=1), [**Riccardo Buscicchio**](https://riccardobuscicchio.com/about/), and [**Germano Nardini**](https://www.uis.no/en/profile/germano-nardini) and has resulted in three papers:
+Bayesian inference is central to much of modern astrophysics, yet its application to complex models with expensive likelihoods can be computationally prohibitive. To address this, I have been working on methods that use **Gaussian processes** (GPs) as surrogate models to accelerate Bayesian analysis, particularly for cosmological and gravitational-wave data. The approach is general and can be applied to other expensive likelihoods.
+
+I developed [**GPry**](/gpry/), which implements these methods as a user-friendly alternative to conventional samplers when likelihood evaluations dominate the computational cost. The project was developed in collaboration with [**Jesús Torrado**](https://jesustorrado.github.io), [**Nils Schöneberg**](https://schoeneberg.github.io), [**Christian Fidler**](https://www.physik.rwth-aachen.de/cms/physik/die-fachgruppe/institute-und-lehrstuehle/~bbxnga/mitarbeiter-campus-/?gguid=PER-7PFRSMS&allou=1), [**Riccardo Buscicchio**](https://riccardobuscicchio.com/about/), and [**Germano Nardini**](https://www.uis.no/en/profile/germano-nardini), and has resulted in three papers:
 
 #### [1] [Surrogate Posterior for Bayesian Inference](https://arxiv.org/abs/2211.02045)
 
@@ -30,7 +39,7 @@ Finally, we apply this framework to a concrete and highly demanding application:
 
 <img src="/assets/img/gpry_animation.gif" alt="GIF showing the GPry Algorithm" style="max-width: 65%; display:block; margin:auto;">
 
-#### What's next?
+#### Current direction
 The GPry framework is still in its early stages, and there are many avenues for future work. Some potential directions include:
 - **Speeding up the GP model**: We are currently using a simple GP implementation which is based on [sklearn](https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html), but which does not fully take advantage of hardware acceleration like thread parallelization and GPUs. We are currently working on implementing the core functionality of the GPR in [jax](https://github.com/jax-ml/jax), which natively supports GPU and TPU acceleration.
 - **Interfacing**: Although [**GPry**](https://github.com/jonaselgammal/GPry) is designed to be a drop-in replacement for existing samplers, we are currently working on interfacing it with codes that are widely used in the community.
@@ -59,7 +68,7 @@ Our study also considers extensions such as non-standard thermal histories and p
   <img src="/assets/img/usr_posterior_predictives_omega_gw.svg" alt="Posterior Predictives Omega GW" style="max-width: 100%; height: auto; width: 330px;">
 </div>
 
-#### What's next?
+#### Current direction
 We are currently working on extending the analysis to include **non-standard thermal histories** for both constant and changing equation of state which allows for a more realistic modeling of the early universe and its impact on the SIGW background. In addition, we are applying the same analysis to determine whether the **PTA signal** can be explained by a SIGW background.
 
 ---
@@ -78,7 +87,7 @@ Currently supported samplers include:
 
 The package uses a unified prior specification format and handles all the necessary transformations between Discovery's callable interface and each sampler's expected API. This makes it straightforward to benchmark different sampling strategies and identify the most efficient approach for a given PTA dataset.
 
-#### What's next?
+#### Current direction
 We are currently working on extending discoverysamplers to support additional backends, including [blackjax](https://blackjax-devs.github.io/blackjax/) for end-to-end JAX-based inference with gradient-based samplers like NUTS. The goal is to fully leverage hardware acceleration (GPUs/TPUs) to achieve significant speed-ups in PTA parameter estimation.
 
 ---

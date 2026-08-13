@@ -1,5 +1,10 @@
 title: Jonas El Gammal
-description: My Personal Webpage
+description: Cosmologist and scientific machine-learning researcher developing accelerated Bayesian inference and gravitational-wave analysis tools.
+lang: en
+author:
+  name: Jonas El Gammal
+  url: "https://jonaselgammal.github.io"
+  picture: "/assets/img/me.jpg"
 baseurl: "" # Leave this empty for user.github.io sites
 
 url: "https://jonaselgammal.github.io"

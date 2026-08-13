@@ -3,6 +3,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {%- seo -%}
+  {%- include structured-data.html -%}
+  <meta name="theme-color" content="#7f2832">
+  <meta property="og:image" content="{{ '/assets/img/me.jpg' | absolute_url }}">
+  <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
   {%- feed_meta -%}

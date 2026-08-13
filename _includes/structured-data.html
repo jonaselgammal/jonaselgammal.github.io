@@ -1,0 +1,62 @@
+{%- if page.url == "/" -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": "{{ '/' | absolute_url }}#profile",
+  "url": "{{ '/' | absolute_url }}",
+  "mainEntity": {
+    "@type": "Person",
+    "@id": "{{ '/' | absolute_url }}#jonas-el-gammal",
+    "name": "Jonas El Gammal",
+    "url": "{{ '/' | absolute_url }}",
+    "image": "{{ '/assets/img/me.jpg' | absolute_url }}",
+    "jobTitle": "Postdoctoral Researcher",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "National Institute of Chemical Physics and Biophysics",
+      "alternateName": "KBFI/NICPB",
+      "url": "https://kbfi.ee/en/"
+    },
+    "sameAs": [
+      "https://orcid.org/0009-0005-4833-4266",
+      "https://inspirehep.net/authors/2902073",
+      "https://github.com/jonaselgammal",
+      "https://www.linkedin.com/in/jelgammal/"
+    ],
+    "knowsAbout": [
+      "Cosmology",
+      "Bayesian inference",
+      "Scientific machine learning",
+      "Gaussian processes",
+      "Gravitational-wave astronomy",
+      "Pulsar timing arrays"
+    ]
+  }
+}
+</script>
+{%- elsif page.schema_type == "SoftwareSourceCode" -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": {{ page.software_name | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "codeRepository": {{ page.repository | jsonify }},
+  "programmingLanguage": "Python",
+  "license": "https://www.gnu.org/licenses/lgpl-3.0.html",
+  "author": [
+    {"@type": "Person", "name": "Jonas El Gammal", "url": "{{ '/' | absolute_url }}"},
+    {"@type": "Person", "name": "Jesús Torrado"},
+    {"@type": "Person", "name": "Nils Schöneberg"},
+    {"@type": "Person", "name": "Christian Fidler"}
+  ],
+  "citation": [
+    "https://arxiv.org/abs/2211.02045",
+    "https://arxiv.org/abs/2305.19267",
+    "https://arxiv.org/abs/2503.21871"
+  ]
+}
+</script>
+{%- endif -%}

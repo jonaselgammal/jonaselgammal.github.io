@@ -6,20 +6,24 @@
 <title>Research | Jonas El Gammal</title>
 <meta name="generator" content="Jekyll v3.10.0" />
 <meta property="og:title" content="Research" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="My Personal Webpage" />
-<meta property="og:description" content="My Personal Webpage" />
-<link rel="canonical" href="http://localhost:4000/research/" />
-<meta property="og:url" content="http://localhost:4000/research/" />
+<meta name="author" content="Jonas El Gammal" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Research by Jonas El Gammal in scientific machine learning, Bayesian inference, cosmology, LISA, and Pulsar Timing Array analysis." />
+<meta property="og:description" content="Research by Jonas El Gammal in scientific machine learning, Bayesian inference, cosmology, LISA, and Pulsar Timing Array analysis." />
+<link rel="canonical" href="https://jonaselgammal.github.io/research/" />
+<meta property="og:url" content="https://jonaselgammal.github.io/research/" />
 <meta property="og:site_name" content="Jonas El Gammal" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Research" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"My Personal Webpage","headline":"Research","url":"http://localhost:4000/research/"}</script>
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Jonas El Gammal","url":"https://jonaselgammal.github.io"},"description":"Research by Jonas El Gammal in scientific machine learning, Bayesian inference, cosmology, LISA, and Pulsar Timing Array analysis.","headline":"Research","url":"https://jonaselgammal.github.io/research/"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css">
-  <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Jonas El Gammal" /></head>
+<meta name="theme-color" content="#7f2832">
+  <meta property="og:image" content="https://jonaselgammal.github.io/assets/img/me.jpg">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://jonaselgammal.github.io/feed.xml" title="Jonas El Gammal" /></head>
 <body><header class="site-header" role="banner">
 
   <div class="wrapper"><a class="site-title" rel="author" href="/">Jonas El Gammal</a><nav class="site-nav">
@@ -32,7 +36,7 @@
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/research/">Research</a><a class="page-link" href="/resources/">Resources</a><a class="page-link" href="/resume/">Resume</a></div>
+        <div class="trigger"><a class="page-link" href="/research/">Research</a><a class="page-link" href="/projects/">Projects</a><a class="page-link" href="/resources/">Resources</a><a class="page-link" href="/resume/">Resume</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
@@ -44,8 +48,15 @@
   </header>
 
   <div class="post-content">
-    <p>Here you find an overview of my research interests and projects that I have been working on. There is a bunch of other stuff in the pipeline that I haven’t had time to write up yet, so check back later for updates!
-I am currently working on three main topics:</p>
+    <p class="page-lede">My research connects cosmology and gravitational-wave astronomy with Bayesian inference, scientific machine learning, and high-performance scientific software.</p>
+
+<nav class="section-nav" aria-label="Research topics">
+  <strong>On this page</strong>
+  <a href="#machine-learning-for-bayesian-inference">Machine learning for Bayesian inference</a>
+  <a href="#reconstructing-curvature-perturbations-via-scalar-induced-gws">Scalar-induced gravitational waves</a>
+  <a href="#fast-pta-inference">Fast PTA inference</a>
+  <a href="#statistical-diagnostics-for-the-pta-gravitational-wave-background">PTA statistical diagnostics</a>
+</nav>
 
 <hr />
 
@@ -53,8 +64,9 @@ I am currently working on three main topics:</p>
 
 <p><img src="/assets/img/Figure1.jpg" alt="GP surrogate and Active Learning procedure" /></p>
 
-<p>Bayesian inference is central to much of modern astrophysics, yet its application to complex models with expensive likelihoods can be computationally prohibitive. To address this, I have been working on a series of methods that use <strong>Gaussian Processes</strong> (GPs) as surrogate models to accelerate Bayesian analysis, particularly in the context of cosmological and gravitational wave data (though the approach is general and can be applied to any expensive likelihood).
-I have developed a software package called <a href="https://github.com/jonaselgammal/GPry"><strong>GPry</strong></a>, which implements these methods and is designed to be a user-friendly and efficient drop-in replacement for existing samplers. The project has been developed with in collabroation with <a href="https://jesustorrado.github.io"><strong>Jes'us Torrado</strong></a>, <a href="https://schoeneberg.github.io"><strong>Nils Schöneberg</strong></a>, <a href="https://www.physik.rwth-aachen.de/cms/physik/die-fachgruppe/institute-und-lehrstuehle/~bbxnga/mitarbeiter-campus-/?gguid=PER-7PFRSMS&amp;allou=1"><strong>Christian Fidler</strong></a>, <a href="https://riccardobuscicchio.com/about/"><strong>Riccardo Buscicchio</strong></a>, and <a href="https://www.uis.no/en/profile/germano-nardini"><strong>Germano Nardini</strong></a> and has resulted in three papers:</p>
+<p>Bayesian inference is central to much of modern astrophysics, yet its application to complex models with expensive likelihoods can be computationally prohibitive. To address this, I have been working on methods that use <strong>Gaussian processes</strong> (GPs) as surrogate models to accelerate Bayesian analysis, particularly for cosmological and gravitational-wave data. The approach is general and can be applied to other expensive likelihoods.</p>
+
+<p>I developed <a href="/gpry/"><strong>GPry</strong></a>, which implements these methods as a user-friendly alternative to conventional samplers when likelihood evaluations dominate the computational cost. The project was developed in collaboration with <a href="https://jesustorrado.github.io"><strong>Jesús Torrado</strong></a>, <a href="https://schoeneberg.github.io"><strong>Nils Schöneberg</strong></a>, <a href="https://www.physik.rwth-aachen.de/cms/physik/die-fachgruppe/institute-und-lehrstuehle/~bbxnga/mitarbeiter-campus-/?gguid=PER-7PFRSMS&amp;allou=1"><strong>Christian Fidler</strong></a>, <a href="https://riccardobuscicchio.com/about/"><strong>Riccardo Buscicchio</strong></a>, and <a href="https://www.uis.no/en/profile/germano-nardini"><strong>Germano Nardini</strong></a>, and has resulted in three papers:</p>
 
 <h4 id="1-surrogate-posterior-for-bayesian-inference">[1] <a href="https://arxiv.org/abs/2211.02045">Surrogate Posterior for Bayesian Inference</a></h4>
 
@@ -70,7 +82,7 @@ I have developed a software package called <a href="https://github.com/jonaselga
 
 <p><img src="/assets/img/gpry_animation.gif" alt="GIF showing the GPry Algorithm" style="max-width: 65%; display:block; margin:auto;" /></p>
 
-<h4 id="whats-next">What’s next?</h4>
+<h4 id="current-direction">Current direction</h4>
 <p>The GPry framework is still in its early stages, and there are many avenues for future work. Some potential directions include:</p>
 <ul>
   <li><strong>Speeding up the GP model</strong>: We are currently using a simple GP implementation which is based on <a href="https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html">sklearn</a>, but which does not fully take advantage of hardware acceleration like thread parallelization and GPUs. We are currently working on implementing the core functionality of the GPR in <a href="https://github.com/jax-ml/jax">jax</a>, which natively supports GPU and TPU acceleration.</li>
@@ -103,21 +115,54 @@ I have developed a software package called <a href="https://github.com/jonaselga
   <img src="/assets/img/usr_posterior_predictives_omega_gw.svg" alt="Posterior Predictives Omega GW" style="max-width: 100%; height: auto; width: 330px;" />
 </div>
 
-<h4 id="whats-next-1">What’s next?</h4>
+<h4 id="current-direction-1">Current direction</h4>
 <p>We are currently working on extending the analysis to include <strong>non-standard thermal histories</strong> for both constant and changing equation of state which allows for a more realistic modeling of the early universe and its impact on the SIGW background. In addition, we are applying the same analysis to determine whether the <strong>PTA signal</strong> can be explained by a SIGW background.</p>
 
 <hr />
 
 <h3 id="fast-pta-inference">Fast PTA inference</h3>
 
-<p>I recently started working on PTA data analysis as part of EPTA, where I am trying to speed up Bayesian inference for PTAs using the jax-enabled PTA likelihood from <a href="https://github.com/nanograv/discovery"><strong>discovery</strong></a>. As part of this, I have written a number of interfaces to samplers that I am collecting <a href="https://github.com/jonaselgammal/discoverysamplers"><strong>here</strong></a>. Currently supported samplers are:</p>
+<p>Pulsar Timing Arrays (PTAs) are a powerful tool for detecting low-frequency gravitational waves by monitoring the precise timing of millisecond pulsars. However, Bayesian inference for PTA data is notoriously expensive, often requiring millions of likelihood evaluations due to the high dimensionality of the parameter space and the complexity of the noise models involved.</p>
+
+<p>To address this, I have developed <a href="https://github.com/jonaselgammal/discoverysamplers"><strong>discoverysamplers</strong></a>, a Python package that provides lightweight bridge interfaces connecting <a href="https://github.com/nanograv/discovery"><strong>Discovery</strong></a> (a JAX-enabled PTA likelihood code developed by NANOGrav) to various state-of-the-art sampling backends. The package is designed to be modular and easy to use, allowing researchers to seamlessly switch between different samplers while maintaining a consistent interface.</p>
+
+<p>Currently supported samplers include:</p>
 <ul>
-  <li><a href="https://nessai.readthedocs.io/en/latest/">nessai</a>: Nested sampling with normalizing flows</li>
-  <li><a href="https://github.com/mikekatz04/Eryn">eryn</a>: RJMCMC sampler with parallel tempering</li>
-  <li><a href="https://gpry.readthedocs.io/en/latest/">GPry</a>: See above for details</li>
+  <li><a href="https://github.com/mikekatz04/Eryn"><strong>Eryn</strong></a>: Ensemble MCMC with parallel tempering and reversible-jump support</li>
+  <li><a href="https://nessai.readthedocs.io/en/latest/"><strong>Nessai</strong></a>: Flow-based nested sampling with importance sampling</li>
+  <li><a href="https://github.com/Joshuaalbert/jaxns"><strong>JAX-NS</strong></a>: Pure JAX nested sampling with native GPU support</li>
+  <li><a href="https://gpry.readthedocs.io/en/latest/"><strong>GPry</strong></a>: Gaussian process emulation via the Cobaya framework (see above)</li>
 </ul>
 
-<p>In addition, I am working on interfacing with <a href="https://blackjax-devs.github.io/blackjax/">blackjax</a> to enable end-to-end jax-based PTA inference.</p>
+<p>The package uses a unified prior specification format and handles all the necessary transformations between Discovery’s callable interface and each sampler’s expected API. This makes it straightforward to benchmark different sampling strategies and identify the most efficient approach for a given PTA dataset.</p>
+
+<h4 id="current-direction-2">Current direction</h4>
+<p>We are currently working on extending discoverysamplers to support additional backends, including <a href="https://blackjax-devs.github.io/blackjax/">blackjax</a> for end-to-end JAX-based inference with gradient-based samplers like NUTS. The goal is to fully leverage hardware acceleration (GPUs/TPUs) to achieve significant speed-ups in PTA parameter estimation.</p>
+
+<hr />
+
+<h3 id="statistical-diagnostics-for-the-pta-gravitational-wave-background">Statistical diagnostics for the PTA gravitational-wave background</h3>
+
+<p>One of the central open questions in PTA science is whether the observed nanohertz gravitational-wave background is of <strong>astrophysical</strong> origin, most likely a population of supermassive black hole binaries, or whether it could instead be sourced by the <strong>early Universe</strong>. In current work with <strong>Chiara Cecchini</strong>, <strong>Gabriele Franciolini</strong>, and <strong>Mauro Pieroni</strong>, I study whether this question can be answered directly from the <strong>statistics of the signal</strong> rather than from detailed population or cosmological modeling.</p>
+
+<p>The paper makes two closely related points. First, PTA data must be <strong>whitened</strong> before any statistical test is meaningful. The built-in Hellings-Downs correlations otherwise generate false positives even under a perfectly Gaussian and isotropic null hypothesis. Second, after whitening, the PTA response itself becomes the main limitation: because each pulsar averages the signal over a broad region of the sky, the response rapidly <strong>Gaussianizes</strong> the signal, even when the underlying source population is discrete and intrinsically non-Gaussian.</p>
+
+<p>In practice, this means that once the overall signal amplitude is estimated from the same realization, simple model-agnostic tests of non-Gaussianity lose almost all of their discriminatory power. What remains is mostly a mismatch in the overall variance, and that information is removed by the scale fit itself. Our conclusion is therefore fairly negative but important: in an idealized signal-dominated setup, PTAs are largely <strong>insensitive to non-Gaussianity</strong> in a model-agnostic sense, precisely because the broad antenna patterns wash the signal out. The current preprint is available on <a href="https://arxiv.org/abs/2605.05157">arXiv:2605.05157</a>.</p>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; align-items: flex-start;">
+  <div style="max-width: 360px; text-align: center;">
+    <a href="/assets/img/pta_whitening_qq.pdf">
+      <img src="/assets/img/pta_whitening_qq.png" alt="QQ plot showing false positives without whitening and good calibration after whitening" style="max-width: 100%; height: auto;" />
+    </a>
+    <p style="font-size: 0.92rem; margin-top: 0.5rem;">Without whitening, even a Gaussian isotropic null produces miscalibrated p-values. Whitening restores the expected null behavior.</p>
+  </div>
+  <div style="max-width: 360px; text-align: center;">
+    <a href="/assets/img/pta_scale_estimation_hist_multisrc.pdf">
+      <img src="/assets/img/pta_scale_estimation_hist_multisrc.png" alt="Scale estimation and antenna-pattern broadening wash out non-Gaussian signal information in PTAs" style="max-width: 100%; height: auto;" />
+    </a>
+    <p style="font-size: 0.92rem; margin-top: 0.5rem;">After scale normalization, the broad true PTA antenna pattern drives the whitened distributions close to the Gaussian null, while narrower synthetic responses retain more visible non-Gaussian structure.</p>
+  </div>
+</div>
 
   </div>
 
@@ -169,14 +214,14 @@ I have developed a software package called <a href="https://github.com/jonaselga
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
         <ul class="contact-list">
-          <li class="p-name">Jonas El Gammal</li></ul>
+          <li class="p-name">{&quot;name&quot;=&gt;&quot;Jonas El Gammal&quot;, &quot;url&quot;=&gt;&quot;https://jonaselgammal.github.io&quot;, &quot;picture&quot;=&gt;&quot;/assets/img/me.jpg&quot;}</li></ul>
       </div>
 
       <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
 </div>
 
       <div class="footer-col footer-col-3">
-        <p>My Personal Webpage</p>
+        <p>Cosmologist and scientific machine-learning researcher developing accelerated Bayesian inference and gravitational-wave analysis tools.</p>
       </div>
     </div>
 
