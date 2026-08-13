@@ -10,10 +10,10 @@ const id = `gpry-${compact ? 'compact' : 'full'}`;
     <div class="gp-lab__metric"><span>expensive evaluations</span><strong data-count>3</strong></div>
   </div>
   <div class="gp-lab__plot">
-    <svg viewBox="0 0 900 390" role="img" aria-label="Target log posterior, Gaussian-process surrogate, uncertainty, and selected evaluations">
+    <svg viewBox="0 0 900 405" role="img" aria-label="Target log posterior, Gaussian-process surrogate, uncertainty, and selected evaluations">
       <defs><clipPath id={`${id}-plot-clip`}><rect x="48" y="22" width="834" height="330" /></clipPath></defs>
       <g data-grid></g><g clip-path={`url(#${id}-plot-clip)`}><path data-band></path><path data-truth></path><path data-mean></path><path data-acq></path><g data-points></g><g data-next></g></g>
-      <text x="18" y="26" class="plot-label">log posterior</text><text x="450" y="380" class="plot-label">parameter x</text>
+      <text x="18" y="26" class="plot-label">log posterior</text><text x="450" y="400" class="plot-label">parameter x</text>
     </svg>
     <div class="gp-lab__legend"><span class="truth">target</span><span class="mean">GP mean</span><span class="uncertainty">uncertainty</span><span class="acquisition">acquisition</span><span class="sample">evaluations</span></div>
   </div>
@@ -32,7 +32,7 @@ const id = `gpry-${compact ? 'compact' : 'full'}`;
     const data = JSON.parse(json);
     const slider = root.querySelector<HTMLInputElement>('[data-slider]')!;
     const play = root.querySelector<HTMLButtonElement>('[data-play]')!;
-    const W=900,H=390,L=48,R=18,T=22,B=38,YMIN=-32,YMAX=2;
+    const W=900,H=405,L=48,R=18,T=22,B=53,YMIN=-32,YMAX=2;
     const xScale=(x:number)=>L+(x+4)/8*(W-L-R);
     const yScale=(y:number)=>T+(1-(y-YMIN)/(YMAX-YMIN))*(H-T-B);
     const path=(values:number[])=>values.map((v:number,i:number)=>`${i?'L':'M'}${xScale(data.x[i]).toFixed(1)},${yScale(v).toFixed(1)}`).join(' ');
@@ -45,7 +45,7 @@ const id = `gpry-${compact ? 'compact' : 'full'}`;
     };
     const normalizedAcquisition=(s:any)=>{const max=Math.max(...s.acquisition,1e-9);return s.acquisition.map((v:number)=>YMIN+1+v/max*2.4)};
     const grid=root.querySelector('[data-grid]')!;
-    grid.innerHTML=[-4,-2,0,2,4].map(x=>`<line x1="${xScale(x)}" y1="${T}" x2="${xScale(x)}" y2="${H-B}"/><text x="${xScale(x)}" y="${H-14}">${x}</text>`).join('')+[-30,-20,-10,0].map(y=>`<line x1="${L}" y1="${yScale(y)}" x2="${W-R}" y2="${yScale(y)}"/><text x="8" y="${yScale(y)+4}">${y}</text>`).join('');
+    grid.innerHTML=[-4,-2,0,2,4].map(x=>`<line x1="${xScale(x)}" y1="${T}" x2="${xScale(x)}" y2="${H-B}"/><text x="${xScale(x)}" y="${H-30}">${x}</text>`).join('')+[-30,-20,-10,0].map(y=>`<line x1="${L}" y1="${yScale(y)}" x2="${W-R}" y2="${yScale(y)}"/><text x="8" y="${yScale(y)+4}">${y}</text>`).join('');
     root.querySelector('[data-truth]')!.setAttribute('d',path(data.truth));
     let timer:number|undefined,animation:number|undefined,currentIndex=0;
     const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
