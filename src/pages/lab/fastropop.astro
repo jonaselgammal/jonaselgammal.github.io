@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FastropopExplorer from '../../components/FastropopExplorer.astro';
+---
+<BaseLayout title="fastropop population lab" description="Explore how supermassive black-hole-binary population parameters shape PTA sources and their gravitational-wave background.">
+  <header class="page-head"><div class="shell"><span class="eyebrow">Interactive lab · fastropop</span><h1>From a cosmic population to a PTA signal</h1><p>Adjust a semi-analytic merger-rate model and see how its black-hole-binary population changes across chirp mass and redshift—and what that implies for the nanohertz gravitational-wave background.</p></div></header>
+  <section class="lab-stage"><div class="shell"><FastropopExplorer /></div></section>
+  <div class="prose lab-notes"><h2>What is being calculated?</h2><p>The controls are the five parameters of fastropop’s semi-analytic population law: its normalization, mass slope and cutoff, and redshift evolution and cutoff. Together they determine how many binaries occupy each chirp-mass and redshift interval.</p><p>The upper panel separates two related questions. Source abundance identifies where PTA-band binaries are common, while GW contribution weights those systems by how strongly they affect the strain. The lower panel then compares the smooth ensemble expectation with one discrete population realization. Its irregular high-frequency structure comes from the small number of individually influential binaries in each bin, not from a change in the underlying mean population.</p></div>
+</BaseLayout>
+<style is:global>.lab-stage{background:var(--paper-deep);margin-top:clamp(1.75rem,3vw,2.75rem);padding-block:clamp(1.5rem,3vw,2.5rem)}.lab-notes{margin-top:clamp(2.5rem,4vw,3.5rem)}</style>

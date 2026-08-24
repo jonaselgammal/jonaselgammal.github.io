@@ -1,108 +1,84 @@
 ---
-import data from '../data/gpry-toy.json';
+import data1d from '../data/gpry-toy.json';
+import data2d from '../data/gpry-toy-2d.json';
 interface Props { compact?: boolean }
 const { compact = false } = Astro.props;
 const id = `gpry-${compact ? 'compact' : 'full'}`;
 ---
 <section class:list={["gp-lab", compact && "gp-lab--compact"]} id={id}>
   <div class="gp-lab__head">
-    <div><span class="eyebrow">Precomputed active-learning run</span><h2>Watch the surrogate learn</h2></div>
+    <div><span class="eyebrow">Gaussian-process active learning</span><h2>Watch the surrogate learn</h2></div>
     <div class="gp-lab__metric"><span>expensive evaluations</span><strong data-count>3</strong></div>
   </div>
-  <div class="gp-lab__plot">
-    <svg viewBox="0 0 900 405" role="img" aria-label="Target log posterior, Gaussian-process surrogate, uncertainty, and selected evaluations">
-      <defs><clipPath id={`${id}-plot-clip`}><rect x="48" y="22" width="834" height="330" /></clipPath></defs>
-      <g data-grid></g><g clip-path={`url(#${id}-plot-clip)`}><path data-band></path><path data-truth></path><path data-mean></path><path data-acq></path><g data-points></g><g data-next></g></g>
-      <text x="18" y="26" class="plot-label">log posterior</text><text x="468" y="393" text-anchor="middle" class="plot-label">parameter x</text>
-    </svg>
-    <div class="gp-lab__legend"><span class="truth">target</span><span class="mean">GP mean</span><span class="uncertainty">uncertainty</span><span class="acquisition">acquisition</span><span class="sample">evaluations</span></div>
+  <label class="gp-lab__mode">Example<select data-mode-select aria-label="Demonstration dimensionality"><option value="1d">1D active learning</option><option value="2d">2D · NORA batch</option></select></label>
+
+  <div data-view="1d">
+    <div class="gp-lab__plot">
+      <svg viewBox="0 0 900 405" role="img" aria-label="Target log posterior, Gaussian-process surrogate, uncertainty, and selected evaluations">
+        <defs><clipPath id={`${id}-plot-clip`}><rect x="48" y="22" width="834" height="330" /></clipPath></defs>
+        <g data-grid></g><g clip-path={`url(#${id}-plot-clip)`}><path data-band></path><path data-truth></path><path data-mean></path><path data-acq></path><g data-points></g><g data-next></g></g>
+        <text x="18" y="26" class="plot-label">log posterior</text><text x="468" y="393" text-anchor="middle" class="plot-label">parameter x</text>
+      </svg>
+      <div class="gp-lab__legend"><span class="truth">target</span><span class="mean">GP mean</span><span class="uncertainty">uncertainty</span><span class="acquisition">acquisition</span><span class="sample">evaluations</span></div>
+    </div>
   </div>
+
+  <div data-view="2d" hidden>
+    <div class="gp2-grid">
+      <figure class="gp2-panel"><figcaption><strong>GP mean</strong><span>surrogate log posterior</span></figcaption><canvas data-panel="mean" aria-label="Gaussian-process predictive mean contour plot"></canvas></figure>
+      <figure class="gp2-panel"><figcaption><strong>GP uncertainty</strong><span>predictive standard deviation</span></figcaption><canvas data-panel="std" aria-label="Gaussian-process predictive uncertainty contour plot"></canvas></figure>
+      <figure class="gp2-panel"><figcaption><strong>LogExp acquisition</strong><span>exploration × posterior relevance</span></figcaption><canvas data-panel="acquisition" aria-label="GPry LogExp acquisition contour plot"></canvas></figure>
+      <figure class="gp2-panel"><figcaption><strong>NORA sample & batch</strong><span>mean-posterior sample · next 4 locations</span></figcaption><canvas data-panel="nora" aria-label="NORA candidate sample and selected batch locations"></canvas></figure>
+    </div>
+    <div class="gp2-key"><span class="evaluated">evaluated</span><span class="candidate">NORA sample</span><span class="batch">selected batch</span></div>
+  </div>
+
   <div class="gp-lab__controls">
     <button type="button" data-play aria-label="Play active-learning sequence">Play</button>
-    <label>Iteration <input data-slider type="range" min="0" max={data.states.length - 1} value="0" /></label>
-    <output data-step>01 / {String(data.states.length).padStart(2,'0')}</output>
+    <label>Iteration <input data-slider type="range" min="0" max={data1d.states.length - 1} value="0" /></label>
+    <output data-step>01 / {String(data1d.states.length).padStart(2,'0')}</output>
   </div>
-  {!compact && <p class="gp-lab__note">The browser replays a deterministic, precomputed RBF-GP run. No fitting or inference is performed client-side. The target is an illustrative asymmetric two-feature log posterior.</p>}
-  <script is:inline type="application/json" data-gp-json set:html={JSON.stringify(data)}></script>
+  {!compact && <p class="gp-lab__note" data-note>The target is an illustrative asymmetric log posterior. At each iteration, the Gaussian process updates its mean and uncertainty from the marked evaluations; the acquisition function then balances posterior relevance against what the model still does not know.</p>}
+  <script is:inline type="application/json" data-gp-json set:html={JSON.stringify({one:data1d,two:data2d})}></script>
 </section>
 
 <script>
   document.querySelectorAll<HTMLElement>('.gp-lab').forEach((root) => {
-    const json = root.querySelector('[data-gp-json]')?.textContent || '{}';
-    const data = JSON.parse(json);
-    const slider = root.querySelector<HTMLInputElement>('[data-slider]')!;
-    const play = root.querySelector<HTMLButtonElement>('[data-play]')!;
+    const all=JSON.parse(root.querySelector('[data-gp-json]')?.textContent||'{}');
+    const one=all.one,two=all.two,slider=root.querySelector<HTMLInputElement>('[data-slider]')!,play=root.querySelector<HTMLButtonElement>('[data-play]')!;
     const W=900,H=405,L=48,R=18,T=22,B=53,YMIN=-32,YMAX=2;
-    const xScale=(x:number)=>L+(x+4)/8*(W-L-R);
-    const yScale=(y:number)=>T+(1-(y-YMIN)/(YMAX-YMIN))*(H-T-B);
-    const path=(values:number[])=>values.map((v:number,i:number)=>`${i?'L':'M'}${xScale(data.x[i]).toFixed(1)},${yScale(v).toFixed(1)}`).join(' ');
-    const bandPath=(mean:number[],std:number[])=>{
-      const upper=mean.map((v:number,i:number)=>v+1.5*std[i]);
-      const lower=mean.map((v:number,i:number)=>v-1.5*std[i]);
-      const top=path(upper);
-      const bottom=lower.map((_:number,j:number)=>{const i=lower.length-1-j;return `L${xScale(data.x[i]).toFixed(1)},${yScale(lower[i]).toFixed(1)}`}).join(' ');
-      return `${top} ${bottom} Z`;
-    };
-    const normalizedAcquisition=(s:any)=>{const max=Math.max(...s.acquisition,1e-9);return s.acquisition.map((v:number)=>YMIN+1+v/max*2.4)};
+    const xScale=(x:number)=>L+(x+4)/8*(W-L-R),yScale=(y:number)=>T+(1-(y-YMIN)/(YMAX-YMIN))*(H-T-B);
+    const path=(v:number[])=>v.map((y:number,i:number)=>`${i?'L':'M'}${xScale(one.x[i]).toFixed(1)},${yScale(y).toFixed(1)}`).join(' ');
+    const bandPath=(m:number[],s:number[])=>`${path(m.map((v,i)=>v+1.5*s[i]))} ${m.map((_,j)=>{const i=m.length-1-j;return `L${xScale(one.x[i]).toFixed(1)},${yScale(m[i]-1.5*s[i]).toFixed(1)}`}).join(' ')} Z`;
+    const normAcq=(s:any)=>{const max=Math.max(...s.acquisition,1e-9);return s.acquisition.map((v:number)=>YMIN+1+v/max*2.4)};
     const grid=root.querySelector('[data-grid]')!;
     grid.innerHTML=[-4,-2,0,2,4].map(x=>`<line x1="${xScale(x)}" y1="${T}" x2="${xScale(x)}" y2="${H-B}"/><text x="${xScale(x)}" y="${H-30}">${x}</text>`).join('')+[-30,-20,-10,0].map(y=>`<line x1="${L}" y1="${yScale(y)}" x2="${W-R}" y2="${yScale(y)}"/><text x="8" y="${yScale(y)+4}">${y}</text>`).join('');
-    root.querySelector('[data-truth]')!.setAttribute('d',path(data.truth));
-    let timer:number|undefined,animation:number|undefined,currentIndex=0;
-    const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function renderCurves(mean:number[],std:number[],acquisition:number[]){
-      root.querySelector('[data-band]')!.setAttribute('d',bandPath(mean,std));
-      root.querySelector('[data-mean]')!.setAttribute('d',path(mean));
-      root.querySelector('[data-acq]')!.setAttribute('d',path(acquisition));
-    }
-    function updateAnnotations(index:number){
-      const s=data.states[index];
-      root.querySelector('[data-points]')!.innerHTML=s.selected.map((i:number)=>`<circle cx="${xScale(data.x[i])}" cy="${yScale(data.truth[i])}" r="5"/>`).join('');
-      root.querySelector('[data-next]')!.innerHTML=`<line x1="${xScale(data.x[s.next])}" y1="${T}" x2="${xScale(data.x[s.next])}" y2="${H-B}"/><text x="${xScale(data.x[s.next])+7}" y="${T+14}">next</text>`;
-      root.querySelector('[data-count]')!.textContent=String(s.selected.length);
-      root.querySelector('[data-step]')!.textContent=`${String(index+1).padStart(2,'0')} / ${String(data.states.length).padStart(2,'0')}`;
-      slider.value=String(index);
-    }
-    function draw(index:number,animate=true){
-      if(animation)cancelAnimationFrame(animation);
-      const from=data.states[currentIndex],to=data.states[index];
-      const fromAcq=normalizedAcquisition(from),toAcq=normalizedAcquisition(to);
-      updateAnnotations(index);
-      if(!animate||reducedMotion||index===currentIndex){renderCurves(to.mean,to.std,toAcq);currentIndex=index;return;}
-      const started=performance.now(),duration=460;
-      const frame=(now:number)=>{
-        const raw=Math.min(1,(now-started)/duration),t=raw<.5?2*raw*raw:1-(-2*raw+2)**2/2;
-        const mix=(a:number[],b:number[])=>a.map((v:number,i:number)=>v+(b[i]-v)*t);
-        renderCurves(mix(from.mean,to.mean),mix(from.std,to.std),mix(fromAcq,toAcq));
-        if(raw<1)animation=requestAnimationFrame(frame);else{animation=undefined;currentIndex=index;}
-      };
-      animation=requestAnimationFrame(frame);
-    }
-    slider.addEventListener('input',()=>{if(timer)window.clearInterval(timer);timer=undefined;play.textContent='Play';draw(Number(slider.value));});
-    play.addEventListener('click',()=>{
-      if(timer){window.clearInterval(timer);timer=undefined;play.textContent='Play';return;}
-      if(Number(slider.value)===data.states.length-1)draw(0,false);
-      play.textContent='Pause';
-      timer=window.setInterval(()=>{
-        const current=Number(slider.value);
-        if(current>=data.states.length-1){window.clearInterval(timer);timer=undefined;play.textContent='Play';return;}
-        const next=current+1;
-        draw(next);
-        if(next===data.states.length-1){window.clearInterval(timer);timer=undefined;play.textContent='Play';}
-      },900);
-    });
-    draw(0,false);
+    root.querySelector('[data-truth]')!.setAttribute('d',path(one.truth));
+    let mode='1d',timer:number|undefined,animation:number|undefined,current={one:0,two:0};
+    const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function curves(m:number[],s:number[],a:number[]){root.querySelector('[data-band]')!.setAttribute('d',bandPath(m,s));root.querySelector('[data-mean]')!.setAttribute('d',path(m));root.querySelector('[data-acq]')!.setAttribute('d',path(a));}
+    function annotations(i:number){const s=one.states[i];root.querySelector('[data-points]')!.innerHTML=s.selected.map((j:number)=>`<circle cx="${xScale(one.x[j])}" cy="${yScale(one.truth[j])}" r="5"/>`).join('');root.querySelector('[data-next]')!.innerHTML=`<line x1="${xScale(one.x[s.next])}" y1="${T}" x2="${xScale(one.x[s.next])}" y2="${H-B}"/><text x="${xScale(one.x[s.next])+7}" y="${T+14}">next</text>`;}
+
+    const palettes={mean:[[244,241,234],[154,179,174],[44,85,88],[21,35,38]],std:[[244,241,234],[190,211,204],[82,122,123],[31,66,69]],acquisition:[[244,241,234],[223,190,165],[168,127,104],[72,55,51]]};
+    const lerp=(a:number,b:number,t:number)=>a+(b-a)*t;
+    function color(p:number[][],t:number){t=Math.max(0,Math.min(.999,t))*(p.length-1);const i=Math.floor(t),f=t-i;return `rgb(${p[i].map((v,j)=>Math.round(lerp(v,p[i+1][j],f))).join(',')})`;}
+    function range(values:number[][],kind:string){const flat=values.flat().filter(Number.isFinite).sort((a,b)=>a-b);if(kind==='mean')return[-16,0.5];if(kind==='std')return[0,1];return[flat[Math.floor(flat.length*.05)],flat[Math.floor(flat.length*.97)]];}
+    function contours(ctx:CanvasRenderingContext2D,v:number[][],levels:number[],pw:number,ph:number){const n=v.length,cw=pw/(n-1),ch=ph/(n-1),table:any={1:[3,0],2:[0,1],3:[3,1],4:[1,2],5:[3,2,0,1],6:[0,2],7:[3,2],8:[2,3],9:[0,2],10:[0,3,1,2],11:[1,2],12:[1,3],13:[0,1],14:[3,0]};ctx.strokeStyle='rgba(24,35,40,.25)';ctx.lineWidth=.65;for(const z of levels){ctx.beginPath();for(let y=0;y<n-1;y++)for(let x=0;x<n-1;x++){const q=[v[y][x],v[y][x+1],v[y+1][x+1],v[y+1][x]],code=(q[0]>z?1:0)|(q[1]>z?2:0)|(q[2]>z?4:0)|(q[3]>z?8:0),edges=table[code];if(!edges)continue;const ep=(e:number)=>{const pairs=[[0,1],[1,2],[3,2],[0,3]],ab=pairs[e],a=ab[0],b=ab[1],t=(z-q[a])/(q[b]-q[a]||1),pos=[[x,y],[x+1,y],[x+1,y+1],[x,y+1]],pa=pos[a],pb=pos[b];return[(pa[0]+(pb[0]-pa[0])*t)*cw,(pa[1]+(pb[1]-pa[1])*t)*ch]};for(let k=0;k<edges.length;k+=2){const a=ep(edges[k]),b=ep(edges[k+1]);ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);}}ctx.stroke();}}
+    function panel(canvas:HTMLCanvasElement,values:number[][],kind:string,state:any){const rect=canvas.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2),pw=Math.max(280,rect.width),ph=Math.max(220,rect.height);canvas.width=pw*dpr;canvas.height=ph*dpr;const c=canvas.getContext('2d')!;c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,pw,ph);const pad={l:48,r:10,t:10,b:38},w=pw-pad.l-pad.r,h=ph-pad.t-pad.b,n=values.length,[lo,hi]=range(values,kind==='nora'?'mean':kind);c.save();c.translate(pad.l,pad.t);const pal=palettes[kind==='nora'?'mean':kind as keyof typeof palettes],field=document.createElement('canvas');field.width=n;field.height=n;const fc=field.getContext('2d')!,pixels=fc.createImageData(n,n);for(let y=0;y<n;y++)for(let x=0;x<n;x++){const css=color(pal,(values[y][x]-lo)/(hi-lo||1)),rgb=css.match(/\d+/g)!.map(Number),i=(y*n+x)*4;pixels.data[i]=rgb[0];pixels.data[i+1]=rgb[1];pixels.data[i+2]=rgb[2];pixels.data[i+3]=255}fc.putImageData(pixels,0,0);c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';c.drawImage(field,0,0,w,h);contours(c,values,[.18,.36,.54,.72,.9].map(t=>lo+t*(hi-lo)),w,h);const map=(p:number[])=>[(p[0]-two.bounds[0])/(two.bounds[1]-two.bounds[0])*w,(two.bounds[1]-p[1])/(two.bounds[1]-two.bounds[0])*h];if(kind==='mean'||kind==='std'||kind==='acquisition'){for(const p of state.evaluated){const [x,y]=map(p);c.fillStyle='#182328';c.strokeStyle='#f4f1ea';c.lineWidth=1;c.beginPath();c.arc(x,y,3.4,0,Math.PI*2);c.fill();c.stroke()}}else{c.globalAlpha=.32;c.fillStyle='#182328';for(const p of state.candidates){const [x,y]=map(p);c.beginPath();c.arc(x,y,1.25,0,Math.PI*2);c.fill()}c.globalAlpha=1;for(const p of state.evaluated){const [x,y]=map(p);c.fillStyle='#182328';c.strokeStyle='#f4f1ea';c.lineWidth=1;c.beginPath();c.arc(x,y,3.2,0,Math.PI*2);c.fill();c.stroke()}state.batch.forEach((p:number[],i:number)=>{const[x,y]=map(p);c.fillStyle='#a87f68';c.strokeStyle='#f4f1ea';c.lineWidth=1.8;c.beginPath();c.arc(x,y,5.2,0,Math.PI*2);c.fill();c.stroke();c.fillStyle='#182328';c.font='8px DM Mono';c.fillText(String(i+1),x+7,y-5)})}c.restore();c.strokeStyle='rgba(24,35,40,.16)';c.strokeRect(pad.l+.5,pad.t+.5,w,h);c.fillStyle='rgba(24,35,40,.55)';c.font='9px DM Mono';c.textAlign='center';[-3,0,3].forEach(v=>{const x=pad.l+(v-two.bounds[0])/(two.bounds[1]-two.bounds[0])*w;c.fillText(String(v),x,ph-22)});c.textAlign='right';[-3,0,3].forEach(v=>{const y=pad.t+(two.bounds[1]-v)/(two.bounds[1]-two.bounds[0])*h;c.fillText(String(v),pad.l-8,y+3)});c.textAlign='center';c.fillText('parameter x',pad.l+w/2,ph-5);c.save();c.translate(12,pad.t+h/2);c.rotate(-Math.PI/2);c.fillText('parameter y',0,0);c.restore();c.textAlign='start';}
+    const mixGrid=(a:number[][],b:number[][],t:number)=>a.map((row,y)=>row.map((v,x)=>lerp(v,b[y][x],t)));
+    function draw2(i:number,fromIndex:number|undefined=undefined,t=1){const s=two.states[i],from=fromIndex===undefined?s:two.states[fromIndex];root.querySelectorAll<HTMLCanvasElement>('[data-panel]').forEach(canvas=>{const k=canvas.dataset.panel!,field=k==='nora'?'mean':k,values=t===1?s[field]:mixGrid(from[field],s[field],t);panel(canvas,values,k,s)});}
+    function meta(i:number){const states=mode==='1d'?one.states:two.states,s=states[i];root.querySelector('[data-count]')!.textContent=String(mode==='1d'?s.selected.length:s.evaluated.length);root.querySelector('[data-step]')!.textContent=`${String(i+1).padStart(2,'0')} / ${String(states.length).padStart(2,'0')}`;slider.value=String(i);}
+    function draw(i:number,animate=true){if(animation)cancelAnimationFrame(animation);const key=mode==='1d'?'one':'two',fromIndex=current[key],from=(mode==='1d'?one:two).states[fromIndex],to=(mode==='1d'?one:two).states[i];meta(i);if(mode==='2d'){if(!animate||reduced||i===current.two){draw2(i);current.two=i;return}const start=performance.now(),duration=520,frame=(now:number)=>{const r=Math.min(1,(now-start)/duration),t=r<.5?2*r*r:1-(-2*r+2)**2/2;draw2(i,fromIndex,t);if(r<1)animation=requestAnimationFrame(frame);else{animation=undefined;current.two=i}};animation=requestAnimationFrame(frame);return}annotations(i);const fa=normAcq(from),ta=normAcq(to);if(!animate||reduced||i===current.one){curves(to.mean,to.std,ta);current.one=i;return}const start=performance.now(),duration=460,frame=(now:number)=>{const r=Math.min(1,(now-start)/duration),t=r<.5?2*r*r:1-(-2*r+2)**2/2,mix=(a:number[],b:number[])=>a.map((v,j)=>lerp(v,b[j],t));curves(mix(from.mean,to.mean),mix(from.std,to.std),mix(fa,ta));if(r<1)animation=requestAnimationFrame(frame);else{animation=undefined;current.one=i}};animation=requestAnimationFrame(frame)}
+    function stop(){if(timer)clearInterval(timer);timer=undefined;play.textContent='Play'}
+    root.querySelector<HTMLSelectElement>('[data-mode-select]')!.addEventListener('change',event=>{stop();mode=(event.currentTarget as HTMLSelectElement).value;root.querySelectorAll<HTMLElement>('[data-view]').forEach(v=>v.hidden=v.dataset.view!==mode);const states=mode==='1d'?one.states:two.states;slider.max=String(states.length-1);slider.value='0';const note=root.querySelector('[data-note]');if(note)note.textContent=mode==='1d'?'The target is an illustrative asymmetric log posterior. At each iteration, the Gaussian process updates its mean and uncertainty from the marked evaluations; the acquisition function then balances posterior relevance against what the model still does not know.':'The mean and uncertainty panels describe the current surrogate. LogExp combines both into a utility for new evaluations. NORA explores candidates distributed like the surrogate posterior, then uses sequential Kriging-believer conditioning to select four informative, non-redundant locations for parallel evaluation.';requestAnimationFrame(()=>draw(0,false))});
+    slider.addEventListener('input',()=>{stop();draw(Number(slider.value))});play.addEventListener('click',()=>{if(timer){stop();return}const states=mode==='1d'?one.states:two.states;if(Number(slider.value)===states.length-1)draw(0,false);play.textContent='Pause';timer=window.setInterval(()=>{const i=Number(slider.value);if(i>=states.length-1){stop();return}draw(i+1);if(i+1===states.length-1)stop()},1050)});window.addEventListener('resize',()=>{if(mode==='2d')draw2(Number(slider.value))},{passive:true});draw(0,false);
   });
 </script>
 
 <style>
-  .gp-lab{background:var(--night);color:var(--cream);padding:clamp(1.2rem,3vw,2.2rem)}
-  .gp-lab__head{align-items:end;display:flex;justify-content:space-between;margin-bottom:1rem}
-  h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,3.2rem);font-weight:400;letter-spacing:-.04em;margin:.3rem 0 0}
-  .gp-lab__metric{text-align:right}.gp-lab__metric span{color:rgba(244,241,234,.5);display:block;font-family:var(--mono);font-size:.62rem;text-transform:uppercase}.gp-lab__metric strong{color:var(--signal-soft);font-family:var(--serif);font-size:2.5rem;font-weight:400}
-  .gp-lab__plot{border:1px solid var(--line-dark);position:relative}svg{width:100%}
-  [data-grid] :global(line){stroke:rgba(244,241,234,.1);stroke-width:1}[data-grid] :global(text),.plot-label{fill:rgba(244,241,234,.48);font-family:var(--mono);font-size:11px}
-  [data-truth]{fill:none;stroke:var(--cream);stroke-dasharray:5 5;stroke-width:2}[data-mean]{fill:none;stroke:var(--signal);stroke-width:3}[data-band]{fill:rgba(82,122,123,.18);stroke:none}[data-acq]{fill:none;stroke:var(--signal-soft);stroke-width:2}[data-points] :global(circle){fill:var(--cream);stroke:var(--night);stroke-width:2}[data-next] :global(line){stroke:var(--signal-soft);stroke-dasharray:3 4}[data-next] :global(text){fill:var(--signal-soft);font-family:var(--mono);font-size:11px}
-  .gp-lab__legend{border-top:1px solid var(--line-dark);display:flex;gap:1rem;justify-content:flex-end;padding:.55rem .8rem .65rem}.gp-lab__legend span{font-family:var(--mono);font-size:.58rem;text-transform:uppercase}.gp-lab__legend span:before{content:"";display:inline-block;height:2px;margin-right:.35rem;vertical-align:middle;width:16px}.truth:before{background:var(--cream)}.mean:before{background:var(--signal)}.uncertainty:before{background:rgba(82,122,123,.48);height:7px!important}.acquisition:before{background:var(--signal-soft)}.sample:before{background:var(--cream);border-radius:50%;height:7px!important;width:7px!important}
-  .gp-lab__controls{align-items:center;display:grid;gap:1rem;grid-template-columns:auto 1fr auto;padding-top:1rem}.gp-lab__controls button{background:transparent;border:1px solid var(--line-dark);color:var(--cream);cursor:pointer;font-family:var(--mono);font-size:.65rem;padding:.6rem .8rem;text-transform:uppercase}.gp-lab__controls label{align-items:center;color:rgba(244,241,234,.55);display:grid;font-family:var(--mono);font-size:.62rem;gap:.7rem;grid-template-columns:auto 1fr;text-transform:uppercase}.gp-lab__controls input{accent-color:var(--signal);width:100%}.gp-lab__controls output{font-family:var(--mono);font-size:.65rem}.gp-lab__note{color:rgba(244,241,234,.5);font-size:.72rem;line-height:1.5;margin:1rem 0 0}.gp-lab--compact .gp-lab__head{margin-bottom:.5rem}.gp-lab--compact .gp-lab__note{display:none}
-  @media(max-width:600px){.gp-lab__metric{display:none}.gp-lab__legend{display:none}.gp-lab__controls{grid-template-columns:auto 1fr}.gp-lab__controls output{display:none}}
+  .gp-lab{background:transparent;color:var(--ink);padding:clamp(1.2rem,3vw,2.2rem)}.gp-lab__head{align-items:end;display:flex;justify-content:space-between;margin-bottom:1rem}h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,3.2rem);font-weight:400;letter-spacing:-.04em;margin:.3rem 0 0}.gp-lab__metric{text-align:right}.gp-lab__metric span{color:var(--ink-soft);display:block;font-family:var(--mono);font-size:.62rem;text-transform:uppercase}.gp-lab__metric strong{color:var(--signal);font-family:var(--serif);font-size:2.5rem;font-weight:400}.gp-lab__mode{align-items:center;color:var(--ink-soft);display:flex;font-family:var(--mono);font-size:.6rem;gap:.55rem;margin:0 0 .85rem;text-transform:uppercase}.gp-lab__mode select{appearance:auto;background:rgba(244,241,234,.48);border:1px solid var(--line);border-radius:0;color:var(--ink);font-family:var(--mono);font-size:.62rem;padding:.5rem 2rem .5rem .65rem;text-transform:uppercase}
+  .gp-lab__plot{background:rgba(244,241,234,.48);border:1px solid var(--line);position:relative}.gp-lab__plot svg{width:100%}[data-grid] :global(line){stroke:rgba(24,35,40,.1);stroke-width:1}[data-grid] :global(text),.plot-label{fill:rgba(24,35,40,.5);font-family:var(--mono);font-size:11px}[data-truth]{fill:none;stroke:var(--ink);stroke-dasharray:5 5;stroke-width:2}[data-mean]{fill:none;stroke:var(--signal);stroke-width:3}[data-band]{fill:rgba(82,122,123,.18);stroke:none}[data-acq]{fill:none;stroke:var(--warm-signal);stroke-width:2}[data-points] :global(circle){fill:var(--ink);stroke:var(--paper);stroke-width:2}[data-next] :global(line){stroke:var(--warm-signal);stroke-dasharray:3 4}[data-next] :global(text){fill:var(--warm-signal);font-family:var(--mono);font-size:11px}.gp-lab__legend{border-top:1px solid var(--line);display:flex;gap:1rem;justify-content:flex-end;padding:.55rem .8rem .65rem}.gp-lab__legend span,.gp2-key span{font-family:var(--mono);font-size:.58rem;text-transform:uppercase}.gp-lab__legend span:before,.gp2-key span:before{content:"";display:inline-block;height:2px;margin-right:.35rem;vertical-align:middle;width:16px}.truth:before{background:var(--ink)}.mean:before{background:var(--signal)}.uncertainty:before{background:rgba(82,122,123,.48);height:7px!important}.acquisition:before{background:var(--warm-signal)}.sample:before,.evaluated:before{background:var(--ink);border-radius:50%;height:7px!important;width:7px!important}
+  .gp2-grid{display:grid;gap:1px;grid-template-columns:1fr 1fr}.gp2-panel{background:rgba(244,241,234,.48);border:1px solid var(--line);margin:0;min-width:0;padding:.75rem}.gp2-panel figcaption{align-items:baseline;display:flex;gap:.6rem;margin:0 0 .55rem}.gp2-panel strong{font-family:var(--serif);font-size:1.08rem;font-weight:400}.gp2-panel figcaption span{color:var(--ink-soft);font-family:var(--mono);font-size:.55rem}.gp2-panel canvas{display:block;height:clamp(230px,25vw,320px);width:100%}.gp2-key{display:flex;gap:1.1rem;justify-content:flex-end;padding:.7rem .2rem 0}.candidate:before{background:rgba(24,35,40,.35);border-radius:50%;height:5px!important;width:5px!important}.batch:before{background:var(--warm-signal);border-radius:50%;height:8px!important;width:8px!important}
+  .gp-lab__controls{align-items:center;display:grid;gap:1rem;grid-template-columns:auto 1fr auto;padding-top:1rem}.gp-lab__controls button{background:rgba(244,241,234,.48);border:1px solid var(--line);color:var(--ink);cursor:pointer;font-family:var(--mono);font-size:.65rem;padding:.6rem .8rem;text-transform:uppercase}.gp-lab__controls label{align-items:center;color:var(--ink-soft);display:grid;font-family:var(--mono);font-size:.62rem;gap:.7rem;grid-template-columns:auto 1fr;text-transform:uppercase}.gp-lab__controls input{accent-color:var(--signal);width:100%}.gp-lab__controls output{font-family:var(--mono);font-size:.65rem}.gp-lab__note{color:var(--ink-soft);font-size:.72rem;line-height:1.5;margin:1rem 0 0}.gp-lab--compact .gp-lab__head{margin-bottom:.5rem}.gp-lab--compact .gp-lab__note{display:none}[hidden]{display:none!important}
+  @media(max-width:720px){.gp2-grid{grid-template-columns:1fr}.gp2-panel canvas{height:270px}.gp2-panel figcaption{align-items:flex-start;flex-direction:column;gap:.15rem}.gp-lab__metric{display:none}.gp-lab__legend{display:none}.gp-lab__controls{grid-template-columns:auto 1fr}.gp-lab__controls output{display:none}.gp2-key{justify-content:flex-start;overflow-x:auto;white-space:nowrap}}
 </style>
