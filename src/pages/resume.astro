@@ -1,11 +1,79 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 const experience=[
-  {logo:'/assets/icons/kbfi.svg',org:'KBFI / NICPB',url:'https://kbfi.ee/en/',role:'Postdoctoral researcher',years:'2026–present',text:'Cosmology, gravitational-wave inference, and scientific machine learning in Tallinn, Estonia.'},
+  {logo:'/assets/icons/kbfi.svg',org:'KBFI / NICPB',url:'https://kbfi.ee/en/',role:'Postdoctoral researcher',years:'2026–present',text:'Cosmology, gravitational-wave inference, and scientific machine learning.'},
   {logo:'/assets/icons/insubria.png',org:'University of Insubria',url:'https://www.uninsubria.eu',role:'Postdoctoral researcher',years:'2025–2026',text:'GPU-accelerated and differentiable Pulsar Timing Array inference with JAX in the EPTA collaboration.'},
-  {logo:'/assets/icons/cern.png',org:'CERN Theory',url:'https://theory.cern/',role:'Visiting researcher',years:'2024',text:'Scalar-induced gravitational-wave analysis for LISA with Mauro Pieroni and Gabriele Franciolini.'},
+  {logo:'/assets/icons/cern.png',org:'CERN',url:'https://theory.cern/',role:'Visiting researcher',years:'2024',text:'Developed a LISA analysis pipeline for scalar-induced gravitational waves.'},
 ];
 const publications=[['2026','Are PTA measurements sensitive to gravitational wave non-Gaussianities?','https://arxiv.org/abs/2605.05157'],['2025','Accelerating LISA inference with Gaussian processes','https://arxiv.org/abs/2503.21871'],['2025','Reconstructing Primordial Curvature Perturbations via Scalar-Induced GWs','https://arxiv.org/abs/2501.11320'],['2023','Parallelized Acquisition for Active Learning using Monte Carlo','https://arxiv.org/abs/2305.19267'],['2022','Fast and Robust Bayesian Inference using Gaussian Processes with GPry','https://arxiv.org/abs/2211.02045']];
+const schema={
+  '@context':'https://schema.org',
+  '@graph':[
+    {
+      '@type':'ProfilePage',
+      '@id':'https://jonaselgammal.github.io/resume/#page',
+      url:'https://jonaselgammal.github.io/resume/',
+      name:'Résumé and academic CV — Jonas El Gammal',
+      mainEntity:{'@id':'https://jonaselgammal.github.io/#jonas-el-gammal'},
+      hasPart:[
+        {'@id':'https://jonaselgammal.github.io/assets/files/Jonas_El_Gammal_industry_resume.pdf#document'},
+        {'@id':'https://jonaselgammal.github.io/assets/files/CV_jonas_el_gammal.pdf#document'},
+      ],
+    },
+    {
+      '@type':'DigitalDocument',
+      '@id':'https://jonaselgammal.github.io/assets/files/Jonas_El_Gammal_industry_resume.pdf#document',
+      name:'Jonas El Gammal — Industry résumé',
+      url:'https://jonaselgammal.github.io/assets/files/Jonas_El_Gammal_industry_resume.pdf',
+      encodingFormat:'application/pdf',
+      author:{'@id':'https://jonaselgammal.github.io/#jonas-el-gammal'},
+      about:['Quantitative research','Machine learning','AI agents','Data science','Scientific software engineering','Bayesian inference'],
+      keywords:'quantitative research, machine learning, AI agents, data science, scientific software engineering, Python, JAX, Bayesian inference, uncertainty quantification',
+    },
+    {
+      '@type':'DigitalDocument',
+      '@id':'https://jonaselgammal.github.io/assets/files/CV_jonas_el_gammal.pdf#document',
+      name:'Jonas El Gammal — Academic curriculum vitae',
+      url:'https://jonaselgammal.github.io/assets/files/CV_jonas_el_gammal.pdf',
+      encodingFormat:'application/pdf',
+      author:{'@id':'https://jonaselgammal.github.io/#jonas-el-gammal'},
+      about:['Cosmology','Gravitational-wave astronomy','Scientific machine learning','Bayesian inference','Computational statistics'],
+      keywords:'academic CV, cosmology, gravitational waves, scientific machine learning, Bayesian inference, Gaussian processes, active learning, JAX, publications',
+    },
+  ],
+};
 ---
-<BaseLayout title="CV — Jonas El Gammal" description="Research experience, education, publications and software by cosmologist and scientific-ML researcher Jonas El Gammal."><header class="page-head"><div class="shell"><span class="eyebrow">Curriculum vitae</span><h1>About & CV</h1><p>Cosmologist and scientific-machine-learning researcher working across Bayesian inference, gravitational waves, and reliable computational systems.</p><a class="button button--solid" href="/assets/files/CV_jonas_el_gammal.pdf">Download full CV · PDF</a></div></header><div class="shell cv"><aside><img src="/assets/img/me.jpg" alt="Jonas El Gammal"/><h2>Jonas El Gammal</h2><p>Tallinn, Estonia</p><a href="mailto:jonas.el.gammal@rwth-aachen.de">Email</a><a href="https://orcid.org/0009-0005-4833-4266">ORCID</a><a href="https://inspirehep.net/authors/2902073">INSPIRE-HEP</a><a href="https://github.com/jonaselgammal">GitHub</a><a href="https://www.linkedin.com/in/jelgammal/">LinkedIn</a></aside><div class="cv__main"><section><span class="eyebrow">Experience</span>{experience.map(x=><article class="entry"><a class="logo" href={x.url}><img src={x.logo} alt={`${x.org} logo`}/></a><div><h3>{x.role}</h3><a href={x.url}>{x.org}</a><p>{x.text}</p></div><time>{x.years}</time></article>)}</section><section><span class="eyebrow">Education</span><article class="entry"><a class="logo" href="https://www.uis.no/en"><img src="/assets/icons/uis.png" alt="University of Stavanger logo"/></a><div><h3>PhD in Physics</h3><a href="https://www.uis.no/en">University of Stavanger</a><p><em>Cutting Edge Data Analysis for Gravitational Wave Detection with LISA</em></p></div><time>2021–2025</time></article><article class="entry"><a class="logo" href="https://www.rwth-aachen.de"><img src="/assets/icons/rwth_small.png" alt="RWTH Aachen logo"/></a><div><h3>BSc and MSc in Physics</h3><a href="https://www.rwth-aachen.de">RWTH Aachen University</a><p>Astroparticle physics and cosmology; Gaussian-process acceleration of expensive Bayesian inference.</p></div><time>2015–2020</time></article></section><section><span class="eyebrow">Selected publications</span>{publications.map(p=><article class="publication"><time>{p[0]}</time><a href={p[2]}>{p[1]}</a></article>)}</section><section><span class="eyebrow">Methods & technologies</span><p class="skills">Bayesian inference · Gaussian processes · active learning · uncertainty quantification · JAX · Python · scientific software · gravitational-wave analysis · differentiable programming · simulation-based inference</p></section></div></div></BaseLayout>
-<style>.page-head .button{margin-top:1rem}.cv{display:grid;gap:clamp(2.5rem,5vw,5rem);grid-template-columns:220px 1fr;padding-top:2.75rem}.cv aside img{aspect-ratio:4/3;object-fit:cover;width:100%}.cv aside h2{font-family:var(--serif);font-size:1.7rem;font-weight:400;margin-bottom:.2rem}.cv aside p{color:var(--ink-soft)}.cv aside a{display:block;font-family:var(--mono);font-size:.66rem;margin:.55rem 0;text-transform:uppercase}.cv__main section{border-top:1px solid var(--line);padding:1.2rem 0 2.25rem}.entry{align-items:start;border-bottom:1px solid var(--line);display:grid;gap:1.1rem;grid-template-columns:52px 1fr auto;padding:1.15rem 0}.logo{align-items:center;background:white;border:1px solid var(--line);display:flex;height:46px;justify-content:center;padding:7px}.logo img{max-height:100%;object-fit:contain}.entry h3{font-family:var(--serif);font-size:1.45rem;font-weight:400;margin:0 0 .15rem}.entry div>a{font-size:.78rem}.entry p,.skills{color:var(--ink-soft);font-size:.92rem;line-height:1.6}.entry time,.publication time{font-family:var(--mono);font-size:.65rem}.publication{display:grid;gap:1rem;grid-template-columns:60px 1fr;padding:.8rem 0}.skills{font-size:1rem}@media(max-width:700px){.cv{grid-template-columns:1fr}.cv aside{max-width:220px}.entry{grid-template-columns:45px 1fr}.entry time{grid-column:2}}</style>
+<BaseLayout title="Résumé & Academic CV — Jonas El Gammal" description="Download Jonas El Gammal’s industry résumé or academic CV, and review his experience in quantitative research, scientific machine learning, Bayesian inference, AI systems, cosmology, and scientific software." schema={schema} type="profile">
+  <header class="page-head">
+    <div class="shell">
+      <span class="eyebrow">Experience and qualifications</span>
+      <h1>Résumé & academic CV</h1>
+      <div class="document-grid" aria-label="Download résumé or academic CV">
+        <article class="document-card">
+          <span class="document-card__label">Industry · one page</span>
+          <h2>Industry résumé</h2>
+          <p>For quantitative research, machine learning, AI systems, data science, and scientific software engineering roles.</p>
+          <a class="button button--solid" href="/assets/files/Jonas_El_Gammal_industry_resume.pdf" download>Download résumé · PDF</a>
+        </article>
+        <article class="document-card">
+          <span class="document-card__label">Academic · one page</span>
+          <h2>Academic curriculum vitae</h2>
+          <p>Research appointments, education, teaching, publications, current R&amp;D, methods, and open-source packages.</p>
+          <a class="button button--solid" href="/assets/files/CV_jonas_el_gammal.pdf" download>Download academic CV · PDF</a>
+        </article>
+      </div>
+    </div>
+  </header>
+  <div class="shell cv">
+    <aside><img src="/assets/img/me.jpg" alt="Jonas El Gammal"/><h2>Jonas El Gammal</h2><p>Tallinn, Estonia</p><a href="mailto:jonas.el.gammal@rwth-aachen.de">Email</a><a href="https://orcid.org/0009-0005-4833-4266">ORCID</a><a href="https://inspirehep.net/authors/2902073">INSPIRE-HEP</a><a href="https://github.com/jonaselgammal">GitHub</a><a href="https://www.linkedin.com/in/jelgammal/">LinkedIn</a></aside>
+    <div class="cv__main">
+      <section><span class="eyebrow">Experience</span>{experience.map(x=><article class="entry"><a class="logo" href={x.url}><img src={x.logo} alt={`${x.org} logo`}/></a><div><h3>{x.role}</h3><a href={x.url}>{x.org}</a><p>{x.text}</p></div><time>{x.years}</time></article>)}</section>
+      <section><span class="eyebrow">Education</span><article class="entry"><a class="logo" href="https://www.uis.no/en"><img src="/assets/icons/uis.png" alt="University of Stavanger logo"/></a><div><h3>PhD in Physics</h3><a href="https://www.uis.no/en">University of Stavanger</a><p>Developed data-analysis methods for LISA, including Gaussian-process-accelerated Bayesian inference and reconstruction of primordial curvature perturbations from scalar-induced gravitational waves.</p></div><time>2021–2025</time></article><article class="entry"><a class="logo" href="https://www.rwth-aachen.de"><img src="/assets/icons/rwth_small.png" alt="RWTH Aachen logo"/></a><div><h3>BSc and MSc in Physics</h3><a href="https://www.rwth-aachen.de">RWTH Aachen University</a><p>Astroparticle physics and cosmology; Gaussian-process acceleration of expensive Bayesian inference. MSc grade 1.3 (approximately 3.7/4.0 GPA); BSc grade 1.7 (approximately 3.3/4.0 GPA).</p></div><time>2015–2020</time></article></section>
+      <section><span class="eyebrow">Selected publications</span>{publications.map(p=><article class="publication"><time>{p[0]}</time><a href={p[2]}>{p[1]}</a></article>)}</section>
+      <section><span class="eyebrow">Methods & technologies</span><p class="skills">Bayesian inference · probabilistic machine learning · Gaussian processes · active learning · uncertainty quantification · Monte Carlo methods · numerical optimisation · time-series analysis · AI agents and agent loops · Python · JAX · NumPy · SciPy · scikit-learn · PyTorch · TensorFlow · C++ · FastAPI · REST APIs · Docker · CI/CD · HPC and GPU computing · scientific software · gravitational-wave analysis · differentiable programming</p></section>
+    </div>
+  </div>
+</BaseLayout>
+<style>
+  .document-grid{display:grid;gap:1rem;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:1.5rem;max-width:920px}.document-card{background:color-mix(in srgb,var(--paper) 74%,white);border:1px solid var(--line);display:flex;flex-direction:column;padding:1.25rem}.document-card__label{color:var(--signal);font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase}.document-card h2{font-family:var(--serif);font-size:1.35rem;font-weight:400;margin:.45rem 0}.document-card p{color:var(--ink-soft);font-size:.86rem;line-height:1.55;margin:0 0 1rem}.document-card .button{align-self:flex-start;margin-top:auto}.cv{display:grid;gap:clamp(2.5rem,5vw,5rem);grid-template-columns:220px 1fr;padding-top:2.75rem}.cv aside img{aspect-ratio:4/3;object-fit:cover;width:100%}.cv aside h2{font-family:var(--serif);font-size:1.7rem;font-weight:400;margin-bottom:.2rem}.cv aside p{color:var(--ink-soft)}.cv aside a{display:block;font-family:var(--mono);font-size:.66rem;margin:.55rem 0;text-transform:uppercase}.cv__main section{border-top:1px solid var(--line);padding:1.2rem 0 2.25rem}.entry{align-items:start;border-bottom:1px solid var(--line);display:grid;gap:1.1rem;grid-template-columns:52px 1fr auto;padding:1.15rem 0}.logo{align-items:center;background:white;border:1px solid var(--line);display:flex;height:46px;justify-content:center;padding:7px}.logo img{max-height:100%;object-fit:contain}.entry h3{font-family:var(--serif);font-size:1.45rem;font-weight:400;margin:0 0 .15rem}.entry div>a{font-size:.78rem}.entry p,.skills{color:var(--ink-soft);font-size:.92rem;line-height:1.6}.entry time,.publication time{font-family:var(--mono);font-size:.65rem}.publication{display:grid;gap:1rem;grid-template-columns:60px 1fr;padding:.8rem 0}.skills{font-size:.94rem}@media(max-width:700px){.document-grid,.cv{grid-template-columns:1fr}.cv aside{max-width:220px}.entry{grid-template-columns:45px 1fr}.entry time{grid-column:2}}
+</style>

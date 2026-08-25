@@ -1,145 +1,140 @@
 from pathlib import Path
 
 from reportlab.lib import colors
-from reportlab.lib.enums import TA_CENTER
+from reportlab.lib.enums import TA_RIGHT
 from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import mm
-from reportlab.platypus import (
-    BaseDocTemplate,
-    Frame,
-    PageTemplate,
-    Paragraph,
-    Spacer,
-)
-
+from reportlab.platypus import BaseDocTemplate, Frame, PageTemplate, Paragraph, Table, TableStyle
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "assets/files/CV_jonas_el_gammal.pdf"
-
-INK = colors.HexColor("#20242A")
-MUTED = colors.HexColor("#59636E")
-ACCENT = colors.HexColor("#8F292F")
-RULE = colors.HexColor("#D7DCE1")
-
-
-def footer(canvas, doc):
-    canvas.saveState()
-    canvas.setStrokeColor(RULE)
-    canvas.line(18 * mm, 13 * mm, 192 * mm, 13 * mm)
-    canvas.setFont("Helvetica", 8)
-    canvas.setFillColor(MUTED)
-    canvas.drawString(18 * mm, 8.5 * mm, "Jonas El Gammal")
-    canvas.drawRightString(192 * mm, 8.5 * mm, f"Page {doc.page}")
-    canvas.restoreState()
-
+INK = colors.HexColor("#182328")
+MUTED = colors.HexColor("#626B6B")
+PETROL = colors.HexColor("#527A7B")
+PAPER = colors.HexColor("#F4F1EA")
+BAND = colors.HexColor("#E5E8E4")
+LINE = colors.HexColor("#CDD2CF")
 
 doc = BaseDocTemplate(
     str(OUTPUT),
     pagesize=A4,
-    leftMargin=18 * mm,
-    rightMargin=18 * mm,
+    leftMargin=16 * mm,
+    rightMargin=16 * mm,
     topMargin=12 * mm,
-    bottomMargin=16 * mm,
-    title="Jonas El Gammal CV",
+    bottomMargin=14 * mm,
+    title="Jonas El Gammal - Academic CV",
     author="Jonas Elias El Gammal",
+    subject="Academic curriculum vitae: cosmology, gravitational-wave astronomy, Bayesian inference, scientific machine learning, publications, teaching, and open-source software.",
+    keywords="academic CV, cosmology, gravitational waves, Bayesian inference, probabilistic machine learning, scientific machine learning, Gaussian processes, active learning, uncertainty quantification, JAX, Python, computational statistics, scientific software, pulsar timing arrays, LISA, publications",
 )
 frame = Frame(doc.leftMargin, doc.bottomMargin, doc.width, doc.height, id="main")
-doc.addPageTemplates(PageTemplate(id="cv", frames=[frame], onPage=footer))
-
-base = getSampleStyleSheet()
 styles = {
-    "name": ParagraphStyle("name", parent=base["Title"], fontName="Helvetica-Bold", fontSize=21, leading=24, textColor=INK, alignment=TA_CENTER, spaceAfter=2),
-    "tag": ParagraphStyle("tag", parent=base["Normal"], fontName="Helvetica", fontSize=9.6, leading=12, textColor=MUTED, alignment=TA_CENTER, spaceAfter=3),
-    "links": ParagraphStyle("links", parent=base["Normal"], fontName="Helvetica", fontSize=8.1, leading=10, textColor=MUTED, alignment=TA_CENTER, spaceAfter=5),
-    "section": ParagraphStyle("section", parent=base["Heading2"], fontName="Helvetica-Bold", fontSize=11.3, leading=13, textColor=ACCENT, spaceBefore=5, spaceAfter=3, borderPadding=(0, 0, 1, 0), borderWidth=0, keepWithNext=True),
-    "role": ParagraphStyle("role", parent=base["Normal"], fontName="Helvetica-Bold", fontSize=8.6, leading=10.3, textColor=INK, spaceBefore=1.5, spaceAfter=0.5, keepWithNext=True),
-    "body": ParagraphStyle("body", parent=base["Normal"], fontName="Helvetica", fontSize=8.1, leading=10.2, textColor=INK, spaceAfter=1.5),
-    "bullet": ParagraphStyle("bullet", parent=base["Normal"], fontName="Helvetica", fontSize=8, leading=10, textColor=INK, leftIndent=10, firstLineIndent=-6, bulletIndent=0, spaceAfter=0.8),
+    "name": ParagraphStyle("name", fontName="Helvetica-Bold", fontSize=22, leading=24, textColor=INK, spaceAfter=1.2 * mm),
+    "tag": ParagraphStyle("tag", fontName="Helvetica", fontSize=10.2, leading=12.5, textColor=PETROL, spaceAfter=1.2 * mm),
+    "contact": ParagraphStyle("contact", fontName="Helvetica", fontSize=7.7, leading=9, textColor=MUTED, spaceAfter=1.5 * mm),
+    "section": ParagraphStyle("section", fontName="Helvetica-Bold", fontSize=8.4, leading=10, textColor=PETROL),
+    "role": ParagraphStyle("role", fontName="Helvetica-Bold", fontSize=8.5, leading=10, textColor=INK),
+    "date": ParagraphStyle("date", fontName="Helvetica", fontSize=7.8, leading=10, textColor=MUTED, alignment=TA_RIGHT),
+    "body": ParagraphStyle("body", fontName="Helvetica", fontSize=7.75, leading=9.25, textColor=INK, spaceAfter=.65 * mm),
+    "bullet": ParagraphStyle("bullet", fontName="Helvetica", fontSize=7.65, leading=9.15, textColor=INK, leftIndent=3.5 * mm, firstLineIndent=-2.5 * mm, spaceAfter=.35 * mm),
+    "paper": ParagraphStyle("paper", fontName="Helvetica", fontSize=7.55, leading=9, textColor=INK, spaceAfter=.75 * mm),
+    "software": ParagraphStyle("software", fontName="Helvetica", fontSize=7.65, leading=9.15, textColor=INK, spaceAfter=.5 * mm),
 }
-
 
 def p(text, style="body"):
     return Paragraph(text, styles[style])
 
-
 def section(title):
-    return [p(title, "section")]
+    band = Table([[p(title.upper(), "section")]], colWidths=[173 * mm])
+    band.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, -1), BAND), ("LINEBEFORE", (0, 0), (0, 0), 2.2, PETROL), ("LEFTPADDING", (0, 0), (-1, -1), 2.5 * mm), ("RIGHTPADDING", (0, 0), (-1, -1), 2 * mm), ("TOPPADDING", (0, 0), (-1, -1), .8 * mm), ("BOTTOMPADDING", (0, 0), (-1, -1), .65 * mm)]))
+    band.spaceBefore = 1.7 * mm
+    band.spaceAfter = .8 * mm
+    return band
 
-
-def role(title, dates, detail=None):
-    items = [p(f"{title} <font color='#59636E'>| {dates}</font>", "role")]
-    if detail:
-        items.append(p(detail))
-    return items
-
+def role(title, date):
+    table = Table([[p(title, "role"), p(date, "date")]], colWidths=[143 * mm, 30 * mm])
+    table.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0), ("TOPPADDING", (0, 0), (-1, -1), .5 * mm), ("BOTTOMPADDING", (0, 0), (-1, -1), .2 * mm)]))
+    return table
 
 def bullet(text):
-    return Paragraph(f"• {text}", styles["bullet"])
+    return p(f"• {text}", "bullet")
 
+def page(canvas, document):
+    canvas.saveState()
+    canvas.setFillColor(PAPER)
+    canvas.rect(0, 0, A4[0], A4[1], fill=1, stroke=0)
+    canvas.setStrokeColor(LINE)
+    canvas.line(16 * mm, 9 * mm, 194 * mm, 9 * mm)
+    canvas.setFillColor(MUTED)
+    canvas.setFont("Helvetica", 6.8)
+    canvas.drawString(16 * mm, 5.5 * mm, "Jonas El Gammal - Academic CV")
+    canvas.drawRightString(194 * mm, 5.5 * mm, f"Page {document.page}  |  Updated August 2026")
+    canvas.restoreState()
+
+doc.addPageTemplates(PageTemplate(id="cv", frames=[frame], onPage=page))
 
 story = [
     p("Jonas Elias El Gammal", "name"),
-    p("Cosmologist and scientific machine-learning researcher", "tag"),
-    p(
-        '<link href="mailto:jonas.el.gammal@rwth-aachen.de" color="#8F292F">jonas.el.gammal@rwth-aachen.de</link>'
-        '  |  <link href="https://jonaselgammal.github.io" color="#8F292F">jonaselgammal.github.io</link>'
-        '  |  <link href="https://github.com/jonaselgammal" color="#8F292F">GitHub</link>'
-        '  |  <link href="https://orcid.org/0009-0005-4833-4266" color="#8F292F">ORCID</link>',
-        "links",
-    ),
-]
-
-story += section("PROFILE")
-story += [p("Postdoctoral researcher working at the intersection of cosmology, gravitational-wave astronomy, Bayesian inference, and scientific machine learning. Developer of open-source tools for accelerating expensive likelihood-based inference and modelling gravitational-wave signals.")]
-
-story += section("RESEARCH EXPERIENCE")
-story += role('<link href="https://kbfi.ee/en/" color="#20242A">National Institute of Chemical Physics and Biophysics (KBFI/NICPB)</link> - Postdoctoral Researcher', "2026-present", "Tallinn, Estonia")
-story += role('<link href="https://www.uninsubria.eu" color="#20242A">University of Insubria</link> - Postdoctoral Researcher', "2025-2026")
-story += [bullet("Accelerated Pulsar Timing Array inference using GPUs and differentiable programming with JAX as part of the EPTA collaboration.")]
-story += role('<link href="https://theory.cern/" color="#20242A">CERN Theory Department</link> - Visiting Researcher', "2024")
-story += [bullet("Developed a LISA data-analysis pipeline for second-order scalar-induced gravitational waves from inflation with M. Pieroni and G. Franciolini.")]
-
-story += section("EDUCATION")
-story += role("University of Stavanger - PhD in Physics", "2021-2025", "Thesis: <i>Cutting edge data analysis for gravitational wave detection with LISA</i>.")
-story += role("Grenoble INP, PHELMA - Erasmus Exchange", "2019-2020", "Specialisation in nuclear engineering.")
-story += role("RWTH Aachen University - MSc Physics", "2018-2020", "Grade 1.3. Thesis: <i>Accelerating Bayesian Inference of Expensive Likelihoods with Gaussian Processes</i>.")
-story += role("RWTH Aachen University - BSc Physics", "2015-2018", "Grade 1.7. Focus on astroparticle physics and cosmology.")
-
-story += section("SELECTED PUBLICATIONS")
-publications = [
-    ("Are PTA measurements sensitive to gravitational wave non-Gaussianities?", "C. Cecchini, J. El Gammal, G. Franciolini, M. Pieroni", "2026", "https://arxiv.org/abs/2605.05157"),
-    ("Accelerating LISA inference with Gaussian processes", "J. El Gammal, R. Buscicchio, J. Torrado, G. Nardini", "2025", "https://arxiv.org/abs/2503.21871"),
-    ("Reconstructing Primordial Curvature Perturbations via Scalar-Induced Gravitational Waves with LISA", "LISA Cosmology Working Group", "2025", "https://arxiv.org/abs/2501.11320"),
-    ("Parallelized Acquisition for Active Learning using Monte Carlo Sampling", "J. Torrado, N. Schöneberg, J. El Gammal", "2023", "https://arxiv.org/abs/2305.19267"),
-    ("Fast and Robust Bayesian Inference using Gaussian Processes with GPry", "J. El Gammal et al.", "2022", "https://arxiv.org/abs/2211.02045"),
-]
-for title, authors, year, url in publications:
-    story.append(p(f'<link href="{url}" color="#8F292F"><b>{title}</b></link> ({year})<br/><font color="#59636E">{authors}</font>'))
-
-story += section("OPEN-SOURCE SOFTWARE")
-software = [
-    ("GPry", "https://github.com/jonaselgammal/GPry", "Bayesian inference for expensive likelihoods using Gaussian-process surrogate modelling and active learning."),
-    ("SIGWAY", "https://github.com/jonaselgammal/SIGWAY", "Simulation and inference tools for second-order scalar-induced gravitational waves from inflation."),
-    ("discoverysamplers", "https://github.com/jonaselgammal/discoverysamplers", "Unified interfaces connecting Discovery PTA models to multiple sampling backends."),
-    ("fastropop", "https://github.com/jonaselgammal/fastropop", "JAX-enabled simulation of supermassive black-hole-binary populations and nanohertz gravitational-wave signatures."),
-]
-for name, url, description in software:
-    story.append(p(f'<link href="{url}" color="#8F292F"><b>{name}</b></link> - {description}'))
-
-story += section("TEACHING")
-story += [
-    p("<b>Numerical Methods</b>, University of Stavanger - full bachelor-level course (2023, 2024). Python programming; numerical differentiation, integration, ODEs, and PDEs."),
+    p("Cosmologist | Scientific machine-learning researcher | Scientific software developer", "tag"),
+    p('<link href="mailto:jonas.el.gammal@rwth-aachen.de" color="#527A7B">jonas.el.gammal@rwth-aachen.de</link>  |  Tallinn, Estonia  |  <link href="https://jonaselgammal.github.io" color="#527A7B">jonaselgammal.github.io</link>  |  <link href="https://github.com/jonaselgammal" color="#527A7B">GitHub</link>  |  <link href="https://orcid.org/0009-0005-4833-4266" color="#527A7B">ORCID</link>', "contact"),
+    section("Profile"),
+    p("Postdoctoral researcher working across cosmology, gravitational-wave astronomy, Bayesian inference, probabilistic machine learning, and computational statistics. I develop open-source methods that turn expensive physical models into tractable, validated inference workflows."),
+    section("Research experience"),
+    role("Postdoctoral Researcher - KBFI / NICPB, Tallinn", "2026-present"),
+    bullet("Research in cosmology, gravitational-wave inference, scientific machine learning, and reusable computational methodology."),
+    role("Postdoctoral Researcher - University of Insubria", "2025-2026"),
+    bullet("Developed GPU-accelerated and differentiable pulsar-timing-array inference with JAX in the EPTA collaboration."),
+    role("Visiting Researcher - CERN", "2024"),
+    bullet("Developed a LISA analysis pipeline for scalar-induced gravitational waves."),
+    section("Education"),
+    role("PhD in Physics - University of Stavanger", "2021-2025"),
+    p("Developed data-analysis methods for LISA, including Gaussian-process-accelerated Bayesian inference and reconstruction of primordial curvature perturbations from scalar-induced gravitational waves."),
+    role("Erasmus Exchange - Grenoble INP, PHELMA", "2019-2020"),
+    p("Specialisation in nuclear engineering."),
+    role("MSc in Physics - RWTH Aachen University", "2018-2020"),
+    p("Grade 1.3 (approximately 3.7/4.0 GPA). Thesis: <i>Accelerating Bayesian Inference of Expensive Likelihoods with Gaussian Processes</i>."),
+    role("BSc in Physics - RWTH Aachen University", "2015-2018"),
+    p("Grade 1.7 (approximately 3.3/4.0 GPA). Focus on astroparticle physics and cosmology."),
+    section("Teaching"),
+    p("<b>Numerical Methods</b>, University of Stavanger - full bachelor-level course (2023, 2024): Python, numerical differentiation and integration, ODEs, and PDEs."),
     p("<b>Electromagnetism and Special Relativity</b>, University of Stavanger - full bachelor-level course (2023)."),
     p("<b>Physics and data-processing tutorials</b>, RWTH Aachen University (2017-2019)."),
+    section("Methods and technology"),
+    p("<b>Research:</b> Bayesian inference, Gaussian processes, active learning, uncertainty quantification, Monte Carlo methods, numerical optimisation, stochastic simulation, time-series analysis, cosmology, and gravitational-wave data analysis."),
+    p("<b>AI systems:</b> LLM agents, tool use, agent loops, multi-agent workflows, typed planning, structured outputs, validation, repair, tracing, evaluation, and reproducible experimentation."),
+    p("<b>Software:</b> Python, JAX, NumPy, SciPy, scikit-learn, PyTorch, TensorFlow, C++, Git, Docker, Linux, SLURM, HPC/GPU computing, CI/CD, testing, documentation, and package development."),
+    section("Languages"),
+    p("<b>German</b> - native  |  <b>English</b> - near-native  |  <b>French</b> - B2/C1"),
+    section("Publications"),
 ]
 
-story += section("SKILLS")
-story += [
-    p("<b>Research:</b> Bayesian inference, Gaussian processes, uncertainty quantification, active learning, time-series analysis, cosmology, and gravitational-wave data analysis."),
-    p("<b>Software:</b> Python, JAX, NumPy, SciPy, scikit-learn, PyTorch, TensorFlow, SQL, C++, Git, Docker, Linux, SLURM, HPC, CI/CD, and scientific package development."),
-    p("<b>Languages:</b> German (native), English (near-native), French (B2/C1)."),
+publications = [
+    ("Are PTA measurements sensitive to gravitational wave non-Gaussianities?", "C. Cecchini, J. El Gammal, G. Franciolini, M. Pieroni", "2026 - under review; arXiv:2605.05157", "https://arxiv.org/abs/2605.05157"),
+    ("Accelerating LISA inference with Gaussian processes", "J. El Gammal, R. Buscicchio, G. Nardini, J. Torrado", "2025 - Physical Review D 112, 063010", "https://doi.org/10.1103/c66v-rl3w"),
+    ("Reconstructing primordial curvature perturbations via scalar-induced gravitational waves with LISA", "J. El Gammal et al. (LISA Cosmology Working Group)", "2025 - JCAP 05, 062", "https://doi.org/10.1088/1475-7516/2025/05/062"),
+    ("Parallelized Acquisition for Active Learning using Monte Carlo Sampling", "J. Torrado, N. Schoeneberg, J. El Gammal", "2023 - arXiv:2305.19267", "https://arxiv.org/abs/2305.19267"),
+    ("Fast and robust Bayesian inference using Gaussian processes with GPry", "J. El Gammal, N. Schoeneberg, J. Torrado, C. Fidler", "2023 - JCAP 10, 021", "https://doi.org/10.1088/1475-7516/2023/10/021"),
 ]
+for title, authors, record, url in publications:
+    story.append(p(f'<link href="{url}" color="#527A7B"><b>{title}</b></link><br/><font color="#626B6B">{authors} - {record}</font>', "paper"))
+
+story.extend([section("Current research and development"),
+    bullet("High-dimensional GP surrogate inference using gradient-based NUTS acquisition, with emphasis on numerical robustness, reproducible benchmarking, and scalable active learning."),
+    bullet("GPU-accelerated JAX likelihoods and reversible-jump inference for continuous gravitational-wave searches with pulsar timing arrays."),
+    bullet("PROSECCO: differentiable surrogate refitting of physical stochastic-background models against model-independent LISA reconstructions (in development)."),
+    bullet("Evaluation environments for autonomous scientific agents that propose, test, and revise executable structural theories under noisy and incomplete data (early research)."),
+    section("Open-source software")])
+
+software = [
+    ("GPry", "https://github.com/jonaselgammal/GPry", "Gaussian-process surrogate modelling and active learning for Bayesian inference with expensive likelihoods."),
+    ("SIGWAY", "https://github.com/jonaselgammal/SIGWAY", "JAX framework for scalar-induced gravitational-wave simulation and inference."),
+    ("discoverysamplers", "https://github.com/jonaselgammal/discoverysamplers", "Consistent interfaces connecting Discovery PTA models to multiple Bayesian inference backends."),
+    ("fastropop", "https://github.com/jonaselgammal/fastropop", "JAX-backed simulation of supermassive black-hole-binary populations and their nanohertz signals."),
+    ("Graphsmith", "https://github.com/jonaselgammal/Graphsmith", "Typed graph planning with deterministic compilation, validation, local repair, and traceable execution."),
+]
+for name, url, description in software:
+    story.append(p(f'<link href="{url}" color="#527A7B"><b>{name}</b></link> - {description}', "software"))
 
 doc.build(story)
 print(OUTPUT)
