@@ -9,6 +9,7 @@ interface Props {
   image?: string;
   schema?: Record<string, unknown>;
   type?: 'website' | 'article' | 'profile';
+  robots?: string;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   image = '/assets/img/me.jpg',
   schema,
   type = 'website',
+  robots = 'index, follow, max-image-preview:large, max-snippet:-1',
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
@@ -30,7 +32,7 @@ const socialImage = new URL(image, Astro.site);
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="author" content="Jonas El Gammal" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="robots" content={robots} />
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content="Jonas El Gammal" />
     <meta property="og:locale" content="en_GB" />

@@ -1,9 +1,51 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';import SigwayExplorer from '../../components/SigwayExplorer.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MukhanovSasakiExplorer from '../../components/MukhanovSasakiExplorer.astro';
+import SigwayExplorer from '../../components/SigwayExplorer.astro';
 ---
-<BaseLayout title="Early-Universe Gravitational Waves — Jonas El Gammal" description="SIGWAY, LISA, and reconstruction of primordial curvature perturbations.">
-  <div class="shell"><header class="page-head"><span class="eyebrow">Primordial spectra from induced gravitational waves</span><h1>Early-universe gravitational waves</h1><p>Scalar-induced gravitational waves may let LISA probe curvature perturbations and inflationary dynamics on otherwise inaccessible scales.</p></header></div>
-  <article class="prose"><h2>Reconstructing the curvature spectrum</h2><p>Density perturbations large enough to be interesting on small scales generate gravitational waves at second order when they re-enter the horizon. This offers an indirect window onto scales far beyond those measured in the cosmic microwave background, but the observable spectrum is a broad, quadratic convolution of the primordial curvature spectrum rather than a point-by-point image of it.</p><p>As part of the LISA Cosmology Working Group, I study the inverse problem at three levels: agnostic binned reconstruction, physically motivated spectral templates, and first-principles inference of inflationary models. This makes it possible to ask both what a detector can reconstruct without strong assumptions and what it could tell us about concrete early-universe dynamics.</p><ul class="paper-list"><li><a href="https://arxiv.org/abs/2501.11320"><strong>Reconstructing Primordial Curvature Perturbations via Scalar-Induced Gravitational Waves with LISA</strong></a><span>LISA Cosmology Working Group · arXiv:2501.11320</span><p>Compares binned, template-based, and inflationary-model reconstructions of the primordial curvature spectrum.</p></li></ul><figure class="figure"><img src="/assets/img/detector_sensitivity.svg" alt="Sensitivity of gravitational-wave detectors to primordial curvature perturbations"/><figcaption>Detector sensitivity to enhanced primordial curvature perturbations.</figcaption></figure><h2>SIGWAY</h2><p><a href="/software/sigway/"><strong>SIGWAY</strong></a> is the open-source analysis framework behind this work. It separates the primordial spectrum, cosmological transfer kernel, and numerical integrator, so the same inference machinery can combine analytic templates or inflationary solutions with radiation- or early-matter-dominated histories.</p><p>For binned spectra, SIGWAY ships precomputed bilinear coefficients. The induced signal can then be evaluated as a matrix contraction instead of repeating the full double integral. That makes model-agnostic reconstruction fast enough for inference—and powers the interactive laboratory below.</p></article>
-  <section class="lab-embed"><div class="shell"><SigwayExplorer /></div></section>
+<BaseLayout title="Early-Universe Gravitational Waves — Jonas El Gammal" description="LISA cosmology, scalar-induced gravitational waves, primordial curvature reconstruction, SIGWAY, and fiducial signals for LISA data challenges.">
+  <div class="shell"><header class="page-head"><span class="eyebrow">Cosmology with LISA and primordial gravitational waves</span><h1>Early-universe gravitational waves</h1><p>Gravitational waves provide a direct messenger from epochs that are opaque to light. I work on connecting early-universe models to signals that LISA can reconstruct and test.</p></header></div>
+  <article class="prose">
+    <h2>Using gravitational waves as a cosmological probe</h2>
+    <p>Most of observational cosmology is built from electromagnetic radiation and the distribution of matter. Those probes are extraordinarily powerful, but they do not give direct access to every epoch: before recombination the Universe was opaque to photons, and many high-energy processes leave no surviving electromagnetic signal. Gravitational waves interact very weakly and can propagate essentially unscattered from the time they were produced.</p>
+    <p>Different production mechanisms populate different frequency bands. Inflationary dynamics, first-order phase transitions, cosmic defects, and second-order scalar perturbations can all create stochastic backgrounds whose shape carries information about the source and the subsequent expansion history. A measured frequency today corresponds to a physical scale—and therefore an epoch—that may be many orders of magnitude smaller than the scales constrained by the cosmic microwave background.</p>
+
+    <h2>LISA as a cosmology experiment</h2>
+    <p>LISA is an ESA-led space-based gravitational-wave observatory with NASA as a major partner. Its million-kilometre laser interferometer is designed for the millihertz band, between the nanohertz frequencies of pulsar timing arrays and the audio band of ground-based detectors. Alongside compact binaries and massive black-hole mergers, that band gives access to possible stochastic signals from the early Universe.</p>
+    <p>Extracting such a background is an inference problem rather than a simple curve overlay. Instrument noise, time-dependent detector response, unresolved astrophysical foregrounds, and competing cosmological spectra must be represented jointly. Within the LISA Cosmology Working Group I work on primordial-signal reconstruction; within the Data Distributed Processing Centre (DDPC), I also contribute fiducial cosmological signals for LISA data challenges. That connects theoretical spectra to the realistic analysis machinery needed to identify them in data.</p>
+    <figure class="figure"><img src="/assets/img/detector_sensitivity.svg" alt="Sensitivity of gravitational-wave detectors to primordial curvature perturbations"/><figcaption>Different detector bands probe enhanced primordial curvature perturbations on vastly different physical scales.</figcaption></figure>
+
+    <h2>Scalar-induced gravitational waves</h2>
+    <p>Primordial density perturbations source tensor perturbations at second order when they re-enter the horizon. If the curvature power spectrum is strongly enhanced on small scales, the resulting scalar-induced gravitational-wave background can become observable. This creates an indirect window onto inflationary structure far beyond the range measured by the CMB.</p>
+    <p>The mapping is informative but non-trivial. The gravitational-wave spectrum is a broad, quadratic convolution of pairs of scalar modes, weighted by a transfer kernel that depends on the expansion history. It is therefore not a point-by-point image of the primordial curvature spectrum: narrow input features can broaden, nearby features can mix, and some information is inevitably lost.</p>
+  </article>
+
+  <section class="lab-embed"><div class="shell">
+    <nav class="lab-switcher" aria-label="Choose SIGWAY experiment">
+      <button class="is-active" type="button" data-lab="spectrum" aria-pressed="true"><span>01</span>Spectrum → gravitational waves</button>
+      <button type="button" data-lab="inflation" aria-pressed="false"><span>02</span>Inflation → curvature spectrum</button>
+    </nav>
+    <div data-lab-panel="spectrum"><SigwayExplorer /></div>
+    <div data-lab-panel="inflation" hidden><MukhanovSasakiExplorer /></div>
+  </div></section>
+
+  <article class="prose research-continuation">
+    <h2>Reconstructing the curvature spectrum</h2>
+    <p>As part of the LISA Cosmology Working Group, I study this inverse problem at three levels. A binned reconstruction asks what the data can recover with minimal assumptions. Spectral templates test classes of physically motivated shapes. A first-principles analysis solves the inflationary background and Mukhanov–Sasaki equations, connecting parameters of an inflaton potential directly to the observable signal.</p>
+    <p>Using all three levels helps separate detector information from model assumptions. A flexible reconstruction can reveal whether a signal contains a robust feature; a template can measure it efficiently; and an inflationary model can translate it into early-universe dynamics—but only with the additional assumptions made explicit.</p>
+    <ul class="paper-list"><li><a href="https://arxiv.org/abs/2501.11320"><strong>Reconstructing Primordial Curvature Perturbations via Scalar-Induced Gravitational Waves with LISA</strong></a><span>LISA Cosmology Working Group · JCAP 2025 · arXiv:2501.11320</span><p>Compares binned, template-based, and inflationary-model reconstructions of the primordial curvature spectrum.</p></li></ul>
+    <h2>SIGWAY</h2>
+    <p><a href="/software/sigway/"><strong>SIGWAY</strong></a> is the open-source analysis framework behind this work. It separates the primordial spectrum, cosmological transfer kernel, and numerical integrator, allowing the same inference machinery to combine analytic templates or inflationary solutions with radiation- or early-matter-dominated histories.</p>
+    <p>For binned spectra, precomputed bilinear coefficients turn the induced signal into a matrix contraction rather than a repeated double integral. That makes model-independent reconstruction fast enough for Bayesian inference. The interactive laboratory above exposes the same non-local mapping: changing one region of the primordial spectrum generally affects a broad range of gravitational-wave frequencies.</p>
+  </article>
 </BaseLayout>
-<style is:global>.lab-embed{background:var(--paper-deep);margin-top:4rem;padding-block:clamp(1.5rem,3vw,2.5rem)}</style>
+<script>
+  (()=>{
+    const buttons=[...document.querySelectorAll<HTMLButtonElement>('[data-lab]')];
+    const panels=[...document.querySelectorAll<HTMLElement>('[data-lab-panel]')];
+    const activate=(name:string)=>{buttons.forEach(button=>{const active=button.dataset.lab===name;button.classList.toggle('is-active',active);button.setAttribute('aria-pressed',String(active));});panels.forEach(panel=>panel.hidden=panel.dataset.labPanel!==name);};
+    buttons.forEach(button=>button.addEventListener('click',()=>activate(button.dataset.lab!)));
+    window.addEventListener('sigway:load-spectrum',()=>activate('spectrum'));
+  })();
+</script>
+<style is:global>.lab-embed{background:var(--paper-deep);margin-block:clamp(2.5rem,5vw,4rem);padding-block:clamp(1.5rem,3vw,2.5rem)}.research-continuation{padding-top:0}.lab-switcher{border-bottom:1px solid var(--line);display:flex;gap:0;margin:0 clamp(.15rem,3vw,2.5rem) .5rem}.lab-switcher button{background:transparent;border:0;border-bottom:2px solid transparent;color:var(--ink-soft);cursor:pointer;font-family:var(--mono);font-size:.67rem;letter-spacing:.03em;margin-bottom:-1px;padding:.75rem 1rem;text-transform:uppercase}.lab-switcher button span{color:var(--signal);margin-right:.55rem}.lab-switcher button:hover,.lab-switcher button.is-active{border-bottom-color:var(--signal);color:var(--ink)}[data-lab-panel][hidden]{display:none}@media(max-width:620px){.lab-switcher{align-items:stretch;flex-direction:column}.lab-switcher button{text-align:left}}</style>

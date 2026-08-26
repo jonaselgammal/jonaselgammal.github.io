@@ -1,5 +1,44 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';import SigwayExplorer from '../../components/SigwayExplorer.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MukhanovSasakiExplorer from '../../components/MukhanovSasakiExplorer.astro';
+import SigwayExplorer from '../../components/SigwayExplorer.astro';
 ---
-<BaseLayout title="SIGWAY primordial-spectrum lab" description="Paint a primordial curvature spectrum and explore its scalar-induced gravitational-wave response."><header class="page-head"><div class="shell"><span class="eyebrow">Interactive lab · SIGWAY</span><h1>From primordial structure to gravitational waves</h1><p>Choose a template or paint your own binned primordial curvature spectrum, then follow how SIGWAY maps it into an induced gravitational-wave signal.</p></div></header><section class="lab-stage"><div class="shell"><SigwayExplorer/></div></section><div class="prose lab-notes"><h2>What is being calculated?</h2><p>Scalar perturbations generate gravitational waves at second order when they re-enter the horizon. The signal at a given frequency is sourced by pairs of curvature modes, making the map from the primordial spectrum to the gravitational-wave spectrum quadratic and non-local: a narrow primordial feature can produce a broader, structured response.</p><p>The presets illustrate several qualitatively different primordial shapes rather than fitted spectra. The 50-bin view is the standard resolution; 100 bins allow finer features and make it easier to see which details survive the broad mode-coupling kernel. Detector overlays provide the observational scale for LISA, PTAs, and LIGO.</p></div></BaseLayout>
-<style is:global>.lab-stage{background:var(--paper-deep);margin-top:clamp(1.75rem,3vw,2.75rem);padding-block:clamp(1.5rem,3vw,2.5rem)}.lab-notes{margin-top:clamp(2.5rem,4vw,3.5rem)}</style>
+<BaseLayout title="SIGWAY inflation and primordial-spectrum lab" description="Solve inflationary background and Mukhanov–Sasaki dynamics, or paint a primordial curvature spectrum and explore its scalar-induced gravitational-wave response.">
+  <header class="page-head">
+    <div class="shell">
+      <span class="eyebrow">Interactive lab · SIGWAY</span>
+      <h1>From inflation to gravitational waves</h1>
+      <p>Start from a single-field inflationary potential or draw the primordial curvature spectrum directly, then explore the structures that can seed scalar-induced gravitational waves.</p>
+    </div>
+  </header>
+  <section class="lab-stage">
+    <div class="shell">
+      <nav class="lab-switcher" aria-label="Choose SIGWAY experiment">
+        <button class="is-active" type="button" data-lab="spectrum" aria-pressed="true"><span>01</span>Spectrum → gravitational waves</button>
+        <button type="button" data-lab="inflation" aria-pressed="false"><span>02</span>Inflation → curvature spectrum</button>
+      </nav>
+      <div data-lab-panel="spectrum"><SigwayExplorer /></div>
+      <div data-lab-panel="inflation" hidden><MukhanovSasakiExplorer /></div>
+    </div>
+  </section>
+  <div class="prose lab-notes">
+    <h2>What is being calculated?</h2>
+    <p>The inflation playground solves the background Klein–Gordon and Friedmann equations and then evolves each scalar mode from Bunch–Davies initial conditions to super-horizon freeze-out with SIGWAY’s Mukhanov–Sasaki solver. The quasi-inflection potential follows the single-field model introduced <a href="https://arxiv.org/abs/1702.03901">here</a>.</p>
+    <p>Ultra-slow-roll spectra are unusually sensitive to small potential changes. The comparison curve deliberately shows why a horizon-crossing slow-roll estimate is unsafe here: slow-roll violation can change the result qualitatively, and perturbations can continue evolving after horizon exit. The stored solutions are linear Mukhanov–Sasaki results; stochastic effects and primordial non-Gaussianity are outside this illustration.</p>
+    <p>The spectrum painter starts one step later. Scalar perturbations generate gravitational waves at second order when they re-enter the horizon. Because each output frequency receives contributions from pairs of curvature modes, a narrow primordial feature can produce a broader, structured response. The 50-bin view is standard; 100 bins allow finer features. Detector overlays provide the observational scale for LISA, PTAs, and LIGO.</p>
+  </div>
+</BaseLayout>
+
+<script>
+  (()=>{
+    const buttons=[...document.querySelectorAll<HTMLButtonElement>('[data-lab]')];
+    const panels=[...document.querySelectorAll<HTMLElement>('[data-lab-panel]')];
+    const activate=(name:string)=>{buttons.forEach(button=>{const active=button.dataset.lab===name;button.classList.toggle('is-active',active);button.setAttribute('aria-pressed',String(active));});panels.forEach(panel=>panel.hidden=panel.dataset.labPanel!==name);};
+    buttons.forEach(button=>button.addEventListener('click',()=>activate(button.dataset.lab!)));
+    window.addEventListener('sigway:load-spectrum',()=>activate('spectrum'));
+  })();
+</script>
+
+<style is:global>
+  .lab-stage{background:var(--paper-deep);margin-top:clamp(1.75rem,3vw,2.75rem);padding-block:clamp(1.5rem,3vw,2.5rem)}.lab-switcher{border-bottom:1px solid var(--line);display:flex;gap:0;margin:0 clamp(.15rem,3vw,2.5rem) .5rem}.lab-switcher button{background:transparent;border:0;border-bottom:2px solid transparent;color:var(--ink-soft);cursor:pointer;font-family:var(--mono);font-size:.67rem;letter-spacing:.03em;margin-bottom:-1px;padding:.75rem 1rem;text-transform:uppercase}.lab-switcher button span{color:var(--signal);margin-right:.55rem}.lab-switcher button:hover,.lab-switcher button.is-active{border-bottom-color:var(--signal);color:var(--ink)}.lab-notes{margin-top:clamp(2.5rem,4vw,3.5rem)}[data-lab-panel][hidden]{display:none}@media(max-width:620px){.lab-switcher{align-items:stretch;flex-direction:column}.lab-switcher button{text-align:left}}
+</style>

@@ -1,0 +1,109 @@
+---
+import solverData from '../data/mukhanov-sasaki.json';
+---
+<section class="ms-lab" id="ms-explorer">
+  <div class="ms-lab__head">
+    <div>
+      <span class="eyebrow">Single-field inflation lab</span>
+      <h2>From an inflaton potential to 𝒫<sub>ζ</sub>(k)</h2>
+      <p>Follow the background through a near-inflection point and compare the full Mukhanov–Sasaki solution with the usual horizon-crossing slow-roll estimate.</p>
+    </div>
+    <div class="ms-lab__controls">
+      <label>Model
+        <select data-model>
+          <option value="usr">Near-inflection · ultra-slow roll</option>
+          <option value="quadratic">Quadratic · slow roll reference</option>
+        </select>
+      </label>
+      <label class="tuning-control">Inflection tuning
+        <input data-tuning type="range" min="0" max="6" step="1" value="3" aria-label="Near-inflection tuning relative to benchmark" />
+        <span data-tuning-label>1.00 × benchmark</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="ms-lab__metrics" aria-live="polite">
+    <div><span>USR interval</span><strong data-duration>—</strong></div>
+    <div><span>Minimum ε<sub>H</sub></span><strong data-epsilon>—</strong></div>
+    <div><span>Peak frequency</span><strong data-frequency>—</strong></div>
+    <div><span>Peak 𝒫<sub>ζ</sub></span><strong data-peak>—</strong></div>
+  </div>
+
+  <div class="ms-lab__plots">
+    <article class="ms-plot">
+      <div class="plot-title"><span>Inflaton potential</span><strong>V(φ) / V(φ₀)</strong></div>
+      <svg data-potential viewBox="0 0 520 310" role="img" aria-label="Inflaton potential along the background trajectory"><g data-grid></g><path data-main></path><text class="axis-label axis-label--x" x="278" y="301">field φ / Mₚ</text><text class="axis-label axis-label--y" transform="translate(13 160) rotate(-90)">normalised potential V / V₀</text></svg>
+      <p>The shallow shoulder is the quasi-inflection region: the field loses speed there even though the change in the potential itself is visually subtle.</p>
+    </article>
+    <article class="ms-plot">
+      <div class="plot-title"><span>Background</span><strong>ε<sub>H</sub>(N)</strong></div>
+      <svg data-background viewBox="0 0 520 310" role="img" aria-label="Hubble slow-roll parameter before the end of inflation"><g data-grid></g><rect data-phase></rect><path data-main></path><line data-end x1="0" x2="0" y1="0" y2="0"></line><text class="axis-label axis-label--x" x="278" y="301">e-folds before inflation ends</text><text class="axis-label axis-label--y" transform="translate(13 160) rotate(-90)">εH</text></svg>
+      <p>The shaded interval uses η<sub>H</sub> &lt; −3 as a conservative marker of ultra-slow-roll evolution.</p>
+    </article>
+    <article class="ms-plot ms-plot--wide">
+      <div class="plot-title"><span>Mukhanov–Sasaki modes</span><strong>𝒫<sub>ζ</sub>(f)</strong></div>
+      <svg data-spectrum viewBox="0 0 1060 330" role="img" aria-label="Full Mukhanov-Sasaki scalar spectrum compared with the slow-roll estimate"><g data-grid></g><path data-slow></path><path data-main></path><text data-spectrum-xlabel class="axis-label axis-label--x" x="555" y="320">frequency f [Hz]</text><text data-spectrum-ylabel class="axis-label axis-label--y" transform="translate(13 170) rotate(-90)">curvature power 𝒫ζ</text></svg>
+      <div class="ms-legend"><span><i class="full"></i>Full Mukhanov–Sasaki solution</span><span><i class="slow"></i>Horizon-crossing slow-roll estimate</span></div>
+    </article>
+  </div>
+
+  <div class="ms-lab__footer">
+    <p data-explanation>Changing the near-inflection tuning by only tens of percent shifts the enhanced spectrum across several decades in frequency. This sensitivity is the point of the control, not a claim that every setting is equally natural.</p>
+    <button class="button button--solid" type="button" data-send>Use this spectrum in the GW lab</button>
+  </div>
+  <script is:inline type="application/json" data-ms-json set:html={JSON.stringify(solverData)}></script>
+</section>
+
+<script>
+  (()=>{
+    const root=document.getElementById('ms-explorer')!;if(!root)return;
+    const data=JSON.parse(root.querySelector('[data-ms-json]')?.textContent||'{}');
+    const model=root.querySelector<HTMLSelectElement>('[data-model]')!;
+    const tuning=root.querySelector<HTMLInputElement>('[data-tuning]')!;
+    const tuningLabel=root.querySelector<HTMLElement>('[data-tuning-label]')!;
+    const tuningControl=root.querySelector<HTMLElement>('.tuning-control')!;
+    const W=520,H=310,L=56,R=16,T=18,B=42;const mobileSpectrum=window.matchMedia('(max-width:900px)');
+    let current:any=data.usr[3];
+    const fmt=(value:number,digits=1)=>{if(!Number.isFinite(value))return '—';const exp=Math.floor(Math.log10(Math.abs(value)||1));return exp>=-2&&exp<3?value.toFixed(digits):value.toExponential(digits)};
+    const scale=(v:number,min:number,max:number,log=false)=>{const x=log?Math.log10(Math.max(v,1e-300)):v,lo=log?Math.log10(min):min,hi=log?Math.log10(max):max;return (x-lo)/(hi-lo)};
+    const xPos=(v:number,min:number,max:number,width=W,log=false)=>L+scale(v,min,max,log)*(width-L-R);
+    const yPos=(v:number,min:number,max:number,height=H,log=false)=>T+(1-scale(v,min,max,log))*(height-T-B);
+    const path=(xs:number[],ys:number[],xmin:number,xmax:number,ymin:number,ymax:number,width=W,height=H,xlog=false,ylog=false)=>ys.map((y,i)=>`${i?'L':'M'}${xPos(xs[i],xmin,xmax,width,xlog).toFixed(2)},${yPos(Math.max(y,ymin),ymin,ymax,height,ylog).toFixed(2)}`).join(' ');
+    const tickText=(v:number,log:boolean)=>log?v.toExponential(0):Math.abs(v)>=100?v.toFixed(0):v.toFixed(1).replace('.0','');
+    function axes(svg:SVGElement,xmin:number,xmax:number,ymin:number,ymax:number,width=W,height=H,xlog=false,ylog=false){
+      const g=svg.querySelector('[data-grid]')!;
+      const xt=xlog?[xmin,Math.sqrt(xmin*xmax),xmax]:[xmin,(xmin+xmax)/2,xmax];
+      const yt=ylog?[ymin,Math.sqrt(ymin*ymax),ymax]:[ymin,(ymin+ymax)/2,ymax];
+      g.innerHTML=xt.map(x=>`<line x1="${xPos(x,xmin,xmax,width,xlog)}" y1="${T}" x2="${xPos(x,xmin,xmax,width,xlog)}" y2="${height-B}"/><text x="${xPos(x,xmin,xmax,width,xlog)}" y="${height-17}">${tickText(x,xlog)}</text>`).join('')+yt.map(y=>`<line x1="${L}" y1="${yPos(y,ymin,ymax,height,ylog)}" x2="${width-R}" y2="${yPos(y,ymin,ymax,height,ylog)}"/><text x="${L-7}" y="${yPos(y,ymin,ymax,height,ylog)+4}" text-anchor="end">${tickText(y,ylog)}</text>`).join('');
+    }
+    function renderPotential(record:any){
+      const svg=root.querySelector<SVGElement>('[data-potential]')!,b=record.background,x=b.phi,y=b.potential_over_initial;
+      const xmin=Math.min(...x),xmax=Math.max(...x),ymin=Math.max(0,Math.floor(Math.min(...y)*10)/10),ymax=1;
+      axes(svg,xmin,xmax,ymin,ymax,W,H,false,false);svg.querySelector('[data-main]')!.setAttribute('d',path(x,y,xmin,xmax,ymin,ymax,W,H,false,false));
+    }
+    function renderBackground(record:any){
+      const svg=root.querySelector<SVGElement>('[data-background]')!,b=record.background,x=b.N_to_end,y=b.epsilon_H,xmin=0,xmax=Math.ceil(Math.max(...x)/10)*10,ymin=Math.max(1e-12,10**Math.floor(Math.log10(Math.min(...y)))),ymax=1;
+      axes(svg,xmin,xmax,ymin,ymax,W,H,false,true);svg.querySelector('[data-main]')!.setAttribute('d',path(x,y,xmin,xmax,ymin,ymax,W,H,false,true));
+      const phase=svg.querySelector<SVGRectElement>('[data-phase]')!,phaseN=x.filter((_:number,i:number)=>b.eta_H[i]<-3);
+      if(phaseN.length){const xa=xPos(Math.min(...phaseN),xmin,xmax),xb=xPos(Math.max(...phaseN),xmin,xmax);phase.setAttribute('x',String(Math.min(xa,xb)));phase.setAttribute('width',String(Math.abs(xb-xa)));phase.setAttribute('y',String(T));phase.setAttribute('height',String(H-T-B));}else phase.setAttribute('width','0');
+    }
+    function renderSpectrum(record:any){
+      const svg=root.querySelector<SVGElement>('[data-spectrum]')!,s=record.spectrum,x=s.frequency_hz,y=s.P_zeta,slow=s.P_zeta_slow_roll,width=mobileSpectrum.matches?520:1060,height=mobileSpectrum.matches?310:330,xmin=Math.min(...x),xmax=Math.max(...x),all=[...y,...slow].filter((v:number)=>v>0),ymin=Math.max(1e-12,10**Math.floor(Math.log10(Math.min(...all)))),ymax=Math.min(1,10**Math.ceil(Math.log10(Math.max(...all))));
+      svg.setAttribute('viewBox',`0 0 ${width} ${height}`);const xlabel=svg.querySelector<SVGTextElement>('[data-spectrum-xlabel]')!,ylabel=svg.querySelector<SVGTextElement>('[data-spectrum-ylabel]')!;xlabel.setAttribute('x',String((L+width-R)/2));xlabel.setAttribute('y',String(height-9));ylabel.setAttribute('transform',`translate(13 ${height/2}) rotate(-90)`);
+      axes(svg,xmin,xmax,ymin,ymax,width,height,true,true);svg.querySelector('[data-main]')!.setAttribute('d',path(x,y,xmin,xmax,ymin,ymax,width,height,true,true));svg.querySelector('[data-slow]')!.setAttribute('d',path(x,slow,xmin,xmax,ymin,ymax,width,height,true,true));
+    }
+    function update(){
+      const isUsr=model.value==='usr';current=isUsr?data.usr[Number(tuning.value)]:data.quadratic;tuning.disabled=!isUsr;tuningControl.classList.toggle('is-disabled',!isUsr);tuningLabel.textContent=isUsr?`${current.tuning_ratio.toFixed(2)} × benchmark`:'not applicable';
+      root.querySelector<HTMLElement>('[data-duration]')!.textContent=isUsr?`${current.summary.usr_duration.toFixed(2)} e-folds`:'none';root.querySelector<HTMLElement>('[data-epsilon]')!.textContent=fmt(current.summary.minimum_epsilon_H,1);root.querySelector<HTMLElement>('[data-frequency]')!.textContent=`${fmt(current.summary.peak_frequency_hz,1)} Hz`;root.querySelector<HTMLElement>('[data-peak]')!.textContent=fmt(current.summary.peak_P_zeta,1);
+      root.classList.add('is-updating');requestAnimationFrame(()=>{renderPotential(current);renderBackground(current);renderSpectrum(current);requestAnimationFrame(()=>root.classList.remove('is-updating'));});
+      root.querySelector<HTMLElement>('[data-explanation]')!.textContent=isUsr?'Changing the near-inflection tuning by only tens of percent shifts the enhanced spectrum across several decades in frequency. This sensitivity is the point of the control, not a claim that every setting is equally natural.':'For the featureless quadratic model, the full mode solution follows the horizon-crossing slow-roll estimate closely. It is included as a control case for the ultra-slow-roll comparison.';
+    }
+    model.addEventListener('change',update);tuning.addEventListener('input',update);mobileSpectrum.addEventListener('change',update);
+    root.querySelector<HTMLButtonElement>('[data-send]')!.addEventListener('click',()=>{window.dispatchEvent(new CustomEvent('sigway:load-spectrum',{detail:{frequency:current.spectrum.frequency_hz,amplitude:current.spectrum.P_zeta}}));document.getElementById('sigway-explorer')?.scrollIntoView({behavior:'smooth',block:'start'});});
+    update();
+  })();
+</script>
+
+<style>
+  .ms-lab{color:var(--ink);padding:clamp(1.2rem,3vw,2.5rem)}.ms-lab__head{align-items:end;display:flex;gap:2rem;justify-content:space-between}.ms-lab__head>div:first-child{max-width:720px}.ms-lab h2{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;letter-spacing:-.04em;margin:.25rem 0}.ms-lab__head p,.ms-lab__footer p,.ms-plot p{color:var(--ink-soft);line-height:1.6}.ms-lab__controls{display:grid;gap:.7rem;min-width:min(100%,280px)}.ms-lab label{color:var(--ink-soft);display:grid;font-family:var(--mono);font-size:.62rem;gap:.35rem;text-transform:uppercase}.ms-lab select{background:rgba(244,241,234,.48);border:1px solid var(--line);color:var(--ink);font-family:var(--mono);font-size:.65rem;padding:.6rem}.tuning-control span{color:var(--signal);text-align:right}.tuning-control.is-disabled{opacity:.45}.ms-lab input[type=range]{accent-color:var(--signal);width:100%}.ms-lab__metrics{display:grid;grid-template-columns:repeat(4,1fr);margin:1.5rem 0}.ms-lab__metrics div{border:1px solid var(--line);border-right:0;padding:.85rem 1rem}.ms-lab__metrics div:last-child{border-right:1px solid var(--line)}.ms-lab__metrics span{color:var(--ink-soft);display:block;font-family:var(--mono);font-size:.58rem;text-transform:uppercase}.ms-lab__metrics strong{display:block;font-family:var(--serif);font-size:1.25rem;font-weight:400;margin-top:.25rem}.ms-lab__plots{display:grid;gap:1px;grid-template-columns:1fr 1fr}.ms-plot{background:rgba(244,241,234,.48);border:1px solid var(--line);min-width:0;padding:1rem}.ms-plot--wide{grid-column:1/-1}.plot-title{align-items:baseline;display:flex;justify-content:space-between}.plot-title span{color:var(--ink-soft);font-family:var(--mono);font-size:.6rem;text-transform:uppercase}.plot-title strong{font-family:var(--serif);font-size:1.2rem;font-weight:400}.ms-plot svg{display:block;opacity:1;transition:opacity .14s;width:100%}.is-updating .ms-plot svg{opacity:.45}.ms-plot [data-grid] :global(line){stroke:rgba(24,35,40,.1)}.ms-plot [data-grid] :global(text){fill:rgba(24,35,40,.58);font-family:var(--mono);font-size:10px}.ms-plot [data-main]{fill:none;stroke:var(--signal);stroke-linecap:round;stroke-linejoin:round;stroke-width:2.6}.ms-plot [data-slow]{fill:none;stroke:var(--warm-signal);stroke-dasharray:5 4;stroke-width:2}.ms-plot [data-phase]{fill:rgba(82,122,123,.12)}.axis-label{fill:var(--ink-soft);font-family:var(--mono);font-size:10px;text-anchor:middle}.ms-plot p{font-size:.68rem;margin:.3rem 0 0}.ms-legend{display:flex;flex-wrap:wrap;gap:1rem;justify-content:flex-end}.ms-legend span{align-items:center;color:var(--ink-soft);display:flex;font-family:var(--mono);font-size:.58rem;gap:.4rem;text-transform:uppercase}.ms-legend i{display:block;height:2px;width:22px}.ms-legend .full{background:var(--signal)}.ms-legend .slow{border-top:2px dashed var(--warm-signal)}.ms-lab__footer{align-items:center;display:flex;gap:1.5rem;justify-content:space-between;margin-top:1.1rem}.ms-lab__footer p{font-size:.72rem;margin:0;max-width:760px}.ms-lab__footer .button{cursor:pointer;flex:none}@media(max-width:900px){.ms-lab__head{align-items:start;flex-direction:column}.ms-lab__controls{width:100%}.ms-lab__metrics{grid-template-columns:repeat(2,1fr)}.ms-lab__metrics div:nth-child(2){border-right:1px solid var(--line)}.ms-lab__metrics div:nth-child(n+3){border-top:0}.ms-lab__plots{grid-template-columns:1fr}.ms-plot--wide{grid-column:auto}.ms-lab__footer{align-items:start;flex-direction:column}}@media(max-width:520px){.ms-lab{padding:.85rem .15rem}.ms-lab__metrics{grid-template-columns:1fr 1fr}.ms-lab__metrics div{padding:.65rem}.ms-lab__metrics strong{font-size:1rem}.ms-plot{padding:.7rem}.ms-lab__footer .button{width:100%}}
+</style>
