@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 const experience=[
-  {logo:'/assets/icons/kbfi.svg',org:'KBFI / NICPB',url:'https://kbfi.ee/en/',role:'Postdoctoral researcher',years:'2026–present',text:'Cosmology, gravitational-wave inference, and scientific machine learning.'},
-  {logo:'/assets/icons/insubria.png',org:'University of Insubria',url:'https://www.uninsubria.eu',role:'Postdoctoral researcher',years:'2025–2026',text:'GPU-accelerated and differentiable Pulsar Timing Array inference with JAX in the EPTA collaboration.'},
-  {logo:'/assets/icons/cern.png',org:'CERN',url:'https://theory.cern/',role:'Visiting researcher',years:'2024',text:'Developed a LISA analysis pipeline for scalar-induced gravitational waves.'},
+  {logo:'/assets/icons/bright-interface-mark.svg',org:'Bright Interface GmbH',url:'/projects/#bright-interface',role:'Co-founder, Managing Director & CTO',years:'2026–present',text:'Lead product and technical strategy for an integrated healthcare-software platform spanning data integration, workflow automation, operational analytics, and applied AI for medical practices in Germany.'},
+  {logo:'/assets/icons/kbfi.svg',org:'KBFI / NICPB',url:'https://kbfi.ee/en/',role:'Postdoctoral researcher',years:'2026–present',text:'Develop reusable statistical methods and production-quality research software for extracting reliable conclusions from complex, noisy data.'},
+  {logo:'/assets/icons/insubria.png',org:'University of Insubria',url:'https://www.uninsubria.eu',role:'Postdoctoral researcher',years:'2025–2026',text:'Built GPU-accelerated, differentiable inference software for large time-series datasets within the EPTA collaboration.'},
+  {logo:'/assets/icons/cern.png',org:'CERN',url:'https://theory.cern/',role:'Visiting researcher',years:'2024',text:'Built and validated statistical software for reconstructing weak signals in simulated data for LISA.'},
 ];
 const publications=[['2026','Are PTA measurements sensitive to gravitational wave non-Gaussianities?','https://arxiv.org/abs/2605.05157'],['2025','Accelerating LISA inference with Gaussian processes','https://arxiv.org/abs/2503.21871'],['2025','Reconstructing Primordial Curvature Perturbations via Scalar-Induced GWs','https://arxiv.org/abs/2501.11320'],['2023','Parallelized Acquisition for Active Learning using Monte Carlo','https://arxiv.org/abs/2305.19267'],['2022','Fast and Robust Bayesian Inference using Gaussian Processes with GPry','https://arxiv.org/abs/2211.02045']];
 const schema={
@@ -27,8 +28,8 @@ const schema={
       url:'https://jonaselgammal.github.io/assets/files/Jonas_El_Gammal_industry_resume.pdf',
       encodingFormat:'application/pdf',
       author:{'@id':'https://jonaselgammal.github.io/#jonas-el-gammal'},
-      about:['Quantitative research','Machine learning','AI agents','Data science','Scientific software engineering','Bayesian inference'],
-      keywords:'quantitative research, machine learning, AI agents, data science, scientific software engineering, Python, JAX, Bayesian inference, uncertainty quantification',
+      about:['Technology leadership','Healthcare software','Quantitative research','Machine learning','AI agents','Data science','Scientific software engineering','Bayesian inference'],
+      keywords:'CTO, managing director, co-founder, technology leadership, healthcare software, data integration, workflow automation, applied AI, quantitative research, machine learning, AI agents, data science, scientific software engineering, Python, JAX, Bayesian inference',
     },
     {
       '@type':'DigitalDocument',
@@ -43,7 +44,7 @@ const schema={
   ],
 };
 ---
-<BaseLayout title="Résumé & Academic CV — Jonas El Gammal" description="Download Jonas El Gammal’s industry résumé or academic CV, and review his experience in quantitative research, scientific machine learning, Bayesian inference, AI systems, cosmology, and scientific software." schema={schema} type="profile">
+<BaseLayout title="Résumé & Academic CV — Jonas El Gammal" description="Download Jonas El Gammal’s industry résumé or academic CV, and review his experience in technology leadership, healthcare software, quantitative research, scientific machine learning, AI systems, and scientific software." schema={schema} type="profile">
   <header class="page-head">
     <div class="shell">
       <span class="eyebrow">Experience and qualifications</span>
@@ -52,7 +53,7 @@ const schema={
         <article class="document-card">
           <span class="document-card__label">Industry · one page</span>
           <h2>Industry résumé</h2>
-          <p>For quantitative research, machine learning, AI systems, data science, and scientific software engineering roles.</p>
+          <p>For technology leadership, quantitative research, machine learning, AI systems, data science, and software engineering roles.</p>
           <a class="button button--solid" href="/assets/files/Jonas_El_Gammal_industry_resume.pdf" download>Download résumé · PDF</a>
         </article>
         <article class="document-card">
@@ -65,7 +66,7 @@ const schema={
     </div>
   </header>
   <div class="shell cv">
-    <aside><img src="/assets/img/me.jpg" alt="Jonas El Gammal"/><h2>Jonas El Gammal</h2><p>Tallinn, Estonia</p><a href="mailto:jonas.el.gammal@rwth-aachen.de">Email</a><a href="https://orcid.org/0009-0005-4833-4266">ORCID</a><a href="https://inspirehep.net/authors/2902073">INSPIRE-HEP</a><a href="https://github.com/jonaselgammal">GitHub</a><a href="https://www.linkedin.com/in/jelgammal/">LinkedIn</a></aside>
+    <aside><img src="/assets/img/me.jpg" alt="Jonas El Gammal"/><h2>Jonas El Gammal</h2><p>Tallinn, Estonia</p><a href="mailto:jonas.el.gammal@kbfi.ee">Email</a><a href="https://orcid.org/0009-0005-4833-4266">ORCID</a><a href="https://inspirehep.net/authors/2902073">INSPIRE-HEP</a><a href="https://github.com/jonaselgammal">GitHub</a><a href="https://www.linkedin.com/in/jelgammal/">LinkedIn</a></aside>
     <div class="cv__main">
       <section><span class="eyebrow">Experience</span>{experience.map(x=><article class="entry"><a class="logo" href={x.url}><img src={x.logo} alt={`${x.org} logo`}/></a><div><h3>{x.role}</h3><a href={x.url}>{x.org}</a><p>{x.text}</p></div><time>{x.years}</time></article>)}</section>
       <section><span class="eyebrow">Education</span><article class="entry"><a class="logo" href="https://www.uis.no/en"><img src="/assets/icons/uis.png" alt="University of Stavanger logo"/></a><div><h3>PhD in Physics</h3><a href="https://www.uis.no/en">University of Stavanger</a><p>Developed data-analysis methods for LISA, including Gaussian-process-accelerated Bayesian inference and reconstruction of primordial curvature perturbations from scalar-induced gravitational waves.</p></div><time>2021–2025</time></article><article class="entry"><a class="logo" href="https://www.rwth-aachen.de"><img src="/assets/icons/rwth_small.png" alt="RWTH Aachen logo"/></a><div><h3>BSc and MSc in Physics</h3><a href="https://www.rwth-aachen.de">RWTH Aachen University</a><p>Astroparticle physics and cosmology; Gaussian-process acceleration of expensive Bayesian inference. MSc grade 1.3 (approximately 3.7/4.0 GPA); BSc grade 1.7 (approximately 3.3/4.0 GPA).</p></div><time>2015–2020</time></article></section>

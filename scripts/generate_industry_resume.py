@@ -15,7 +15,7 @@ INK = colors.HexColor("#182328")
 MUTED = colors.HexColor("#626B6B")
 PETROL = colors.HexColor("#527A7B")
 LINE = colors.HexColor("#CDD2CF")
-PAPER = colors.HexColor("#F4F1EA")
+PAPER = colors.white
 
 doc = SimpleDocTemplate(
     str(OUTPUT),
@@ -26,8 +26,8 @@ doc = SimpleDocTemplate(
     bottomMargin=12 * mm,
     title="Jonas El Gammal - Quantitative Researcher and Scientific Software Developer",
     author="Jonas El Gammal",
-    subject="Industry resume for quantitative research, machine learning, AI systems, data science, and scientific software engineering roles.",
-    keywords="quantitative researcher, machine learning, AI agents, data science, scientific software engineer, Python, JAX, PyTorch, TensorFlow, C++, Bayesian inference, probabilistic machine learning, Gaussian processes, active learning, uncertainty quantification, Monte Carlo, numerical optimisation, time-series analysis, FastAPI, REST API, Docker, CI/CD, HPC, GPU computing",
+    subject="Industry resume for technology leadership, quantitative research, machine learning, AI systems, data science, and software engineering roles.",
+    keywords="CTO, managing director, co-founder, technology leadership, healthcare software, data integration, workflow automation, applied AI, quantitative researcher, machine learning, AI agents, data science, scientific software engineer, Python, JAX, PyTorch, C++, Bayesian inference, FastAPI, REST API, Docker, CI/CD",
 )
 
 styles = {
@@ -75,23 +75,24 @@ def role(title, date):
 
 story = [
     p("Jonas El Gammal", "name"),
-    p("Quantitative researcher | Scientific software developer | PhD in physics", "tag"),
-    p('<link href="mailto:jonas.el.gammal@rwth-aachen.de" color="#527A7B">jonas.el.gammal@rwth-aachen.de</link>  |  Tallinn, Estonia  |  <link href="https://jonaselgammal.github.io" color="#527A7B">jonaselgammal.github.io</link>  |  <link href="https://github.com/jonaselgammal" color="#527A7B">GitHub</link>  |  <link href="https://www.linkedin.com/in/jelgammal/" color="#527A7B">LinkedIn</link>', "contact"),
+    p("Quantitative researcher | Applied ML &amp; data systems | Scientific software developer", "tag"),
+    p('<link href="mailto:jonas.el.gammal@kbfi.ee" color="#527A7B">jonas.el.gammal@kbfi.ee</link>  |  Tallinn, Estonia  |  <link href="https://jonaselgammal.github.io" color="#527A7B">jonaselgammal.github.io</link>  |  <link href="https://github.com/jonaselgammal" color="#527A7B">GitHub</link>  |  <link href="https://www.linkedin.com/in/jelgammal/" color="#527A7B">LinkedIn</link>', "contact"),
     section("Profile"),
-    p("Quantitative researcher and scientific software developer working across probabilistic machine learning, Bayesian inference, and computational physics. I turn expensive mathematical models into tested, documented tools for inference and decision-making under uncertainty. My work spans method development, numerical implementation, validation, publication, and open-source delivery."),
+    p("Quantitative researcher and scientific software developer working across probabilistic machine learning, computational physics, and healthcare software. I turn complex models and fragmented data into tested systems for inference, automation, and decision-making. My work spans product strategy, system architecture, numerical implementation, validation, and delivery."),
     section("Selected technical impact"),
-    bullet("Developed <b>GPry</b>, an active-learning Gaussian-process framework that reduced expensive posterior evaluations by roughly two orders of magnitude in published benchmark problems."),
+    bullet("Led the technical design of an integrated platform that turns fragmented practice data into automated workflows, patient-facing services, and operational insight."),
+    bullet("Delivered simulation workflows, code-quality assurance, and computational-statistics methods for LISA, a joint ESA &amp; NASA space mission."),
     bullet("Built and maintained open-source Python/JAX packages for surrogate inference, differentiable gravitational-wave modelling, astrophysical population simulation, and sampler interoperability."),
-    bullet("Build tool-using AI agents and agent loops with structured plans, deterministic validation, traceable execution, and bounded repair."),
-    bullet("Designed analyses that connect statistical assumptions to observable consequences, including calibrated tests of non-Gaussianity in pulsar-timing-array data."),
-    bullet("Teach and communicate technical material from Python and numerical methods to Bayesian inference and gravitational-wave data analysis."),
+    bullet("Built tool-using AI agents and agent loops with structured plans, deterministic validation, traceable execution, and bounded repair."),
     section("Experience"),
+    role("Co-founder, Managing Director &amp; CTO - Bright Interface GmbH", "2026-present"),
+    bullet("Lead product and technical strategy, architecture, engineering quality, data integration, applied AI, and delivery."),
     role("Postdoctoral Researcher - KBFI / NICPB, Tallinn", "2026-present"),
-    bullet("Research in gravitational-wave inference, cosmology, and scientific machine learning; develop reusable computational methods alongside domain analyses."),
+    bullet("Develop reusable statistical methods and production-quality research software for extracting reliable conclusions from complex, noisy data."),
     role("Postdoctoral Researcher - University of Insubria", "2025-2026"),
-    bullet("Developed GPU-accelerated and differentiable pulsar-timing-array inference with JAX in the EPTA collaboration."),
+    bullet("Built GPU-accelerated, differentiable inference software for large time-series datasets within an international scientific collaboration."),
     role("Visiting Researcher - CERN", "2024"),
-    bullet("Developed a data-analysis pipeline for LISA, the ESA-led space-based gravitational-wave mission with NASA as a major partner."),
+    bullet("Built and validated statistical software for reconstructing weak signals in simulated data for LISA."),
     section("Selected projects"),
 ]
 
@@ -135,8 +136,7 @@ def page(canvas, _doc):
     canvas.line(15 * mm, 9 * mm, 195 * mm, 9 * mm)
     canvas.setFillColor(MUTED)
     canvas.setFont("Helvetica", 6.8)
-    canvas.drawString(15 * mm, 5.5 * mm, "Jonas El Gammal - concise quantitative and technology resume")
-    canvas.drawRightString(195 * mm, 5.5 * mm, "Updated August 2026")
+    canvas.drawRightString(195 * mm, 5.5 * mm, "Updated October 2026")
     canvas.restoreState()
 
 

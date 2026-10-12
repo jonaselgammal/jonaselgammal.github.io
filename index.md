@@ -13,7 +13,7 @@ hide_title: true
 
 <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; margin-bottom: 20px; justify-content: center;">
 
-  <a href="mailto:jonas.el.gammal@rwth-aachen.de">
+  <a href="mailto:jonas.el.gammal@kbfi.ee">
     <img src="/assets/icons/email.png" alt="Email" style="width: 40px; height: 40px;">
   </a>
 

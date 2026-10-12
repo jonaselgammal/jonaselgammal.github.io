@@ -12,7 +12,7 @@ OUTPUT = ROOT / "assets/files/CV_jonas_el_gammal.pdf"
 INK = colors.HexColor("#182328")
 MUTED = colors.HexColor("#626B6B")
 PETROL = colors.HexColor("#527A7B")
-PAPER = colors.HexColor("#F4F1EA")
+PAPER = colors.white
 BAND = colors.HexColor("#E5E8E4")
 LINE = colors.HexColor("#CDD2CF")
 
@@ -47,9 +47,9 @@ def p(text, style="body"):
 
 def section(title):
     band = Table([[p(title.upper(), "section")]], colWidths=[173 * mm])
-    band.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, -1), BAND), ("LINEBEFORE", (0, 0), (0, 0), 2.2, PETROL), ("LEFTPADDING", (0, 0), (-1, -1), 2.5 * mm), ("RIGHTPADDING", (0, 0), (-1, -1), 2 * mm), ("TOPPADDING", (0, 0), (-1, -1), .8 * mm), ("BOTTOMPADDING", (0, 0), (-1, -1), .65 * mm)]))
-    band.spaceBefore = 1.7 * mm
-    band.spaceAfter = .8 * mm
+    band.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, -1), BAND), ("LINEBEFORE", (0, 0), (0, 0), 2.2, PETROL), ("LEFTPADDING", (0, 0), (-1, -1), 2.5 * mm), ("RIGHTPADDING", (0, 0), (-1, -1), 2 * mm), ("TOPPADDING", (0, 0), (-1, -1), .7 * mm), ("BOTTOMPADDING", (0, 0), (-1, -1), .55 * mm)]))
+    band.spaceBefore = 1.4 * mm
+    band.spaceAfter = .6 * mm
     return band
 
 def role(title, date):
@@ -69,7 +69,7 @@ def page(canvas, document):
     canvas.setFillColor(MUTED)
     canvas.setFont("Helvetica", 6.8)
     canvas.drawString(16 * mm, 5.5 * mm, "Jonas El Gammal - Academic CV")
-    canvas.drawRightString(194 * mm, 5.5 * mm, f"Page {document.page}  |  Updated August 2026")
+    canvas.drawRightString(194 * mm, 5.5 * mm, f"Page {document.page}  |  Updated October 2026")
     canvas.restoreState()
 
 doc.addPageTemplates(PageTemplate(id="cv", frames=[frame], onPage=page))
@@ -77,12 +77,14 @@ doc.addPageTemplates(PageTemplate(id="cv", frames=[frame], onPage=page))
 story = [
     p("Jonas Elias El Gammal", "name"),
     p("Cosmologist | Scientific machine-learning researcher | Scientific software developer", "tag"),
-    p('<link href="mailto:jonas.el.gammal@rwth-aachen.de" color="#527A7B">jonas.el.gammal@rwth-aachen.de</link>  |  Tallinn, Estonia  |  <link href="https://jonaselgammal.github.io" color="#527A7B">jonaselgammal.github.io</link>  |  <link href="https://github.com/jonaselgammal" color="#527A7B">GitHub</link>  |  <link href="https://orcid.org/0009-0005-4833-4266" color="#527A7B">ORCID</link>', "contact"),
+    p('<link href="mailto:jonas.el.gammal@kbfi.ee" color="#527A7B">jonas.el.gammal@kbfi.ee</link>  |  Tallinn, Estonia  |  <link href="https://jonaselgammal.github.io" color="#527A7B">jonaselgammal.github.io</link>  |  <link href="https://github.com/jonaselgammal" color="#527A7B">GitHub</link>  |  <link href="https://orcid.org/0009-0005-4833-4266" color="#527A7B">ORCID</link>', "contact"),
     section("Profile"),
-    p("Postdoctoral researcher working across cosmology, gravitational-wave astronomy, Bayesian inference, probabilistic machine learning, and computational statistics. I develop open-source methods that turn expensive physical models into tractable, validated inference workflows."),
-    section("Research experience"),
+    p("Postdoctoral researcher and technology founder working across cosmology, Bayesian inference, scientific machine learning, and software. I develop validated computational methods and lead the translation of data, automation, and AI into operational systems."),
+    section("Professional and research experience"),
+    role("Co-founder, Managing Director &amp; CTO - Bright Interface GmbH", "2026-present"),
+    bullet("Lead product and technology strategy for a healthcare-software platform combining data integration, workflow automation, operational analytics, and applied AI."),
     role("Postdoctoral Researcher - KBFI / NICPB, Tallinn", "2026-present"),
-    bullet("Research in cosmology, gravitational-wave inference, scientific machine learning, and reusable computational methodology."),
+    bullet("KOHTO grant recipient; research in cosmology, gravitational-wave inference, scientific ML, and computational methods."),
     role("Postdoctoral Researcher - University of Insubria", "2025-2026"),
     bullet("Developed GPU-accelerated and differentiable pulsar-timing-array inference with JAX in the EPTA collaboration."),
     role("Visiting Researcher - CERN", "2024"),
@@ -110,7 +112,7 @@ story = [
 ]
 
 publications = [
-    ("Are PTA measurements sensitive to gravitational wave non-Gaussianities?", "C. Cecchini, J. El Gammal, G. Franciolini, M. Pieroni", "2026 - under review; arXiv:2605.05157", "https://arxiv.org/abs/2605.05157"),
+    ("Are PTA measurements sensitive to gravitational wave non-Gaussianities?", "C. Cecchini, J. El Gammal, G. Franciolini, M. Pieroni", "2026 - accepted for publication in Physical Review Letters; arXiv:2605.05157", "https://arxiv.org/abs/2605.05157"),
     ("Accelerating LISA inference with Gaussian processes", "J. El Gammal, R. Buscicchio, G. Nardini, J. Torrado", "2025 - Physical Review D 112, 063010", "https://doi.org/10.1103/c66v-rl3w"),
     ("Reconstructing primordial curvature perturbations via scalar-induced gravitational waves with LISA", "J. El Gammal et al. (LISA Cosmology Working Group)", "2025 - JCAP 05, 062", "https://doi.org/10.1088/1475-7516/2025/05/062"),
     ("Parallelized Acquisition for Active Learning using Monte Carlo Sampling", "J. Torrado, N. Schoeneberg, J. El Gammal", "2023 - arXiv:2305.19267", "https://arxiv.org/abs/2305.19267"),
@@ -123,7 +125,6 @@ story.extend([section("Current research and development"),
     bullet("High-dimensional GP surrogate inference using gradient-based NUTS acquisition, with emphasis on numerical robustness, reproducible benchmarking, and scalable active learning."),
     bullet("GPU-accelerated JAX likelihoods and reversible-jump inference for continuous gravitational-wave searches with pulsar timing arrays."),
     bullet("PROSECCO: differentiable surrogate refitting of physical stochastic-background models against model-independent LISA reconstructions (in development)."),
-    bullet("Evaluation environments for autonomous scientific agents that propose, test, and revise executable structural theories under noisy and incomplete data (early research)."),
     section("Open-source software")])
 
 software = [
